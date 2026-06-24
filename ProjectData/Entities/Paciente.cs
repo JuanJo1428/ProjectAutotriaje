@@ -32,11 +32,11 @@ namespace Project.Data.Entities
         public string SegundoApellido { get; set; }
 
         [Required]
-        public string SexoBiologico { get; set; } = string.Empty;
+        public string Sexo { get; set; } = string.Empty;
 
         public DateTime FechaNacimiento { get; set; }
 
-        public bool Activo { get; set; }
+        public int Activo { get; set; }
 
     }
 }
