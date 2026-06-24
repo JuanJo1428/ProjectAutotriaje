@@ -1,3 +1,7 @@
 <Solution>
-  <Project Path="WebAppAutotriaje/WebAppAutotriaje.csproj" Id="4534b1d9-b05a-4300-b25b-33e9d7583347" />
+  <Project Path="12/ProjectData.csproj" Id="233503b4-266a-4ff2-901c-621143dedfa1" />
+  <Project Path="AppAutotriajeProject/AppAutotriajeProject.csproj" Id="532b8f77-5bae-45b1-a196-cf58cb7c7fae" />
+  <Project Path="Project.Data/Project.Data.csproj" Id="ee8dea23-874f-490c-9997-1e561bd476ba" />
+  <Project Path="Project.DTOs/Project.Dto.csproj" Id="2f305912-aa89-43f9-b44e-6e0b83406eb5" />
+  <Project Path="Project.Services/Project.Services.csproj" Id="4bc46537-133c-4bc6-a9e9-22c404bc0a2b" />
 </Solution>
