@@ -22,8 +22,6 @@ namespace Project.Data.Entities
 
         public string MotivoConsulta { get; set; }
 
-        public bool CondicionEdad { get; set; }
-
         public bool CondicionMatenidad { get; set; }
 
         public bool CondicionMental { get; set; }
