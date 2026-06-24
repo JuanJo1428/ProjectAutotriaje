@@ -16,6 +16,6 @@ namespace Project.Data.Context
 
         public DbSet<Paciente> Pacientes { get; set; }
 
-        public DbSet<Atencion> Atenciones { get; set; }
+        public DbSet<RegistroAtencion> Atenciones { get; set; }
     }
 }

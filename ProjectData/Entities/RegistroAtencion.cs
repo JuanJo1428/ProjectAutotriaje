@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Project.Data.Entities
 {
     [Table("RegistrosAtencion")]
-    public class Atencion
+    public class RegistroAtencion
     {
         [Key]
         public int IdAtencion { get; set; }
