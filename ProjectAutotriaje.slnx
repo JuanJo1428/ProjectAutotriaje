@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="AppAutotriajeProject/AppAutotriajeProject.csproj" Id="532b8f77-5bae-45b1-a196-cf58cb7c7fae" />
+  <Project Path="ProjectData/ProjectData.csproj" Id="b62500d8-42a1-4b35-93f5-7e6cd6fcb042" />
+  <Project Path="ProjectDto/ProjectDto.csproj" Id="abd8d6a9-b5d7-4bd3-87b5-320bd20a8369" />
+  <Project Path="ProjectServices/ProjectServices.csproj" Id="8d1b088d-747c-4233-b99d-537f06979514" />
 </Solution>
