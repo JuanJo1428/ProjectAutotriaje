@@ -11,6 +11,8 @@ namespace ProjectData.Repositories.Interfaces
     {
         List<TipoDocumento> ObtenerTodos();
 
+        int ObtenerId(string descripcion);
+
         string ObtenerNombre(int idTipoDocumento);
 
         string ObtenerDescripcion(int idTipoDocumento);
