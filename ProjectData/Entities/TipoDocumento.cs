@@ -15,6 +15,10 @@ namespace ProjectData.Entities
         public int IdTipoDocumento { get; set; }
 
         [Required]
+        [MaxLength(3)]
+        public string Nombre { get; set; }
+
+        [Required]
         public string Descripcion { get; set; } = string.Empty;
 
         public int Activo { get; set; }
