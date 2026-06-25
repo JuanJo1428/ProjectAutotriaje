@@ -21,6 +21,6 @@ namespace ProjectData.Entities
         [Required]
         public string Descripcion { get; set; } = string.Empty;
 
-        public int Activo { get; set; }
+        public bool Activo { get; set; }
     }
 }
