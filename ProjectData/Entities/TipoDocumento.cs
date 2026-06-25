@@ -14,6 +14,8 @@ namespace ProjectData.Entities
         [Key]
         public int IdTipoDocumento { get; set; }
 
+        public int Codigo { get; set; }
+
         [Required]
         [MaxLength(3)]
         public string Nombre { get; set; }
