@@ -36,7 +36,7 @@ namespace Project.Data.Entities
 
         public DateTime FechaNacimiento { get; set; }
 
-        public int Activo { get; set; }
+        public bool Activo { get; set; }
 
     }
 }
