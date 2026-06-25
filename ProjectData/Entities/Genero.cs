@@ -9,30 +9,21 @@ using System.Threading.Tasks;
 
 namespace ProjectData.Entities
 {
-    [Table("TiposDocumento")]
-    public class TipoDocumento
+    [Table("OpcionesGenero")]
+     public class Genero
     {
         [Key]
-        public int IdTipoDocumento { get; set; }
-
-
-        public int Codigo { get; set; }
+        public int IdGenero { get; set; }
 
 
         [Required]
-        [MaxLength(5)]
-        public string Nombre { get; set; }
-
-
-        [Required]
-        [MaxLength(50)]
         public string Descripcion { get; set; } = string.Empty;
-
+        
 
         public bool Activo { get; set; }
 
 
-        // Relacion varios pacientes por cada tipo de documento
+        //Relacion varios pacientes pueden estar en alguno de los diferentes generos
         public virtual ICollection<Paciente> Pacientes { get; set; }
     }
 }

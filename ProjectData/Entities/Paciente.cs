@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Project.Data.Entities
 {
-    [Table("PacientesGhips")]
+    [Table("Pacientes")]
     public class Paciente
 
     {
@@ -22,9 +22,6 @@ namespace Project.Data.Entities
 
         [ForeignKey(nameof(IdTipoDocumento))]
         public virtual TipoDocumento TipoDocumento { get; set; }
-
-        //Relacion muchos registros para un solo paciente
-        public virtual ICollection<RegistroAtencion> Atenciones { get; set; }
 
 
         [Required]
@@ -46,14 +43,21 @@ namespace Project.Data.Entities
         public string SegundoApellido { get; set; }
 
 
-        [Required]
-        public string Sexo { get; set; } = string.Empty;
+        //ForeingKey hacia Genero
+        public int IdGenero { get; set; }
+
+        [ForeignKey(nameof(IdGenero))]
+        public virtual Genero Genero { get; set; }
 
 
         public DateTime FechaNacimiento { get; set; }
 
 
         public bool Activo { get; set; }
+
+
+        //Relacion muchos registros para un solo paciente
+        public virtual ICollection<RegistroAtencion> Atenciones { get; set; }
 
     }
 }

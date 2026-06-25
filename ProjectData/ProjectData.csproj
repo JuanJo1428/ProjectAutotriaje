@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\AppDbContext.cs" />
+    <Compile Include="Entities\Genero.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\RegistroAtencion.cs" />
     <Compile Include="Entities\Paciente.cs" />

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectData.Entities;
 
 namespace Project.Data.Context
 {
@@ -16,6 +17,10 @@ namespace Project.Data.Context
 
         public DbSet<Paciente> Pacientes { get; set; }
 
-        public DbSet<RegistroAtencion> Atenciones { get; set; }
+        public DbSet<RegistroAtencion> RegistrosAtencion { get; set; }
+
+        public DbSet<Genero> Generos { get; set; }
+
+        public DbSet<TipoDocumento> TiposDocumento { get; set; }
     }
 }
