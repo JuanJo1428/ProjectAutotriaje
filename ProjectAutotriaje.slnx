@@ -2,6 +2,7 @@
   <Folder Name="/ScriptsSQL/">
     <File Path="../../../../Documents/Tablas/Genero.sql" />
     <File Path="../../../../Documents/Tablas/Pacientes.sql" />
+    <File Path="../../../../Documents/Tablas/RegistrosAtencion.sql" />
     <File Path="../../../../Documents/Tablas/TiposDocumento.sql" />
   </Folder>
   <Project Path="AppAutotriajeProject/AppAutotriajeProject.csproj" Id="532b8f77-5bae-45b1-a196-cf58cb7c7fae" />
