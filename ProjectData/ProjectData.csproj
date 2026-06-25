@@ -57,14 +57,20 @@
     <Compile Include="Entities\RegistroAtencion.cs" />
     <Compile Include="Entities\Paciente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implementations\GeneroRepository.cs" />
+    <Compile Include="Repositories\Implementations\RegistroAtencionRepository.cs" />
+    <Compile Include="Repositories\Implementations\PacienteRepository.cs" />
+    <Compile Include="Repositories\Implementations\TipoDocumentoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IGeneroRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPacienteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRegistroAtencionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITipoDocumentoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
