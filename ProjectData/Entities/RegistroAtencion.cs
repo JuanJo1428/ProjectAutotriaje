@@ -16,7 +16,7 @@ namespace Project.Data.Entities
 
         public int IdPaciente { get; set; }
 
-        public DateTime FechaRegistro { get; set; }
+        public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
         public int EdadPaciente { get; set; }
 
