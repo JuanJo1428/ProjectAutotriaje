@@ -11,7 +11,7 @@ using ProjectData.Context;
 
 namespace ProjectData.Repositories.Implementations
 {
-    internal class GeneroRepository : IGeneroRepository
+    public class GeneroRepository : IGeneroRepository
     {
         private readonly AppDbContext _context;
 

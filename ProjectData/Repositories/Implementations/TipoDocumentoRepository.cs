@@ -1,50 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using ProjectData.Repositories.Implementations;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectData.Repositories.Interfaces;
 using ProjectData.Entities;
+using ProjectData.Context;
 
 namespace ProjectData.Repositories.Implementations
 {
-    internal class TipoDocumentoRepository : ITipoDocumentoRepository
+    public class TipoDocumentoRepository : ITipoDocumentoRepository
     {
-        private readonly DbContext _context;
+        private readonly AppDbContext _context;
 
-        public TipoDocumentoRepository(DbContext context)
+        public TipoDocumentoRepository(AppDbContext context)
         {
             _context = context;
         }
 
         public List<TipoDocumento> ObtenerTodos()
         {
-            return _context.Set<TipoDocumento>().ToList();
+            return _context.TiposDocumento.Where(td => td.Activo).ToList();
         }
 
         public int ObtenerId(string descripcion)
         {
-            var tipoDocumento = _context.Set<TipoDocumento>().FirstOrDefault(td => td.Descripcion == descripcion);
-            return tipoDocumento != null ? tipoDocumento.IdTipoDocumento : 0;
+            TipoDocumento tipoDocumento = _context.TiposDocumento.FirstOrDefault(td => td.Descripcion == descripcion);
+
+            if (tipoDocumento != null)
+            {
+                return tipoDocumento.IdTipoDocumento;
+            }
+
+            return 0;
         }
 
         public string ObtenerNombre(int idTipoDocumento)
         {
-            var tipoDocumento = _context.Set<TipoDocumento>().FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento);
-            return tipoDocumento != null ? tipoDocumento.Nombre : null;
+            TipoDocumento tipoDocumento = ObtenerPorId(idTipoDocumento);
+
+            if (tipoDocumento != null)
+            {
+                return tipoDocumento.Nombre;
+            }
+
+            return null;
         }
 
         public string ObtenerDescripcion(int idTipoDocumento)
         {
-            var tipoDocumento = _context.Set<TipoDocumento>().FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento);
-            return tipoDocumento != null ? tipoDocumento.Descripcion : null;
+            TipoDocumento tipoDocumento = ObtenerPorId(idTipoDocumento);
+
+            if (tipoDocumento != null)
+            {
+                return tipoDocumento.Descripcion;
+            }
+
+            return null;
         }
 
         public TipoDocumento ObtenerPorId(int idTipoDocumento)
         {
-            return _context.Set<TipoDocumento>().FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento);
+            return _context.TiposDocumento.FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento);
         }
     }
 }
