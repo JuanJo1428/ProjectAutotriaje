@@ -1,14 +1,13 @@
 ﻿using Project.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ProjectData.Repositories.Interfaces
 {
     public interface IRegistroAtencionRepository
     {
+        List<RegistroAtencion> ObtenerTodos();
+
         RegistroAtencion CrearRegistro(RegistroAtencion atencion);
 
         RegistroAtencion ActualizarRegistro(RegistroAtencion registro);
@@ -18,8 +17,6 @@ namespace ProjectData.Repositories.Interfaces
         RegistroAtencion ObtenerPorId(int idRegistro);
 
         List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente);
-
-        List<RegistroAtencion> ObtenerTodos();
 
     }
 }

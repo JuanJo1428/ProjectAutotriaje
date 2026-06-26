@@ -1,10 +1,5 @@
 ﻿using System.Data.Entity;
 using Project.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectData.Entities;
 
 namespace ProjectData.Context

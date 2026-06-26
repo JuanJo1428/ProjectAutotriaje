@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using ProjectData.Repositories.Implementations;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectData.Repositories.Interfaces;
 using ProjectData.Entities;
 using ProjectData.Context;

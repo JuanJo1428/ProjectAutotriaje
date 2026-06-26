@@ -1,14 +1,13 @@
 ﻿using Project.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ProjectData.Repositories.Interfaces
 {
     public interface IPacienteRepository
     {
+        List<Paciente> ObtenerTodos(bool incluirInactivos);
+
         Paciente CrearPaciente(Paciente paciente);
 
         Paciente ActualizarPaciente(Paciente paciente);
@@ -18,8 +17,6 @@ namespace ProjectData.Repositories.Interfaces
         Paciente ObtenerPorId(int idPaciente);
 
         Paciente ObtenerPorDocumento(int idTipoDocumento, string nroDocumento);
-
-        List<Paciente> ObtenerTodos();
 
     }
 }
