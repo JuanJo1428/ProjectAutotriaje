@@ -7,33 +7,46 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectData.Repositories.Interfaces;
 using ProjectData.Entities;
+using ProjectData.Context;
 
 namespace ProjectData.Repositories.Implementations
 {
     internal class GeneroRepository : IGeneroRepository
     {
-        private readonly DbContext _context;
+        private readonly AppDbContext _context;
 
-        public GeneroRepository(DbContext context)
+        public GeneroRepository(AppDbContext context)
         {
             _context = context;
         }
 
         public List<Genero> ObtenerTodos()
         {
-            return _context.Set<Genero>().ToList();
+            return _context.Generos.ToList();
         }
 
         public int ObtenerId(string descripcion)
         {
-            var genero = _context.Set<Genero>().FirstOrDefault(g => g.Descripcion == descripcion);
-            return genero != null ? genero.IdGenero : 0;
+            Genero genero = _context.Generos.FirstOrDefault(g => g.Descripcion == descripcion);
+
+            if (genero != null)
+            {
+                return genero.IdGenero;
+            }
+
+            return 0; 
         }
 
         public string ObtenerDescripcion(int idGenero)
         {
-            var genero = _context.Set<Genero>().FirstOrDefault(g => g.IdGenero == idGenero);
-            return genero != null ? genero.Descripcion : null;
+            Genero genero = _context.Generos.FirstOrDefault(g => g.IdGenero == idGenero);
+            
+            if (genero != null)
+            {
+                return genero.Descripcion;
+            }
+
+            return null;
         }
     }
 }

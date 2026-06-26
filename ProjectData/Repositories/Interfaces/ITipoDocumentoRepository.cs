@@ -20,3 +20,6 @@ namespace ProjectData.Repositories.Interfaces
         TipoDocumento ObtenerPorId(int idTipoDocumento);
     }
 }
+
+
+

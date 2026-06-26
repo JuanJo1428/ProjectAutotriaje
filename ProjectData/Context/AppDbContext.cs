@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectData.Entities;
 
-namespace Project.Data.Context
+namespace ProjectData.Context
 {
     public class AppDbContext : DbContext
     {
