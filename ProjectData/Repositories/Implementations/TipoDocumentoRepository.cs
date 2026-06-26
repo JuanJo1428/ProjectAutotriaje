@@ -22,7 +22,7 @@ namespace ProjectData.Repositories.Implementations
 
         public int ObtenerId(string descripcion)
         {
-            TipoDocumento tipoDocumento = _context.TiposDocumento.FirstOrDefault(td => td.Descripcion == descripcion);
+            TipoDocumento tipoDocumento = _context.TiposDocumento.FirstOrDefault(td => td.Descripcion == descripcion && td.Activo);
 
             if (tipoDocumento != null)
             {
@@ -58,7 +58,7 @@ namespace ProjectData.Repositories.Implementations
 
         public TipoDocumento ObtenerPorId(int idTipoDocumento)
         {
-            return _context.TiposDocumento.FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento);
+            return _context.TiposDocumento.FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento && td.Activo);
         }
     }
 }

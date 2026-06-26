@@ -6,15 +6,15 @@ namespace ProjectData.Repositories.Interfaces
 {
     public interface IRegistroAtencionRepository
     {
-        List<RegistroAtencion> ObtenerTodos();
+        List<RegistroAtencion> ObtenerTodos(bool incluirInactivos);
 
         RegistroAtencion CrearRegistro(RegistroAtencion atencion);
 
         RegistroAtencion ActualizarRegistro(RegistroAtencion registro);
 
-        bool EliminarRegistro(int idRegistro);
+        bool InactivarRegistro(int idAtencion);
 
-        RegistroAtencion ObtenerPorId(int idRegistro);
+        RegistroAtencion ObtenerPorId(int idAtencion);
 
         List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente);
 
