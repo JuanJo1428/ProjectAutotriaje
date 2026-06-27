@@ -1,2 +1,354 @@
-﻿body {
+﻿:root {
+    --color-primary: #093c71;
+    --color-accent: #00bab3;
+    --color-secondary: #056d8b;
+    --color-background: #f4f7f6;
+    --color-surface: #ffffff;
+    --color-text-muted: #707272;
+    --border-radius-lg: 12px;
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html {
+    font-size: clamp(14px, 1vw, 18px);
+}
+
+/*
+    Nota:
+    - El código está organizado por secciones y no por elementos o clases.
+    (No se están generalizando los estilos para facilidad de edición.)
+    - La generalización masiva se puede y se debe hacer al final en archivos copia
+    cuando el objetivo sea optimizar para la salida de la aplicación.
+*/
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    line-height: 1.4;
+    min-height: 100dvh;
+}
+
+
+#formPrincipal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+header {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+    header h1 {
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    header time {
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+main {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid #e2e8f0;
+    padding: 1rem 2.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+
+/* Pantalla de inicio */
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+p {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+/* Usamos estilo kiosco pero solo para editar el código, luego lo cambiaré a btn-primary. */
+.btn-kiosk-primary {
+    /*
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    */
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 1.5rem 3.5rem;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 186, 179, 0.25);
+    text-decoration: none;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+    .btn-kiosk-primary:hover {
+        background-color: #009c96;
+    }
+
+    .btn-kiosk-primary:active {
+        transform: scale(0.96);
+    }
+
+/*---------------------------------------------------------------------------*/
+
+/* Pantalla de Identificación */
+
+.split-flow-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 1rem auto 0;
+}
+
+.manual-entry-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    max-width: 420px;
+}
+
+.touch-dropdown {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    font: inherit;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+}
+
+    .touch-dropdown:focus {
+        outline: none;
+        border-color: #666;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+
+.input-display {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    font: inherit;
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius-lg);
+}
+
+.numpad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin: auto;
+}
+
+.num-button {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius-lg);
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem 0;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: background-color 0.1s, transform 0.1s;
+}
+
+    .num-button:active {
+        background-color: #e2e8f0;
+        transform: scale(0.95);
+    }
+
+    .num-button.key-clear {
+        color: var(--color-error);
+    }
+
+.scan-option-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.divider-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+}
+
+.btn-kiosk-scan {
+    height: 180px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 3px solid var(--color-secondary);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+    .btn-kiosk-scan:active {
+        background-color: #e2e8f0;
+        transform: scale(0.95);
+    }
+
+    .btn-kiosk-scan i {
+        display: block;
+        font-size: 3.5rem;
+        color: var(--color-primary);
+    }
+
+    .btn-kiosk-scan span {
+        display: block;
+        color: var(--color-primary);
+    }
+
+/* Nota: Debo reutilizar esto después */
+
+/*
+.priority-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.priority-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.priority-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.clinical-toggle {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.clinical-toggle input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.clinical-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    border: 2px solid #1b3a6b;
+    border-radius: 2rem;
+    font-weight: 600;
+    color: #1b3a6b;
+    background-color: #fff;
+    transition: background-color 0.2s, color 0.2s;
+    user-select: none;
+}
+
+.clinical-toggle input[type="checkbox"]:checked + .clinical-toggle-label {
+    background-color: #1b3a6b;
+    color: #fff;
+}
+*/
+
+.flow-navigation {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .flow-navigation .btn {
+        font-family: inherit;
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 0.8rem 2rem;
+        border-radius: var(--border-radius-lg);
+        cursor: pointer;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+        .flow-navigation .btn:active {
+            background-color: #e2e8f0;
+            transform: scale(0.96);
+        }
+
+.btn-back {
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    border: none;
+}
+

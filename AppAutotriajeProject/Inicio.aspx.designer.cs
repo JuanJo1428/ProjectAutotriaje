@@ -11,25 +11,16 @@ namespace AutoTriageWeb
 {
 
 
-    public partial class SiteMaster
+    public partial class Inicio
     {
 
         /// <summary>
-        /// formPrincipal control.
+        /// btnIniciarTriage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formPrincipal;
-
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button btnIniciarTriage;
     }
 }
