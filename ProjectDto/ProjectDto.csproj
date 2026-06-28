@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\BuscarPacienteDto.cs" />
+    <Compile Include="Dtos\BuscarPacienteRespuestaDto.cs" />
+    <Compile Include="Dtos\CrearPacienteDto.cs" />
+    <Compile Include="Dtos\CrearPacienteRespuestaDto.cs" />
+    <Compile Include="Dtos\PacienteDto.cs" />
+    <Compile Include="Dtos\PacienteValidadoDto.cs" />
+    <Compile Include="Dtos\PacienteProcesadoRespuestaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

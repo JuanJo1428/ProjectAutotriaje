@@ -1,11 +1,10 @@
-﻿using ProjectData.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Project.Data.Entities
+namespace ProjectData.Entities
 {
     [Table("Pacientes")]
     public class Paciente
@@ -52,6 +51,12 @@ namespace Project.Data.Entities
 
 
         public bool Activo { get; set; }
+
+
+        public DateTime FechaCreacion { get; set; }
+
+
+        public DateTime? FechaActualizacion { get; set; }
 
 
         //Relacion muchos registros para un solo paciente
