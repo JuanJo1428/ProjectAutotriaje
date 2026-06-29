@@ -16,6 +16,8 @@ namespace ProjectData.Repositories.Interfaces
 
         RegistroAtencion ObtenerPorId(int idAtencion);
 
+        RegistroAtencion ObtenerRegistroPendiente(int idPaciente);
+
         List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente);
 
     }

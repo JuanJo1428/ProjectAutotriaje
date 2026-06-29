@@ -117,7 +117,7 @@ namespace ProjectServices.Implementations
         }
 
 
-        //Metodos de Mapeo
+        //Metodos de Mapeo y Metodos de Apoyo
         private PacienteDto MapearAPacienteDto(Paciente paciente)
         {
             return new PacienteDto

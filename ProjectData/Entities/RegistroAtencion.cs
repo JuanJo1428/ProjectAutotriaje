@@ -24,9 +24,6 @@ namespace ProjectData.Entities
         public int EdadPaciente { get; set; }
 
 
-        public string MotivoConsulta { get; set; }
-
-
         public bool CondicionMaternidad { get; set; }
 
 
@@ -34,6 +31,15 @@ namespace ProjectData.Entities
 
 
         public bool CondicionOncologica { get; set; }
+
+
+        public bool AutotriajeIniciado { get; set; }
+
+
+        public string MotivoConsulta { get; set; }
+
+
+        public bool Atendido { get; set; }
 
 
         public bool Activo {  get; set; }
