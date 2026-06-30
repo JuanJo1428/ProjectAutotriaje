@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectDto;
-using ProjectDto.Dtos;
+﻿using ProjectDto.Dtos;
 
 
 namespace ProjectServices.Interfaces

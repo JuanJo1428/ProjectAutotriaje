@@ -2,11 +2,6 @@
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos.RegistroAtencionDtos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectServices.Constants;
 using ProjectServices.Interfaces;
 using ProjectDto.Dtos;

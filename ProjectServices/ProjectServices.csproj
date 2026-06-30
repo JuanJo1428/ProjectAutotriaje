@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Generos.cs" />
+    <Compile Include="Implementations\GhipsService.cs" />
     <Compile Include="Implementations\PacienteService.cs" />
     <Compile Include="Implementations\RegistroAtencionService.cs" />
+    <Compile Include="Interfaces\IGhipsService.cs" />
     <Compile Include="Interfaces\IPacienteService.cs" />
     <Compile Include="Interfaces\IRegistroAtencionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
