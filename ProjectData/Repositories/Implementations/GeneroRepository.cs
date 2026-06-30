@@ -43,5 +43,11 @@ namespace ProjectData.Repositories.Implementations
 
             return null;
         }
+
+        public Genero ObtenerPorDescripcion(string descripcion)
+        {
+            return _context.Generos
+                .FirstOrDefault(g => g.Descripcion.ToLower() == descripcion.ToLower());
+        }
     }
 }

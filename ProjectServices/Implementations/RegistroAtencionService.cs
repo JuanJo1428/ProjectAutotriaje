@@ -91,7 +91,14 @@ namespace ProjectServices.Implementations
             ConsultarRegistroPendienteRespuestaDto respuesta = new ConsultarRegistroPendienteRespuestaDto();
 
 
-            RegistroAtencion registroPendiente = _registroAtencionRepository.ObtenerRegistroPendiente(pacienteProcesado.Paciente.IdPaciente);
+            if (!pacienteProcesado.Paciente.IdPaciente.HasValue)
+            {
+                throw new InvalidOperationException(
+                    "El paciente procesado no tiene un Id asignado.");
+            }
+
+
+            RegistroAtencion registroPendiente = _registroAtencionRepository.ObtenerRegistroPendiente(pacienteProcesado.Paciente.IdPaciente.Value);
 
             if (registroPendiente == null)
             {

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\GhipsDtos\BuscarPacienteGhipsDto.cs" />
+    <Compile Include="Dtos\GhipsDtos\BuscarPacienteGhipsRespuestaDto.cs" />
+    <Compile Include="Dtos\GhipsDtos\PacienteGhipsDto.cs" />
     <Compile Include="Dtos\PacienteDtos\BuscarPacienteDto.cs" />
     <Compile Include="Dtos\PacienteDtos\BuscarPacienteRespuestaDto.cs" />
     <Compile Include="Dtos\PacienteDtos\CrearPacienteDto.cs" />
@@ -55,8 +58,6 @@
     <Compile Include="Dtos\RegistroAtencionDtos\RegistroAtencionDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dtos\GhipsDtos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

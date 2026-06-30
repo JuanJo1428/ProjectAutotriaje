@@ -4,9 +4,11 @@ namespace ProjectDto.Dtos
 {
     public class PacienteDto
     {
-        public int IdPaciente { get; set; }
+        public int? IdPaciente { get; set; }
 
         public int IdTipoDocumento { get; set; }
+
+        public string DescripcionTipoDocumento { get; set; }
 
         public string NroDocumento { get; set; }
 
@@ -20,9 +22,11 @@ namespace ProjectDto.Dtos
 
         public int IdGenero { get; set; }
 
+        public string DescripcionGenero { get; set; }
+
         public DateTime FechaNacimiento { get; set; }
 
-        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
 
         public DateTime? FechaActualizacion { get; set; }
 

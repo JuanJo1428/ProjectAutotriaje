@@ -12,5 +12,6 @@ namespace ProjectData.Repositories.Interfaces
 
         string ObtenerDescripcion(int idGenero);
 
+        Genero ObtenerPorDescripcion(string descripcion);
     }
 }

@@ -8,7 +8,9 @@
 
         public bool NotificarGhips { get; set; }
 
-        public string Observacion { get; set; } = string.Empty;
+        public string ObservacionGhips { get; set; } = string.Empty;
+
+        public string ObservacionAutotriaje { get; set; } = string.Empty;
     }
 }
 

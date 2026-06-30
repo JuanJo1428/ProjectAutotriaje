@@ -2,12 +2,16 @@
 {
     public class BuscarPacienteRespuestaDto
     {
-        public PacienteDto Paciente { get; set; }
+        public bool EncontradoAutotriaje { get; set; }
 
-        public bool Encontrado { get; set; }
+        public bool EncontradoGhips { get; set; }
 
-        public string Origen { get; set; } = string.Empty;
+        public PacienteDto PacienteAutotriaje { get; set; }
 
-        public string Observacion { get; set; } = string.Empty;
+        public PacienteDto PacienteGhips { get; set; }
+
+        public PacienteDto PacientePrincipal { get; set; }
+
+        public string Observacion { get; set; }
     }
 }

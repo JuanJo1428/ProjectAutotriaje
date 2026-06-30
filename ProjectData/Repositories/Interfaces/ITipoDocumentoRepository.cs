@@ -15,6 +15,8 @@ namespace ProjectData.Repositories.Interfaces
         string ObtenerDescripcion(int idTipoDocumento);
 
         TipoDocumento ObtenerPorId(int idTipoDocumento);
+
+        TipoDocumento ObtenerPorCodigo(int codigo);
     }
 }
 

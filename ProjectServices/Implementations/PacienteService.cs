@@ -1,8 +1,10 @@
-﻿using ProjectServices.Interfaces;
-using System;
+﻿using ProjectData.Entities;
+using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
-using ProjectData.Entities;
+using ProjectDto.Dtos.GhipsDtos;
+using ProjectServices.Interfaces;
+using System;
 
 namespace ProjectServices.Implementations
 {
@@ -10,31 +12,69 @@ namespace ProjectServices.Implementations
     {
         private readonly IPacienteRepository _pacienteRepository;
 
-        public PacienteService(IPacienteRepository pacienteRepository)
+        private readonly IGhipsService _ghipsService;
+
+        private readonly ITipoDocumentoRepository _tipoDocumentoRepository;
+
+        public PacienteService(IPacienteRepository pacienteRepository, IGhipsService ghipsService, ITipoDocumentoRepository tipoDocumentoRepository)
         {
             _pacienteRepository = pacienteRepository;
+            _ghipsService = ghipsService;
+            _tipoDocumentoRepository = tipoDocumentoRepository;
         }
 
 
         public BuscarPacienteRespuestaDto BuscarPaciente(BuscarPacienteDto datosBusqueda)
         {
+
             BuscarPacienteRespuestaDto respuesta = new BuscarPacienteRespuestaDto();
 
-            Paciente paciente = _pacienteRepository.ObtenerPorDocumento(datosBusqueda.IdTipoDocumento, datosBusqueda.NroDocumento);
 
-            if (paciente == null)
+            Paciente pacienteAutotriaje = _pacienteRepository.ObtenerPorDocumento(datosBusqueda.IdTipoDocumento, datosBusqueda.NroDocumento);
+
+            if (pacienteAutotriaje != null)
             {
-                return respuesta;
+                respuesta.EncontradoAutotriaje = true;
+                respuesta.PacienteAutotriaje = MapearAPacienteDto(pacienteAutotriaje);
+
+
+                if (!pacienteAutotriaje.Activo)
+                {
+                    respuesta.Observacion = "Paciente Inactivo en la BaseDatosAutotriaje.";
+                }
             }
 
-            respuesta.Paciente = MapearAPacienteDto(paciente);
-            respuesta.Encontrado = true;
-            respuesta.Origen = "BaseDatosAutotriaje";
 
-            if (!paciente.Activo)
+            BuscarPacienteGhipsDto datosBusquedaGhips = new BuscarPacienteGhipsDto
             {
-                respuesta.Observacion = "El paciente se encuentra inactivo en la BaseDatosAutotriaje.";
+                NroDocumento = datosBusqueda.NroDocumento,
+                CodigoTipoDocumento = ObtenerCodigoTipoDocumentoGhips(datosBusqueda.IdTipoDocumento)
+            };
+
+            BuscarPacienteGhipsRespuestaDto respuestaGhips = _ghipsService.BuscarPaciente(datosBusquedaGhips);
+
+            if (respuestaGhips.Encontrado)
+            {
+                respuesta.EncontradoGhips = true;
+                respuesta.PacienteGhips = respuestaGhips.Paciente;
             }
+
+
+            if (!respuesta.EncontradoAutotriaje && !respuesta.EncontradoGhips)
+            {
+                respuesta.Observacion = "Paciente no Encontrado en Bases de Datos.";
+            }
+
+
+            if (respuesta.EncontradoAutotriaje)
+            {
+                respuesta.PacientePrincipal = respuesta.PacienteAutotriaje;
+            }
+            else if (respuesta.EncontradoGhips)
+            {
+                respuesta.PacientePrincipal = respuesta.PacienteGhips;
+            }
+
 
             return respuesta;
 
@@ -56,54 +96,73 @@ namespace ProjectServices.Implementations
         }
 
 
-        public PacienteProcesadoRespuestaDto ProcesarPaciente(PacienteValidadoDto paciente)
+        public PacienteProcesadoRespuestaDto ProcesarPaciente(PacienteValidadoDto pacienteValidado)
         {
+
             PacienteProcesadoRespuestaDto respuesta = new PacienteProcesadoRespuestaDto();
 
-            //Consulta y validación BaseDatosAutotriaje
-            BuscarPacienteRespuestaDto pacienteAutotriaje = BuscarPaciente(new BuscarPacienteDto
+
+            //Consulta del Paciente en las distintas Bases
+            BuscarPacienteRespuestaDto consulta = BuscarPaciente(new BuscarPacienteDto
             {
-                IdTipoDocumento = paciente.IdTipoDocumento,
-                NroDocumento = paciente.NroDocumento
+                IdTipoDocumento = pacienteValidado.IdTipoDocumento,
+                NroDocumento = pacienteValidado.NroDocumento
             });
 
-            if (!pacienteAutotriaje.Encontrado)
-            {
 
-                CrearPacienteRespuestaDto pacienteCreado = CrearPaciente(MapearACrearPacienteDto(paciente));
+            //Procesado Autotriaje
+            if (consulta.EncontradoAutotriaje)
+            {
+                bool requiereActivacion = false;
+
+                //Verifica que el Paciente este Activo
+                if (!consulta.PacienteAutotriaje.Activo)
+                {
+                    requiereActivacion = true;
+                    respuesta.ObservacionAutotriaje = "Paciente Reactivado Automaticamente.";
+                }
+
+
+                if (HayInconsistenciasEnDatos(consulta.PacienteAutotriaje, pacienteValidado) || requiereActivacion)
+                {
+                    respuesta.Paciente = ActualizarPaciente(consulta.PacienteAutotriaje, pacienteValidado);
+
+                    respuesta.AccionRealizada = "Actualizado.";
+                }
+                else
+                {
+                    respuesta.Paciente = consulta.PacienteAutotriaje;
+
+                    respuesta.AccionRealizada = "SinCambios.";
+                }
+            }
+            else
+            {
+                CrearPacienteRespuestaDto pacienteCreado = CrearPaciente(MapearACrearPacienteDto(pacienteValidado));
 
                 respuesta.Paciente = pacienteCreado.Paciente;
 
-                respuesta.AccionRealizada = "Creado";
-
-                return respuesta;
+                respuesta.AccionRealizada = "Creado.";
             }
 
-
-            //Existe en la BaseDatosAutotriaje
-            PacienteDto pacienteEncontrado = pacienteAutotriaje.Paciente;
-
-            bool requiereActualizacion = !pacienteEncontrado.Activo || CompararDatosPaciente(pacienteEncontrado, paciente);
-
-            if (requiereActualizacion)
+            //Procesado Ghips
+            if (consulta.EncontradoGhips)
             {
-                respuesta.Paciente = ActualizarPaciente(pacienteEncontrado, paciente);
 
-                respuesta.AccionRealizada = "Actualizado";
+                if (HayInconsistenciasEnDatos(consulta.PacienteGhips, pacienteValidado))
+                {
+                    respuesta.NotificarGhips = true;
+                    respuesta.ObservacionGhips = "Información Inconsistente.";
+                }
             }
-
             else
             {
-                respuesta.Paciente = pacienteEncontrado;
-
-                respuesta.AccionRealizada = "SinCambios";
-
-                respuesta.Observacion = "Los datos del paciente coinciden con la BaseDatosAutotriaje";
-
+                respuesta.NotificarGhips = true;
+                respuesta.ObservacionGhips = "Paciente Inexistente.";
             }
 
             return respuesta;
-            
+
         }
 
         
@@ -133,7 +192,10 @@ namespace ProjectServices.Implementations
                 FechaNacimiento = paciente.FechaNacimiento,
                 FechaCreacion = paciente.FechaCreacion,
                 FechaActualizacion = paciente.FechaActualizacion,
-                Activo = paciente.Activo
+                Activo = paciente.Activo,
+
+                DescripcionTipoDocumento = paciente.TipoDocumento.Descripcion,
+                DescripcionGenero = paciente.Genero.Descripcion,
             };
         }
 
@@ -157,9 +219,16 @@ namespace ProjectServices.Implementations
 
         private Paciente MapearAPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto pacienteValidado)
         {
+            if (!pacienteEncontrado.IdPaciente.HasValue || !pacienteEncontrado.FechaCreacion.HasValue)
+            {
+                throw new InvalidOperationException(
+                    "El paciente no pertenece a la BaseDatosAutotriaje.");
+            }
+
             return new Paciente
             {
-                IdPaciente = pacienteEncontrado.IdPaciente,
+
+                IdPaciente = pacienteEncontrado.IdPaciente.Value,
 
                 IdTipoDocumento = pacienteValidado.IdTipoDocumento,
                 NroDocumento = pacienteValidado.NroDocumento,
@@ -174,7 +243,7 @@ namespace ProjectServices.Implementations
 
                 Activo = true,
 
-                FechaCreacion = pacienteEncontrado.FechaCreacion, 
+                FechaCreacion = pacienteEncontrado.FechaCreacion.Value, 
                 FechaActualizacion = DateTime.UtcNow
             };
         }
@@ -194,7 +263,7 @@ namespace ProjectServices.Implementations
             };
         }
 
-        private bool CompararDatosPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto paciente)
+        private bool HayInconsistenciasEnDatos(PacienteDto pacienteEncontrado, PacienteValidadoDto paciente)
         {
             if (pacienteEncontrado.IdTipoDocumento != paciente.IdTipoDocumento)
                 return true;
@@ -223,7 +292,13 @@ namespace ProjectServices.Implementations
             return false;
         }
 
+        private int ObtenerCodigoTipoDocumentoGhips(int idTipoDocumento)
+        {
+            TipoDocumento tipoDocumento =
+                _tipoDocumentoRepository.ObtenerPorId(idTipoDocumento);
 
+            return tipoDocumento.Codigo;
+        }
 
     }
 }
