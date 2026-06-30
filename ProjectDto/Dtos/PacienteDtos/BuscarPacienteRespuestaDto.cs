@@ -6,6 +6,8 @@
 
         public bool EncontradoGhips { get; set; }
 
+        public bool Existe { get; set; }
+
         public PacienteDto PacienteAutotriaje { get; set; }
 
         public PacienteDto PacienteGhips { get; set; }

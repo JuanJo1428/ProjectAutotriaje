@@ -34,6 +34,7 @@ namespace ProjectServices.Implementations
 
             if (pacienteAutotriaje != null)
             {
+                respuesta.Existe = true;
                 respuesta.EncontradoAutotriaje = true;
                 respuesta.PacienteAutotriaje = MapearAPacienteDto(pacienteAutotriaje);
 
@@ -55,6 +56,7 @@ namespace ProjectServices.Implementations
 
             if (respuestaGhips.Encontrado)
             {
+                respuesta.Existe = true;
                 respuesta.EncontradoGhips = true;
                 respuesta.PacienteGhips = respuestaGhips.Paciente;
             }
@@ -62,6 +64,7 @@ namespace ProjectServices.Implementations
 
             if (!respuesta.EncontradoAutotriaje && !respuesta.EncontradoGhips)
             {
+                respuesta.Existe = false;
                 respuesta.Observacion = "Paciente no Encontrado en Bases de Datos.";
             }
 

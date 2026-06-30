@@ -16,7 +16,7 @@ namespace ProjectDto.Dtos
 
         public string SegundoApellido { get; set; }
 
-        public int IdGenero { get; set; }
+        public int IdGenero { get; set; } 
 
         public DateTime FechaNacimiento { get; set; }
 
