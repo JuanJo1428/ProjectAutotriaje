@@ -13,7 +13,7 @@ namespace ProjectData.Context
 
         public DbSet<RegistroAtencion> RegistrosAtencion { get; set; }
 
-        public DbSet<Genero> TiposGenero { get; set; }
+        public DbSet<Genero> OpcionesGenero { get; set; }
 
         public DbSet<TipoDocumento> TiposDocumento { get; set; }
     }
