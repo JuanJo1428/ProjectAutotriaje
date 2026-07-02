@@ -17,12 +17,12 @@ namespace ProjectData.Repositories.Implementations
 
         public List<Genero> ObtenerTodos()
         {
-            return _context.Generos.Where(g => g.Activo).ToList();
+            return _context.TiposGenero.Where(g => g.Activo).ToList();
         }
 
         public int ObtenerId(string descripcion)
         {
-            Genero genero = _context.Generos.FirstOrDefault(g => g.Descripcion == descripcion && g.Activo);
+            Genero genero = _context.TiposGenero.FirstOrDefault(g => g.Descripcion == descripcion && g.Activo);
 
             if (genero != null)
             {
@@ -34,7 +34,7 @@ namespace ProjectData.Repositories.Implementations
 
         public string ObtenerDescripcion(int idGenero)
         {
-            Genero genero = _context.Generos.FirstOrDefault(g => g.IdGenero == idGenero && g.Activo);
+            Genero genero = _context.TiposGenero.FirstOrDefault(g => g.IdGenero == idGenero && g.Activo);
             
             if (genero != null)
             {
