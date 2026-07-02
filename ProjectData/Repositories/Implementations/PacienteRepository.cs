@@ -1,4 +1,4 @@
-﻿using Project.Data.Entities;
+﻿using ProjectData.Entities;
 using ProjectData.Context;
 using ProjectData.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -21,20 +21,20 @@ namespace ProjectData.Repositories.Implementations
         {
             if (incluirInactivos)
             {
-                return _context.Pacientes.ToList();
+                return _context.Pacientes.Include(p => p.TipoDocumento).Include(p => p.Genero).ToList();
             }
 
-            return _context.Pacientes.Where(p => p.Activo).ToList();
+            return _context.Pacientes.Include(p => p.TipoDocumento).Include(p => p.Genero).Where(p => p.Activo).ToList();
         }
 
         public Paciente ObtenerPorDocumento(int idTipoDocumento, string nroDocumento)
         {
-            return _context.Pacientes.FirstOrDefault(p => p.NroDocumento == nroDocumento && p.IdTipoDocumento == idTipoDocumento);
+            return _context.Pacientes.Include(p => p.TipoDocumento).Include(p => p.Genero).FirstOrDefault(p => p.NroDocumento == nroDocumento && p.IdTipoDocumento == idTipoDocumento);
         }
 
         public Paciente ObtenerPorId(int idPaciente)
         {
-            return _context.Pacientes.FirstOrDefault(p => p.IdPaciente == idPaciente);
+            return _context.Pacientes.Include(p => p.TipoDocumento).Include(p => p.Genero).FirstOrDefault(p => p.IdPaciente == idPaciente);
         }
 
         public Paciente CrearPaciente(Paciente paciente)
@@ -56,8 +56,8 @@ namespace ProjectData.Repositories.Implementations
         }
 
         public bool InactivarPaciente(int idPaciente) 
-        { 
-            Paciente paciente = _context.Pacientes.FirstOrDefault(p => p.IdPaciente ==idPaciente);
+        {
+            Paciente paciente = ObtenerPorId(idPaciente);
 
             if (paciente == null)
             {

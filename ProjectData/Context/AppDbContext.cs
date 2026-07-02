@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using Project.Data.Entities;
 using ProjectData.Entities;
 
 namespace ProjectData.Context

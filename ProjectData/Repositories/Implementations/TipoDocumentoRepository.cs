@@ -60,5 +60,11 @@ namespace ProjectData.Repositories.Implementations
         {
             return _context.TiposDocumento.FirstOrDefault(td => td.IdTipoDocumento == idTipoDocumento && td.Activo);
         }
+
+        public TipoDocumento ObtenerPorCodigo(int codigo)
+        {
+            return _context.TiposDocumento
+                .FirstOrDefault(td => td.Codigo == codigo);
+        }
     }
 }

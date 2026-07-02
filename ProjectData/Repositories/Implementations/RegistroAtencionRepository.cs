@@ -1,4 +1,4 @@
-﻿using Project.Data.Entities;
+﻿using ProjectData.Entities;
 using ProjectData.Context;
 using ProjectData.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -30,6 +30,11 @@ namespace ProjectData.Repositories.Implementations
         public RegistroAtencion ObtenerPorId(int idAtencion)
         {
             return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion);
+        }
+
+        public RegistroAtencion ObtenerRegistroPendiente(int idAtencion)
+        {
+            return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion && !ra.Atendido);
         }
 
         public List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente)

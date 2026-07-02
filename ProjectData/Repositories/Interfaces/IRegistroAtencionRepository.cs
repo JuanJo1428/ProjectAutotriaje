@@ -1,4 +1,4 @@
-﻿using Project.Data.Entities;
+﻿using ProjectData.Entities;
 using System.Collections.Generic;
 
 
@@ -15,6 +15,8 @@ namespace ProjectData.Repositories.Interfaces
         bool InactivarRegistro(int idAtencion);
 
         RegistroAtencion ObtenerPorId(int idAtencion);
+
+        RegistroAtencion ObtenerRegistroPendiente(int idPaciente);
 
         List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente);
 

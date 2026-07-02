@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Project.Data.Entities
+namespace ProjectData.Entities
 {
     [Table("RegistrosAtencion")]
     public class RegistroAtencion
@@ -24,9 +24,6 @@ namespace Project.Data.Entities
         public int EdadPaciente { get; set; }
 
 
-        public string MotivoConsulta { get; set; }
-
-
         public bool CondicionMaternidad { get; set; }
 
 
@@ -36,6 +33,18 @@ namespace Project.Data.Entities
         public bool CondicionOncologica { get; set; }
 
 
+        public bool AutotriajeIniciado { get; set; }
+
+
+        public string MotivoConsulta { get; set; }
+
+
+        public bool Atendido { get; set; }
+
+
         public bool Activo {  get; set; }
+
+
+        public DateTime? FechaActualizacion { get; set; }
     }
 }
