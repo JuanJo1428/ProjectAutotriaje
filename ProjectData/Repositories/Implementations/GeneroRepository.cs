@@ -46,8 +46,7 @@ namespace ProjectData.Repositories.Implementations
 
         public Genero ObtenerPorDescripcion(string descripcion)
         {
-            return _context.Generos
-                .FirstOrDefault(g => g.Descripcion.ToLower() == descripcion.ToLower());
+            return _context.TiposGenero.FirstOrDefault(g => g.Descripcion.ToLower() == descripcion.ToLower());
         }
     }
 }
