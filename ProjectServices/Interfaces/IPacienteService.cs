@@ -1,4 +1,6 @@
-﻿using ProjectDto.Dtos;
+﻿using ProjectData.Entities;
+using ProjectDto.Dtos;
+using System.Collections.Generic;
 
 
 namespace ProjectServices.Interfaces
@@ -12,5 +14,6 @@ namespace ProjectServices.Interfaces
         PacienteProcesadoRespuestaDto ProcesarPaciente(PacienteValidadoDto paciente);
 
         PacienteDto ActualizarPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto pacienteValidado);
+        List<TipoDocumento> ObtenerTodosTiposDocumentos();
     }
 }

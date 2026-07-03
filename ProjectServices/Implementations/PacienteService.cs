@@ -1,10 +1,13 @@
-﻿using ProjectData.Entities;
+﻿using ProjectData.Context;
+using ProjectData.Entities;
 using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
 using ProjectDto.Dtos.GhipsDtos;
 using ProjectServices.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectServices.Implementations
 {
@@ -21,6 +24,12 @@ namespace ProjectServices.Implementations
             _pacienteRepository = pacienteRepository;
             _ghipsService = ghipsService;
             _tipoDocumentoRepository = tipoDocumentoRepository;
+        }
+
+        public PacienteService()
+        {
+            var context = new AppDbContext();
+            _tipoDocumentoRepository = new TipoDocumentoRepository(context);
         }
 
 
@@ -303,5 +312,11 @@ namespace ProjectServices.Implementations
             return tipoDocumento.Codigo;
         }
 
+        public List<TipoDocumento> ObtenerTodosTiposDocumentos()
+        {
+            var tiposDocumento = _tipoDocumentoRepository.ObtenerTodos();
+
+            return tiposDocumento;
+        }
     }
 }

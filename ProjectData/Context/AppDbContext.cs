@@ -7,6 +7,7 @@ namespace ProjectData.Context
     {
         public AppDbContext() : base("DefaultConnection")
         {
+            Database.SetInitializer<AppDbContext>(null);
         }
 
         public DbSet<Paciente> Pacientes { get; set; }
