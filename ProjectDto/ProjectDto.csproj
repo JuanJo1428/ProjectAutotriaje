@@ -56,7 +56,6 @@
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionRespuestaDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\RegistroAtencionDto.cs" />
-    <Compile Include="Dtos\TipoDocumentoDtos\TipoDocumentoListaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
