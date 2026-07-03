@@ -17,6 +17,12 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public PacienteRepository()
+        {
+            _context = new AppDbContext();
+        }
+
+
         public List<Paciente> ObtenerTodos(bool incluirInactivos = true)
         {
             if (incluirInactivos)

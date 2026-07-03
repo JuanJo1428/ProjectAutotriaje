@@ -1,4 +1,5 @@
 ﻿using ProjectData.Entities;
+using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
 using ProjectDto.Dtos.GhipsDtos;
@@ -22,6 +23,13 @@ namespace ProjectServices.Implementations
             _tipoDocumentoRepository = tipoDocumentoRepository;
 
             _generoRepository = generoRepository;
+        }
+
+        public GhipsService()
+        {
+            _tipoDocumentoRepository = new TipoDocumentoRepository();
+
+            _generoRepository = new GeneroRepository();
         }
 
 

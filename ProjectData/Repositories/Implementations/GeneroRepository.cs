@@ -15,6 +15,11 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public GeneroRepository()
+        {
+            _context = new AppDbContext();
+        }
+
         public List<Genero> ObtenerTodos()
         {
             return _context.OpcionesGenero.Where(g => g.Activo).ToList();

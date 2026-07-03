@@ -14,9 +14,6 @@
                     CssClass="btn-kiosk-primary" 
                     OnClick="btnIniciarTriage_Click" />
 
-        <asp:DropDownList ID="ddlTipoDocumento" runat="server" DataTextField="Descripcion" DataValueField="IdTipoDocumento" OnSelectedIndexChanged="ddlTipoDocumento_SelectedIndexChanged"></asp:DropDownList>
-        <asp:TextBox ID="txtPruebas" runat="server"></asp:TextBox>
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
     </section>
     
 </asp:Content>

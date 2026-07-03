@@ -1,4 +1,5 @@
 ﻿using ProjectData.Entities;
+using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
 using ProjectServices.Interfaces;
@@ -15,6 +16,12 @@ namespace ProjectServices.Implementations
         {
             _tipoDocumentoRepository = tipoDocumentoRepository;
         }
+
+        public TipoDocumentoService()
+        {
+            _tipoDocumentoRepository = new TipoDocumentoRepository();
+        }
+
 
         public List<TipoDocumentoListaDto> ObtenerTiposDocumento()
         {

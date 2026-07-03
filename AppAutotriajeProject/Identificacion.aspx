@@ -18,18 +18,9 @@
                         ClientIDMode="Static"
                         CssClass="touch-dropdown"
                         aria-label="Tipo de documento"
+                        DataTextField="Descripcion"
+                        DataValueField="IdTipoDocumento"
                         onchange="DocumentoUI.onTipoDocumentoChange()">
-                        <asp:ListItem Value="" Selected="True">Seleccione tipo de documento</asp:ListItem>
-                        <asp:ListItem Value="CC">Cédula de ciudadanía</asp:ListItem>
-                        <asp:ListItem Value="CE">Cédula de extranjería</asp:ListItem>
-                        <asp:ListItem Value="TI">Tarjeta de identidad</asp:ListItem>
-                        <asp:ListItem Value="RC">Registro civil</asp:ListItem>
-                        <asp:ListItem Value="PA">Pasaporte</asp:ListItem>
-                        <asp:ListItem Value="CD">Carné diplomático</asp:ListItem>
-                        <asp:ListItem Value="SC">Salvoconducto</asp:ListItem>
-                        <asp:ListItem Value="PE">Permiso especial de permanencia</asp:ListItem>
-                        <asp:ListItem Value="PT">Permiso por Protección Temporal</asp:ListItem>
-                        <asp:ListItem Value="DE">Documento extranjero</asp:ListItem>
                     </asp:DropDownList>
 
                     <asp:RequiredFieldValidator

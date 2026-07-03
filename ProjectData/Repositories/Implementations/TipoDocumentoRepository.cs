@@ -15,6 +15,11 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public TipoDocumentoRepository()
+        {
+            _context = new AppDbContext();
+        }
+
         public List<TipoDocumento> ObtenerTodos()
         {
             return _context.TiposDocumento.Where(td => td.Activo).ToList();

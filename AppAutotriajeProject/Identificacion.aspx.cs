@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ProjectData.Entities;
+using ProjectDto.Dtos;
+using ProjectServices.Implementations;
+using ProjectServices.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Newtonsoft.Json;
 
 namespace AutoTriageWeb
 {
@@ -13,6 +18,12 @@ namespace AutoTriageWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                CargarTiposDocumento();
+
+            }
+
             CargarReglasConfiguracion();
         }
 
@@ -68,6 +79,8 @@ namespace AutoTriageWeb
             }
         }
 
+
+        private readonly PacienteService _pacienteService = new PacienteService();
         protected void btnContinuar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -75,20 +88,45 @@ namespace AutoTriageWeb
                 string tipoSeleccionado = ddlTipoDocumento.SelectedValue;
                 string documentoIngresado = txtDocumento.Text;
 
-                //...
+
+                BuscarPacienteDto datosBusqueda = new BuscarPacienteDto
+                {
+                    IdTipoDocumento = Convert.ToInt32(tipoSeleccionado),
+                    NroDocumento = documentoIngresado
+                };
+
+                BuscarPacienteRespuestaDto respuesta = _pacienteService.BuscarPaciente(datosBusqueda);
+
+
+                Session["BusquedaPaciente"] = respuesta;
 
                 Response.Redirect("~/Ejemplo.aspx");
             }
         }
+
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Inicio.aspx");
         }
 
+
         protected void lnkEscaneo_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/EscaneoDocumento.aspx");
+        }
+
+
+        private readonly TipoDocumentoService _tipoDocumentoService = new TipoDocumentoService();
+        private void CargarTiposDocumento()
+        {
+            ddlTipoDocumento.DataSource = _tipoDocumentoService.ObtenerTiposDocumento();
+
+            ddlTipoDocumento.DataBind();
+
+
+            ddlTipoDocumento.Items.Insert(0,new ListItem("Seleccione tipo de documento", ""));
+            ddlTipoDocumento.SelectedIndex = 0;
         }
     }
 

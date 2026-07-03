@@ -26,6 +26,15 @@ namespace ProjectServices.Implementations
             _tipoDocumentoRepository = tipoDocumentoRepository;
         }
 
+        public PacienteService()
+        {
+            _pacienteRepository = new PacienteRepository();
+
+            _ghipsService = new GhipsService();
+
+            _tipoDocumentoRepository = new TipoDocumentoRepository();
+        }
+
 
         public BuscarPacienteRespuestaDto BuscarPaciente(BuscarPacienteDto datosBusqueda)
         {
