@@ -1,8 +1,8 @@
 ﻿namespace ProjectServices.Constants
 {
-    public static class Generos
+    public enum Generos
     {
-        public const int Femenino = 1;
-        public const int Masculino = 2;
+        Masculino = 1,
+        Femenino = 2
     }
 }

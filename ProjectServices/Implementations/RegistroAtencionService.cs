@@ -201,7 +201,7 @@ namespace ProjectServices.Implementations
         private void ValidarCondicionMaternidad(Paciente paciente, CrearRegistroAtencionDto datosRegistro)
         {
             // Un paciente de género masculino no puede presentar condición de maternidad.
-            if (paciente.IdGenero == Generos.Masculino)
+            if (paciente.IdGenero == (int)Generos.Masculino)
             {
                 datosRegistro.CondicionMaternidad = false;
             }

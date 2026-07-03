@@ -26,12 +26,6 @@ namespace ProjectServices.Implementations
             _tipoDocumentoRepository = tipoDocumentoRepository;
         }
 
-        public PacienteService()
-        {
-            var context = new AppDbContext();
-            _tipoDocumentoRepository = new TipoDocumentoRepository(context);
-        }
-
 
         public BuscarPacienteRespuestaDto BuscarPaciente(BuscarPacienteDto datosBusqueda)
         {
@@ -312,11 +306,5 @@ namespace ProjectServices.Implementations
             return tipoDocumento.Codigo;
         }
 
-        public List<TipoDocumento> ObtenerTodosTiposDocumentos()
-        {
-            var tiposDocumento = _tipoDocumentoRepository.ObtenerTodos();
-
-            return tiposDocumento;
-        }
     }
 }

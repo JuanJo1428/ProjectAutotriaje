@@ -14,6 +14,5 @@ namespace ProjectServices.Interfaces
         PacienteProcesadoRespuestaDto ProcesarPaciente(PacienteValidadoDto paciente);
 
         PacienteDto ActualizarPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto pacienteValidado);
-        List<TipoDocumento> ObtenerTodosTiposDocumentos();
     }
 }
