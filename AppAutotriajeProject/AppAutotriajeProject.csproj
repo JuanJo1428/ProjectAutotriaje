@@ -214,8 +214,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
+    <Compile Include="Controllers\RegistroAtencionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

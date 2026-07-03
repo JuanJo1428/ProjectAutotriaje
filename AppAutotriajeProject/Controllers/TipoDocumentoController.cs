@@ -16,14 +16,11 @@ namespace AppAutotriajeProject.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult ObtenerTodos()
+        public IHttpActionResult ObtenerTiposDocumento()
         {
-            var tiposDocumento = _tipoDocumentoRepository
-                .ObtenerTodos()
-                .Select(td => new
+            var tiposDocumento = _tipoDocumentoRepository.ObtenerTodos().Select(td => new
                 {
                     td.IdTipoDocumento,
-                    td.Nombre,
                     td.Descripcion
                 })
                 .ToList();
