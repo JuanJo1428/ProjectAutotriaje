@@ -1,12 +1,10 @@
-﻿using System;
+﻿using ProjectDto.Dtos.GeneroDtos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectServices.Interfaces
 {
-    internal class IGeneroService
+    public interface IGeneroService
     {
+        List<GeneroListaDto> ObtenerGeneros();
     }
 }
