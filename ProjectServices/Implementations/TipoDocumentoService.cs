@@ -28,7 +28,9 @@ namespace ProjectServices.Implementations
             return _tipoDocumentoRepository.ObtenerTodos().Select(td => new TipoDocumentoListaDto
                 {
                     IdTipoDocumento = td.IdTipoDocumento,
-                    Descripcion = td.Descripcion
+                    Descripcion = td.Descripcion,
+                    MinLength = td.MinLength.Value,
+                    MaxLength = td.MaxLength.Value
                 })
                 .ToList();
         }
