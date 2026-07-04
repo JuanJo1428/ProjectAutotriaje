@@ -23,9 +23,26 @@ namespace AutoTriageWeb
 
         protected void cvDocumento_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            // Validar usando las reglas obtenidas desde la base de datos.
-            args.IsValid = false;
+            if (string.IsNullOrEmpty(ddlTipoDocumento.SelectedValue))
+            {
+                args.IsValid = false;
+                return;
+            }
+
+            ListItem item = ddlTipoDocumento.SelectedItem;
+
+            if (!int.TryParse(item.Attributes["data-min"], out int min) ||
+                !int.TryParse(item.Attributes["data-max"], out int max))
+            {
+                args.IsValid = false;
+                return;
+            }
+
+            int longitud = args.Value.Trim().Length;
+
+            args.IsValid = longitud >= min && longitud <= max;
         }
+        
 
 
         private readonly PacienteService _pacienteService = new PacienteService();
@@ -68,18 +85,23 @@ namespace AutoTriageWeb
         private readonly TipoDocumentoService _tipoDocumentoService = new TipoDocumentoService();
         private void CargarTiposDocumento()
         {
-            ddlTipoDocumento.DataSource = _tipoDocumentoService.ObtenerTiposDocumento();
+            List<TipoDocumentoListaDto> tiposDocumento = _tipoDocumentoService.ObtenerTiposDocumento();
+
+            ddlTipoDocumento.DataSource = tiposDocumento;
             ddlTipoDocumento.DataBind();
 
-            // INTENTO DE ESTRUCTURA
-            foreach (ListItem item in ddlTipoDocumento.Items)
+            ddlTipoDocumento.Items.Insert(0,
+                new ListItem("Seleccione tipo de documento", ""));
+
+            for (int i = 0; i < tiposDocumento.Count; i++)
             {
-                // Reemplazar por valores una vez ya se obtengan los datos suando el objeto correspondiente
-                item.Attributes["data-min"] = "0";
-                item.Attributes["data-max"] = "0"; 
+                ddlTipoDocumento.Items[i + 1].Attributes["data-min"] =
+                    tiposDocumento[i].MinLength.ToString();
+
+                ddlTipoDocumento.Items[i + 1].Attributes["data-max"] =
+                    tiposDocumento[i].MaxLength.ToString();
             }
 
-            ddlTipoDocumento.Items.Insert(0,new ListItem("Seleccione tipo de documento", ""));
             ddlTipoDocumento.SelectedIndex = 0;
         }
     }

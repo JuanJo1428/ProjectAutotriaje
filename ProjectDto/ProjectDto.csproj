@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\EscanerDtos\DocumentoEscaneadoDto.cs" />
     <Compile Include="Dtos\GeneroDtos\GeneroListaDto.cs" />
     <Compile Include="Dtos\GhipsDtos\BuscarPacienteGhipsDto.cs" />
     <Compile Include="Dtos\GhipsDtos\BuscarPacienteGhipsRespuestaDto.cs" />

@@ -9,8 +9,11 @@ const DocumentoUI = {
 
     backspace: function () {
         const valorActual = this.txtDocumento.value;
+
         if (valorActual.length > 0) {
-            this.txtDocumento.value = valorActual.substring(0, valorActual.length - 1);
+            this.txtDocumento.value =
+                valorActual.substring(0, valorActual.length - 1);
+
             this.ejecutarValidacionEnTiempoReal();
         }
     },
@@ -20,8 +23,12 @@ const DocumentoUI = {
     },
 
     ejecutarValidacionEnTiempoReal: function () {
-        if (typeof Page_ClientValidate === 'function') {
-            ValidatorValidate(document.getElementById(cvDocumentoId));
+
+        const validator =
+            document.getElementById(cvDocumentoId);
+
+        if (validator) {
+            ValidatorValidate(validator);
         }
     }
 };
