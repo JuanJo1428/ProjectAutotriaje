@@ -28,6 +28,12 @@ namespace ProjectData.Entities
         public bool Activo { get; set; }
 
 
+        public int? MinLength { get; set; }
+
+
+        public int? MaxLength { get; set; }
+
+
         // Relacion varios pacientes por cada tipo de documento
         public virtual ICollection<Paciente> Pacientes { get; set; }
     }
