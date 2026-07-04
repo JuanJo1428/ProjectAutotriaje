@@ -1,7 +1,4 @@
-﻿using ProjectData.Repositories.Interfaces;
-using ProjectServices.Implementations;
-using ProjectServices.Interfaces;
-using System;
+﻿using System;
 using System.Web.UI;
 
 namespace AutoTriageWeb
@@ -10,10 +7,9 @@ namespace AutoTriageWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-      
         }
 
-        protected void btnIniciarTriage_Click(object sender, EventArgs e)
+        protected void btnStart_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Identificacion.aspx");
         }

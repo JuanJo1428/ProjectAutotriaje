@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="Identificación" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Identificacion.aspx.cs" Inherits="AutoTriageWeb.Identificacion" %>
 
 <asp:Content ID="ContentIdentificacion" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Identificación</h1>
-    <p class="subtitle">Ingrese sus datos manualmente o escanee el código de barras de su documento.</p>
+    <div class="description-container">
+        <h1>Identificación</h1>
+        <p class="subtitle">Ingrese sus datos manualmente o escanee el código de barras de su documento.</p>
+    </div>
 
-    <fieldset style="border:none;width:100%;">
+    <fieldset style="border:none;width:100%;" class="identification-form">
         <legend class="sr-only">
             Identificación del Paciente
         </legend>
@@ -58,7 +60,6 @@
                         Display="Dynamic"
                         CssClass="validation-error"
                         ValidateEmptyText="false"
-                        ClientValidationFunction="validateDocumento"
                         OnServerValidate="cvDocumento_ServerValidate"
                         ErrorMessage="El documento no cumple el formato del tipo seleccionado." />
                 </div>
@@ -85,7 +86,7 @@
                 <asp:LinkButton
                     ID="lnkEscaneo"
                     runat="server"
-                    CssClass="btn btn-kiosk-scan"
+                    CssClass="btn-scan"
                     CausesValidation="false"
                     OnClick="lnkEscaneo_Click">
                     <i class="fa-solid fa-barcode" aria-hidden="true"></i>
@@ -93,30 +94,27 @@
                 </asp:LinkButton>
             </div>
         </div>
-
-        <div class="flow-navigation">
-            <asp:Button
-                ID="Button1"
-                runat="server"
-                Text="Volver"
-                CssClass="btn btn-back"
-                CausesValidation="false"
-                OnClick="btnVolver_Click" />
-            <asp:Button
-                ID="Button2"
-                runat="server"
-                Text="Continuar"
-                CssClass="btn btn-primary"
-                OnClick="btnContinuar_Click" />
-        </div>
     </fieldset>
+
+    <div class="flow-navigation">
+        <asp:Button
+            ID="btnVolver"
+            runat="server"
+            Text="Volver"
+            CssClass="btn btn-back"
+            CausesValidation="false"
+            OnClick="btnVolver_Click" />
+        <asp:Button
+            ID="btnContinuar"
+            runat="server"
+            Text="Continuar"
+            CssClass="btn btn-next"
+            OnClick="btnContinuar_Click" />
+    </div>
 
     <script>
         const rfvDocumentoId = '<%= rfvDocumento.ClientID %>';
         const cvDocumentoId = '<%= cvDocumento.ClientID %>';
-        
-        // Inyección del JSON del servidor al entorno de JavaScript
-        const CONFIG_DOCUMENTOS = <%= ReglasDocumentoJson %>;
     </script>
     <script src="Scripts/js/identificacion.js?v=1.1" defer></script>
 </asp:Content>

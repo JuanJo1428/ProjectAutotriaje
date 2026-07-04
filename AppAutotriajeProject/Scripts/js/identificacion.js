@@ -2,21 +2,7 @@ const DocumentoUI = {
     txtDocumento: document.getElementById('txtDocumento'),
     ddlTipoDocumento: document.getElementById('ddlTipoDocumento'),
 
-    getReglaActual: function () {
-        const tipoDoc = this.ddlTipoDocumento.value;
-        if (CONFIG_DOCUMENTOS && CONFIG_DOCUMENTOS.TiposDocumento && CONFIG_DOCUMENTOS.TiposDocumento[tipoDoc]) {
-            return CONFIG_DOCUMENTOS.TiposDocumento[tipoDoc];
-        }
-        return null;
-    },
-
     pressNumber: function (num) {
-        const regla = this.getReglaActual();
-
-        if (regla && this.txtDocumento.value.length >= regla.MaxLength) {
-            return;
-        }
-
         this.txtDocumento.value += num;
         this.ejecutarValidacionEnTiempoReal();
     },
@@ -39,16 +25,3 @@ const DocumentoUI = {
         }
     }
 };
-
-function validateDocumento(source, args) {
-    const regla = DocumentoUI.getReglaActual();
-    const valor = args.Value;
-
-    if (!regla) {
-        args.IsValid = true;
-        return;
-    }
-
-    const longitudCorrecta = valor.length >= regla.MinLength && valor.length <= regla.MaxLength;
-    args.IsValid = longitudCorrecta;
-}

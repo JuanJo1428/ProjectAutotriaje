@@ -9,31 +9,23 @@
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     user-select: none;
     -webkit-user-select: none;
 }
 
 html {
-    font-size: clamp(14px, 1vw, 18px);
+    font-size: 18px;
 }
 
-/*
-    Nota:
-    - El código está organizado por secciones y no por elementos o clases.
-    (No se están generalizando los estilos para facilidad de edición.)
-    - La generalización masiva se puede y se debe hacer al final en archivos copia
-    cuando el objetivo sea optimizar para la salida de la aplicación.
-*/
-
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    min-height: 100dvh;
     background-color: var(--color-background);
     color: var(--color-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     line-height: 1.4;
-    min-height: 100dvh;
 }
 
 
@@ -44,42 +36,40 @@ body {
 }
 
 header {
-    background-color: var(--color-primary);
-    color: var(--color-surface);
-    padding: 1.25rem 2.5rem;
     display: flex;
     justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.25rem 2.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
 }
 
     header h1 {
-        font-size: 1.35rem;
+        font-size: 1.5rem;
         font-weight: 700;
     }
 
     header time {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: 600;
         letter-spacing: 0.5px;
     }
 
 main {
     flex: 1;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 footer {
-    background-color: var(--color-surface);
-    border-top: 1px solid #e2e8f0;
     padding: 1rem 2.5rem;
-    text-align: center;
-    font-size: 0.95rem;
+    background-color: var(--color-surface);
     color: var(--color-text-muted);
+    font-size: 0.95rem;
     font-weight: 600;
+    text-align: center;
 }
 
 
@@ -89,30 +79,23 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: 2rem;
-    max-width: 800px;
+    max-width: 70%;
     margin: auto;
+    text-align: center;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 p {
-    font-size: 1.5rem;
     color: var(--color-text-muted);
+    font-size: 1.5rem;
     line-height: 1.6;
 }
 
-/* Usamos estilo kiosco pero solo para editar el código, luego lo cambiaré a btn-primary. */
-.btn-kiosk-primary {
-    /*
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    */
+.btn-start {
     background-color: var(--color-accent);
     color: var(--color-surface);
     font-family: inherit;
@@ -127,65 +110,60 @@ p {
     transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-    .btn-kiosk-primary:hover {
-        background-color: #009c96;
-    }
-
-    .btn-kiosk-primary:active {
-        transform: scale(0.96);
-    }
-
-/*---------------------------------------------------------------------------*/
+.btn-primary:active {
+    background-color: #009c96;
+    transform: scale(0.96);
+}
 
 /* Pantalla de Identificación */
+
+.description-container {
+    text-align: center;
+}
+
+.identification-form {
+}
 
 .split-flow-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    width: 60%;
-    margin: 1rem auto 0;
 }
 
 .manual-entry-column {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    max-width: 420px;
+    gap: 0.25rem;
+    min-width: 400px;
+    width: 30%;
 }
+
+/*UNA VEZ TERMINADO TODO UNIFICAR LAS DOS SIGUIENTES CLASES*/
 
 .touch-dropdown {
     display: block;
     width: 100%;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    font: inherit;
-    font-size: 1.25rem;
-    color: var(--color-primary);
-    background-color: var(--color-surface);
+    padding: 0.5rem 1.5rem;
     border: 2px solid var(--color-primary);
     border-radius: var(--border-radius-lg);
+    font: inherit;
+    font-size: 1.25rem;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
     cursor: pointer;
 }
-
-    .touch-dropdown:focus {
-        outline: none;
-        border-color: #666;
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-    }
 
 .input-display {
     display: block;
     width: 100%;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    font: inherit;
-    font-size: 1.25rem;
-    color: var(--color-accent);
-    background-color: var(--color-surface);
+    padding: 0.5rem 1.5rem;
     border: 2px solid var(--color-accent);
     border-radius: var(--border-radius-lg);
+    background-color: var(--color-surface);
+    color: var(--color-accent);
+    font: inherit;
+    font-size: 1.25rem;
 }
 
 .numpad-grid {
@@ -193,20 +171,19 @@ p {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     width: 100%;
-    margin: auto;
 }
 
 .num-button {
-    background-color: var(--color-surface);
-    color: var(--color-primary);
+    padding: 0.5rem 0;
     border: 2px solid #e2e8f0;
     border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
     font-size: 1.5rem;
     font-weight: 700;
-    padding: 0.5rem 0;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
     transition: background-color 0.1s, transform 0.1s;
 }
 
@@ -215,27 +192,26 @@ p {
         transform: scale(0.95);
     }
 
-    .num-button.key-clear {
-        color: var(--color-error);
-    }
-
 .scan-option-column {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    min-width: 400px;
+    width: 40%;
 }
 
 .divider-text {
+    color: var(--color-text-muted);
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--color-text-muted);
 }
 
-.btn-kiosk-scan {
+.btn-scan {
     height: 180px;
-    width: 320px;
+    width: 100%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -247,90 +223,34 @@ p {
     text-decoration: none;
 }
 
-    .btn-kiosk-scan:active {
+    .btn-scan:active {
         background-color: #e2e8f0;
         transform: scale(0.95);
     }
 
-    .btn-kiosk-scan i {
+    .btn-scan i {
         display: block;
         font-size: 3.5rem;
         color: var(--color-primary);
     }
 
-    .btn-kiosk-scan span {
+    .btn-scan span {
         display: block;
         color: var(--color-primary);
     }
 
-/* Nota: Debo reutilizar esto después */
-
-/*
-.priority-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.priority-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-primary);
-}
-
-.priority-toggles {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.clinical-toggle {
-    display: inline-flex;
-    cursor: pointer;
-}
-
-.clinical-toggle input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.clinical-toggle-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.5rem;
-    border: 2px solid #1b3a6b;
-    border-radius: 2rem;
-    font-weight: 600;
-    color: #1b3a6b;
-    background-color: #fff;
-    transition: background-color 0.2s, color 0.2s;
-    user-select: none;
-}
-
-.clinical-toggle input[type="checkbox"]:checked + .clinical-toggle-label {
-    background-color: #1b3a6b;
-    color: #fff;
-}
-*/
-
 .flow-navigation {
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    width: 100%;
 }
 
     .flow-navigation .btn {
+        padding: 0.8rem 2rem;
+        border-radius: var(--border-radius-lg);
         font-family: inherit;
         font-size: 1.2rem;
         font-weight: 700;
-        padding: 0.8rem 2rem;
-        border-radius: var(--border-radius-lg);
         cursor: pointer;
         transition: background-color 0.15s ease, transform 0.1s ease;
     }
@@ -341,14 +261,211 @@ p {
         }
 
 .btn-back {
+    border: 2px solid var(--color-primary);
     background-color: var(--color-surface);
     color: var(--color-text-muted);
-    border: 2px solid var(--color-primary);
 }
 
-.btn-primary {
+.btn-next {
+    border: none;
     background-color: var(--color-accent);
     color: var(--color-surface);
-    border: none;
 }
 
+
+/* Página de escaneo (EDITAR HACIA LA ÚLTIMA VERSIÓN - QUEDA PENDIENTE)*/
+
+.scan-target-box {
+    width: 30%;
+    height: 220px;
+    margin: 40px auto;
+    border: 3px dashed var(--color-accent); /* Color verde/turquesa del prototipo */
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.scan-main-icon {
+    font-size: 4rem;
+    color: var(--color-accent);
+}
+
+/* Transición animada cuando la API responde OK */
+.scan-success-icon {
+    font-size: 5rem;
+    color: var(--color-accent);
+    animation: popIn 0.4s ease-in-out;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+
+/* Pantalla de Información */
+
+.form-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+    row-gap: 15px;
+}
+
+/* --- DEPURAR APARTIR DE AQUÍ ↓ --- */
+
+/* Grupos de cada campo */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #37474f;
+        font-size: 0.95rem;
+    }
+
+/* Cajas de texto y selectores estilo Kiosco */
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    border: 2px solid #cfd8dc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #263238;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+    /* Comportamiento cuando un campo está deshabilitado (Modo Lectura) */
+    .form-control:disabled {
+        background-color: #f5f7f8;
+        border-color: #e0e0e0;
+        color: #757575;
+        cursor: not-allowed;
+        opacity: 0.9;
+    }
+
+    /* Enfoque visual cuando el campo está activo para edición */
+    .form-control:focus {
+        border-color: #0078d4;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
+    }
+
+    /* Estilo para los campos requeridos vacíos */
+    .form-control.is-invalid {
+        border-color: #d32f2f;
+        background-color: #ffebee;
+    }
+
+/* Barra de Navegación Inferior Estricta -----------------------------*/
+
+.btn {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary {
+    background-color: #f3f2f1;
+    color: #323130;
+    border: 1px solid #8a8886;
+}
+
+    .btn-secondary:hover {
+        background-color: #edebe9;
+    }
+
+.btn-back {
+    background-color: #eaeaea;
+    color: #333;
+}
+
+    .btn-back:hover {
+        background-color: #dbdbdb;
+    }
+
+/* Responsividad en pantallas pequeñas (por si se reduce la ventana) */
+@media (max-height: 700px) {
+    .form-grid {
+        row-gap: 8px;
+    }
+
+    .form-control {
+        padding: 8px 12px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+    }
+}
+
+
+/* ===========================
+   Pantallas de condiciones
+=========================== */
+
+.condition-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.condition-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+    .condition-options input[type="radio"] {
+        display: none;
+    }
+
+    .condition-options label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 20rem;
+        padding: 4rem 0;
+        border: 3px solid #D6D6D6;
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 4px 10px rgba(0,0,0,.10);
+        background-color: var(--color-surface);
+        color: var(--color-primary);
+        font-size: 3rem;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .condition-options input[type="radio"]:checked + label {
+        border: none;
+        background-color: var(--color-accent);
+        color: var(--color-surface);
+        box-shadow: 0 8px 20px rgba(23,183,181,.35);
+    }
+
+.validation-error {
+    margin-top: 30px;
+    text-align: center;
+}

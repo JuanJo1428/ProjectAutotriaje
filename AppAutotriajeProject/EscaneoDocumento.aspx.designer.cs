@@ -11,16 +11,16 @@ namespace AutoTriageWeb
 {
 
 
-    public partial class Inicio
+    public partial class EscaneoDocumento
     {
 
         /// <summary>
-        /// btnIniciarTriage control.
+        /// btnVolver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIniciarTriage;
+        protected global::System.Web.UI.WebControls.Button btnVolver;
     }
 }

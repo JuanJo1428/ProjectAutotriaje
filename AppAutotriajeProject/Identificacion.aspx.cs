@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using ProjectData.Entities;
+﻿using ProjectData.Entities;
 using ProjectDto.Dtos;
 using ProjectServices.Implementations;
 using ProjectServices.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,9 +11,6 @@ namespace AutoTriageWeb
 {
     public partial class Identificacion : System.Web.UI.Page
     {
-        // Propiedad accesible desde la página .aspx para pasar las reglas a JS
-        protected string ReglasDocumentoJson { get; set; } = "{}";
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,59 +19,12 @@ namespace AutoTriageWeb
 
             }
 
-            CargarReglasConfiguracion();
-        }
-
-        private void CargarReglasConfiguracion()
-        {
-            try
-            {
-                string path = Server.MapPath("~/Config/ReglasDocumento.json");
-                if (File.Exists(path))
-                {
-                    ReglasDocumentoJson = File.ReadAllText(path);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejo de errores silencioso o log de sistema según la política del equipo
-                ReglasDocumentoJson = "{}";
-            }
         }
 
         protected void cvDocumento_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            string tipoDoc = ddlTipoDocumento.SelectedValue;
-            string numDoc = args.Value;
-
-            if (string.IsNullOrEmpty(tipoDoc) || string.IsNullOrEmpty(numDoc))
-            {
-                args.IsValid = false;
-                return;
-            }
-
-            try
-            {
-                string path = Server.MapPath("~/Config/ReglasDocumento.json");
-                var config = JsonConvert.DeserializeAnonymousType(File.ReadAllText(path), new
-                {
-                    TiposDocumento = new System.Collections.Generic.Dictionary<string, ReglaConfig>()
-                });
-
-                if (config != null && config.TiposDocumento.ContainsKey(tipoDoc))
-                {
-                    var regla = config.TiposDocumento[tipoDoc];
-                    args.IsValid = numDoc.Length >= regla.MinLength && numDoc.Length <= regla.MaxLength;
-                }
-                else
-                {
-                    args.IsValid = false;
-                }
-            }
-            catch
-            {
-                args.IsValid = false;
-            }
+            // Validar usando las reglas obtenidas desde la base de datos.
+            args.IsValid = false;
         }
 
 
@@ -107,10 +55,10 @@ namespace AutoTriageWeb
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inicio.aspx");
+            Response.Redirect("~/Default.aspx");
         }
 
-
+        
         protected void lnkEscaneo_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/EscaneoDocumento.aspx");
@@ -121,19 +69,18 @@ namespace AutoTriageWeb
         private void CargarTiposDocumento()
         {
             ddlTipoDocumento.DataSource = _tipoDocumentoService.ObtenerTiposDocumento();
-
             ddlTipoDocumento.DataBind();
 
+            // INTENTO DE ESTRUCTURA
+            foreach (ListItem item in ddlTipoDocumento.Items)
+            {
+                // Reemplazar por valores una vez ya se obtengan los datos suando el objeto correspondiente
+                item.Attributes["data-min"] = "0";
+                item.Attributes["data-max"] = "0"; 
+            }
 
             ddlTipoDocumento.Items.Insert(0,new ListItem("Seleccione tipo de documento", ""));
             ddlTipoDocumento.SelectedIndex = 0;
         }
-    }
-
-    internal class ReglaConfig
-    {
-        public string Nombre { get; set; }
-        public int MinLength { get; set; }
-        public int MaxLength { get; set; }
     }
 }
