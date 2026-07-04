@@ -15,7 +15,7 @@ namespace AutoTriageWeb
         {
             if (!IsPostBack)
             {
-                CargarTiposDocumento();
+                //CargarTiposDocumento();
 
             }
 
