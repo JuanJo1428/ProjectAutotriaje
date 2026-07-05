@@ -54,8 +54,6 @@ namespace ProjectData.Repositories.Implementations
 
         public Paciente ActualizarPaciente(Paciente paciente)
         {
-            _context.Entry(paciente).State = EntityState.Modified;
-
             _context.SaveChanges();
 
             return paciente;

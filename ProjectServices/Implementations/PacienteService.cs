@@ -111,6 +111,8 @@ namespace ProjectServices.Implementations
 
             paciente = _pacienteRepository.CrearPaciente(paciente);
 
+            paciente = _pacienteRepository.ObtenerPorId(paciente.IdPaciente);
+
             respuesta.Paciente = MapearAPacienteDto(paciente);
             respuesta.Creado = true;
 
@@ -190,8 +192,25 @@ namespace ProjectServices.Implementations
         
         public PacienteDto ActualizarPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto pacienteValidado)
         {
-            Paciente paciente = MapearAPaciente(pacienteEncontrado, pacienteValidado);
+            if (!pacienteEncontrado.IdPaciente.HasValue)
+            {
+                throw new InvalidOperationException(
+                    "El paciente no pertenece a la BaseDatosAutotriaje.");
+            }
 
+
+            Paciente paciente = _pacienteRepository.ObtenerPorId(pacienteEncontrado.IdPaciente.Value);
+
+            if (paciente == null)
+            {
+                throw new InvalidOperationException(
+                    "No se encontró el paciente para actualizar.");
+            }
+
+            // Actualiza sus propiedades
+            MapearAPaciente(paciente, pacienteValidado);
+
+            // Guarda los cambios
             paciente = _pacienteRepository.ActualizarPaciente(paciente);
 
             return MapearAPacienteDto(paciente);
@@ -239,35 +258,22 @@ namespace ProjectServices.Implementations
             };
         }
 
-        private Paciente MapearAPaciente(PacienteDto pacienteEncontrado, PacienteValidadoDto pacienteValidado)
+        private void MapearAPaciente(Paciente paciente, PacienteValidadoDto pacienteValidado)
         {
-            if (!pacienteEncontrado.IdPaciente.HasValue || !pacienteEncontrado.FechaCreacion.HasValue)
-            {
-                throw new InvalidOperationException(
-                    "El paciente no pertenece a la BaseDatosAutotriaje.");
-            }
+            paciente.IdTipoDocumento = pacienteValidado.IdTipoDocumento;
+            paciente.NroDocumento = pacienteValidado.NroDocumento;
 
-            return new Paciente
-            {
+            paciente.PrimerNombre = pacienteValidado.PrimerNombre;
+            paciente.SegundoNombre = pacienteValidado.SegundoNombre;
 
-                IdPaciente = pacienteEncontrado.IdPaciente.Value,
+            paciente.PrimerApellido = pacienteValidado.PrimerApellido;
+            paciente.SegundoApellido = pacienteValidado.SegundoApellido;
 
-                IdTipoDocumento = pacienteValidado.IdTipoDocumento,
-                NroDocumento = pacienteValidado.NroDocumento,
+            paciente.IdGenero = pacienteValidado.IdGenero;
+            paciente.FechaNacimiento = pacienteValidado.FechaNacimiento;
 
-                PrimerNombre = pacienteValidado.PrimerNombre,
-                SegundoNombre = pacienteValidado.SegundoNombre,
-                PrimerApellido = pacienteValidado.PrimerApellido,
-                SegundoApellido = pacienteValidado.SegundoApellido,
-
-                IdGenero = pacienteValidado.IdGenero,
-                FechaNacimiento = pacienteValidado.FechaNacimiento,
-
-                Activo = true,
-
-                FechaCreacion = pacienteEncontrado.FechaCreacion.Value, 
-                FechaActualizacion = DateTime.UtcNow
-            };
+            paciente.Activo = true;
+            paciente.FechaActualizacion = DateTime.UtcNow;
         }
 
         private CrearPacienteDto MapearACrearPacienteDto(PacienteValidadoDto paciente)

@@ -44,7 +44,7 @@ namespace AutoTriageWeb
                 txtPrimerApellido.Text = paciente.PrimerApellido;
                 txtSegundoApellido.Text = paciente.SegundoApellido;
 
-                txtFechaNacimiento.Text = paciente.FechaNacimiento.ToString("dd/MM/yyyy");
+                txtFechaNacimiento.Text = paciente.FechaNacimiento.ToString("yyyy-MM-dd");
 
                 if (paciente.IdGenero > 0)
                 {
@@ -85,72 +85,63 @@ namespace AutoTriageWeb
             if (!Page.IsValid)
                 return;
 
-            try
+           
+            BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
+
+            if (respuestaBusqueda == null)
             {
-                BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
-
-                if (respuestaBusqueda == null)
-                {
-                    Response.Redirect("~/Identificacion.aspx");
-                    return;
-                }
-
-
-                PacienteDto paciente = respuestaBusqueda.PacientePrincipal;
-
-                //Creación del Dto que se procesará
-                PacienteValidadoDto pacienteValidado = new PacienteValidadoDto
-                {
-                    IdTipoDocumento = paciente.IdTipoDocumento,
-
-                    NroDocumento = paciente.NroDocumento,
-
-                    PrimerNombre = txtPrimerNombre.Text.Trim(),
-
-                    SegundoNombre = txtSegundoNombre.Text.Trim(),
-
-                    PrimerApellido = txtPrimerApellido.Text.Trim(),
-
-                    SegundoApellido = txtSegundoApellido.Text.Trim(),
-
-                    IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
-
-                    FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture)
-                };
-
-                //Procesa Paciente
-                PacienteProcesadoRespuestaDto pacienteProcesado = _pacienteService.ProcesarPaciente(pacienteValidado);
-
-                Session["PacienteProcesado"] = pacienteProcesado;
-
-
-                //Consulta Registro Pendiente
-                ConsultarRegistroPendienteRespuestaDto registroPendiente = _registroService.ConsultarRegistroPendiente(pacienteProcesado);
-
-                if (registroPendiente.TieneRegistroPendiente)
-                {
-                    Session["RegistroPendiente"] = registroPendiente;
-
-                    Response.Redirect("~/RegistroPendiente.aspx");
-                    return;
-                }
-
-
-                if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Femenino)
-                {
-                    Response.Redirect("~/EvaluacionMaternidad.aspx");
-                    return;
-                }
-
-                Response.Redirect("~/EvaluacionSaludMental.aspx");
-
-            }
-            catch (Exception)
-            {
-                Session["MensajeError"] = "Ocurrió un error al procesar la información del paciente.";
                 Response.Redirect("~/Identificacion.aspx");
+                return;
             }
-            
+
+
+            PacienteDto paciente = respuestaBusqueda.PacientePrincipal;
+
+            //Creación del Dto que se procesará
+            PacienteValidadoDto pacienteValidado = new PacienteValidadoDto
+            {
+                IdTipoDocumento = paciente.IdTipoDocumento,
+
+                NroDocumento = paciente.NroDocumento,
+
+                PrimerNombre = txtPrimerNombre.Text.Trim(),
+
+                SegundoNombre = txtSegundoNombre.Text.Trim(),
+
+                PrimerApellido = txtPrimerApellido.Text.Trim(),
+
+                SegundoApellido = txtSegundoApellido.Text.Trim(),
+
+                IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
+
+                FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text)
+            };
+
+            //Procesa Paciente
+            PacienteProcesadoRespuestaDto pacienteProcesado = _pacienteService.ProcesarPaciente(pacienteValidado);
+
+            Session["PacienteProcesado"] = pacienteProcesado;
+
+
+            //Consulta Registro Pendiente
+            ConsultarRegistroPendienteRespuestaDto registroPendiente = _registroService.ConsultarRegistroPendiente(pacienteProcesado);
+
+            if (registroPendiente.TieneRegistroPendiente)
+            {
+                Session["RegistroPendiente"] = registroPendiente;
+
+                Response.Redirect("~/RegistroPendiente.aspx");
+                return;
+            }
+
+
+            if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Femenino)
+            {
+                Response.Redirect("~/EvaluacionMaternidad.aspx");
+                return;
+            }
+
+            Response.Redirect("~/EvaluacionSaludMental.aspx");    
         }
 
         private void HabilitarModoConsulta()
