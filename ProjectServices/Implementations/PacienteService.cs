@@ -74,13 +74,6 @@ namespace ProjectServices.Implementations
             }
 
 
-            if (!respuesta.EncontradoAutotriaje && !respuesta.EncontradoGhips)
-            {
-                respuesta.Existe = false;
-                respuesta.Observacion = "Paciente no Encontrado en Bases de Datos.";
-            }
-
-
             if (respuesta.EncontradoAutotriaje)
             {
                 respuesta.PacientePrincipal = respuesta.PacienteAutotriaje;
@@ -88,6 +81,20 @@ namespace ProjectServices.Implementations
             else if (respuesta.EncontradoGhips)
             {
                 respuesta.PacientePrincipal = respuesta.PacienteGhips;
+            }
+            else
+            {
+                TipoDocumento tipoDocumento =
+                    _tipoDocumentoRepository.ObtenerPorId(datosBusqueda.IdTipoDocumento);
+
+                respuesta.PacientePrincipal = new PacienteDto
+                {
+                    IdTipoDocumento = datosBusqueda.IdTipoDocumento,
+                    DescripcionTipoDocumento = tipoDocumento.Descripcion,
+                    NroDocumento = datosBusqueda.NroDocumento
+                };
+
+                respuesta.Observacion = "Paciente no Encontrado en Bases de Datos.";
             }
 
 

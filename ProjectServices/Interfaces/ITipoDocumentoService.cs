@@ -11,5 +11,7 @@ namespace ProjectServices.Interfaces
         TipoDocumento ObtenerPorId(int idTipoDocumento);
 
         TipoDocumento ObtenerPorCodigo(int codigo);
+
+        TipoDocumentoListaDto ObtenerTipoDocumento(int idTipoDocumento);
     }
 }

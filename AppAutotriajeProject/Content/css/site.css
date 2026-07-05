@@ -469,3 +469,21 @@ p {
     margin-top: 30px;
     text-align: center;
 }
+
+/* ============================================
+   Alerta de Error en Procesamiento Paciente
+========================================= */
+
+.error-banner {
+    display: block;
+    width: 100%;
+    margin: 15px auto 25px auto;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background-color: #fdecea;
+    border: 2px solid #d32f2f;
+    color: #b71c1c;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}

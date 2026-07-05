@@ -44,5 +44,22 @@ namespace ProjectServices.Implementations
         {
             return _tipoDocumentoRepository.ObtenerPorCodigo(codigo);
         }
+
+        public TipoDocumentoListaDto ObtenerTipoDocumento(int idTipoDocumento)
+        {
+            TipoDocumento tipoDocumento =
+                _tipoDocumentoRepository.ObtenerPorId(idTipoDocumento);
+
+            if (tipoDocumento == null)
+                return null;
+
+            return new TipoDocumentoListaDto
+            {
+                IdTipoDocumento = tipoDocumento.IdTipoDocumento,
+                Descripcion = tipoDocumento.Descripcion,
+                MinLength = tipoDocumento.MinLength.Value,
+                MaxLength = tipoDocumento.MaxLength.Value
+            };
+        }
     }
 }

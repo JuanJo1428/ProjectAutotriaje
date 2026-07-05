@@ -1,10 +1,11 @@
 ﻿using ProjectData.Entities;
+using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
+using ProjectDto.Dtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
-using System;
 using ProjectServices.Constants;
 using ProjectServices.Interfaces;
-using ProjectDto.Dtos;
+using System;
 
 namespace ProjectServices.Implementations
 {
@@ -17,6 +18,13 @@ namespace ProjectServices.Implementations
         {
             _registroAtencionRepository = registroAtencionRepository;
             _pacienteRepository = pacienteRepository;
+        }
+
+        public RegistroAtencionService()
+        {
+            _registroAtencionRepository = new RegistroAtencionRepository();
+
+            _pacienteRepository = new PacienteRepository();
         }
 
 

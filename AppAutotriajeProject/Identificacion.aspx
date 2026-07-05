@@ -6,6 +6,15 @@
         <p class="subtitle">Ingrese sus datos manualmente o escanee el código de barras de su documento.</p>
     </div>
 
+    <div class="mensaje-error-container">
+        <asp:Label
+            ID="lblMensajeError"
+            runat="server"
+            CssClass="error-banner"
+            Visible="false">
+        </asp:Label>
+    </div>
+
     <fieldset style="border:none;width:100%;" class="identification-form">
         <legend class="sr-only">
             Identificación del Paciente

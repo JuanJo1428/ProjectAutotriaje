@@ -1,4 +1,5 @@
-﻿using ProjectData.Repositories.Interfaces;
+﻿using ProjectData.Repositories.Implementations;
+using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos.GeneroDtos;
 using ProjectServices.Interfaces;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace ProjectServices.Implementations
         public GeneroService(IGeneroRepository generoRepository)
         {
             _generoRepository = generoRepository;
+        }
+
+        public GeneroService()
+        {
+            _generoRepository = new GeneroRepository();
         }
 
         public List<GeneroListaDto> ObtenerGeneros()

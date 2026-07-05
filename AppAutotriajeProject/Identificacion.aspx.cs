@@ -17,8 +17,14 @@ namespace AutoTriageWeb
             {
                 CargarTiposDocumento();
 
-            }
+                if (Session["MensajeError"] != null)
+                {
+                    lblMensajeError.Text = Session["MensajeError"].ToString();
+                    lblMensajeError.Visible = true;
 
+                    Session.Remove("MensajeError");
+                }
+            }
         }
 
         protected void cvDocumento_ServerValidate(object source, ServerValidateEventArgs args)
@@ -29,10 +35,13 @@ namespace AutoTriageWeb
                 return;
             }
 
-            ListItem item = ddlTipoDocumento.SelectedItem;
+            int idTipoDocumento =
+                Convert.ToInt32(ddlTipoDocumento.SelectedValue);
 
-            if (!int.TryParse(item.Attributes["data-min"], out int min) ||
-                !int.TryParse(item.Attributes["data-max"], out int max))
+            TipoDocumentoListaDto tipoDocumento =
+                _tipoDocumentoService.ObtenerTipoDocumento(idTipoDocumento);
+
+            if (tipoDocumento == null)
             {
                 args.IsValid = false;
                 return;
@@ -40,7 +49,9 @@ namespace AutoTriageWeb
 
             int longitud = args.Value.Trim().Length;
 
-            args.IsValid = longitud >= min && longitud <= max;
+            args.IsValid =
+                longitud >= tipoDocumento.MinLength &&
+                longitud <= tipoDocumento.MaxLength;
         }
         
 
@@ -65,7 +76,7 @@ namespace AutoTriageWeb
 
                 Session["BusquedaPaciente"] = respuesta;
 
-                Response.Redirect("~/Ejemplo.aspx");
+                Response.Redirect("~/InformacionPaciente.aspx");
             }
         }
 
@@ -85,22 +96,11 @@ namespace AutoTriageWeb
         private readonly TipoDocumentoService _tipoDocumentoService = new TipoDocumentoService();
         private void CargarTiposDocumento()
         {
-            List<TipoDocumentoListaDto> tiposDocumento = _tipoDocumentoService.ObtenerTiposDocumento();
+            ddlTipoDocumento.DataSource = _tipoDocumentoService.ObtenerTiposDocumento();
 
-            ddlTipoDocumento.DataSource = tiposDocumento;
             ddlTipoDocumento.DataBind();
 
-            ddlTipoDocumento.Items.Insert(0,
-                new ListItem("Seleccione tipo de documento", ""));
-
-            for (int i = 0; i < tiposDocumento.Count; i++)
-            {
-                ddlTipoDocumento.Items[i + 1].Attributes["data-min"] =
-                    tiposDocumento[i].MinLength.ToString();
-
-                ddlTipoDocumento.Items[i + 1].Attributes["data-max"] =
-                    tiposDocumento[i].MaxLength.ToString();
-            }
+            ddlTipoDocumento.Items.Insert(0, new ListItem("Seleccione tipo de documento", "") );
 
             ddlTipoDocumento.SelectedIndex = 0;
         }

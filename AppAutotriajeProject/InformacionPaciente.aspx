@@ -137,7 +137,7 @@
                     ClientIDMode="Static"
                     CssClass="form-control"
                     DataTextField="Descripcion"
-                    DataValueField="IdSexoBiologico">
+                    DataValueField="IdGenero">
                 </asp:DropDownList>
 
                 <asp:RequiredFieldValidator

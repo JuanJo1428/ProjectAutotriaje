@@ -19,7 +19,5 @@ namespace ProjectDto.Dtos
         public int IdGenero { get; set; } 
 
         public DateTime FechaNacimiento { get; set; }
-
-        public bool Editado { get; set; }
     }
 }

@@ -17,6 +17,11 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public RegistroAtencionRepository()
+        {
+            _context = new AppDbContext();
+        }
+
         public List<RegistroAtencion> ObtenerTodos(bool incluirInactivos = true)
         {
             if (incluirInactivos)
