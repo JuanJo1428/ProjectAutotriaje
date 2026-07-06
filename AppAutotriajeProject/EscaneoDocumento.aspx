@@ -2,7 +2,7 @@
 
 <asp:Content ID="ContentEscaneo" ContentPlaceHolderID="MainContent" runat="server">
     <h1 id="scanTitle">Escaneo de documento</h1>
-    <p id="scanInstructions" class="subtitle">Ubique el código de barras detrás de su documento en el escáner.</p>
+    <p id="scanInstructions" class="subtitle">Ubique el código de barras o la cadena de caracteres detrás de su documento en el escáner.</p>
 
     <div id="scanTargetZone" class="scan-target-box">
         <i id="scanIcon" class="fa-solid fa-camera scan-main-icon" aria-hidden="true"></i>

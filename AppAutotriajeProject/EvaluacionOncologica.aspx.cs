@@ -7,7 +7,7 @@ namespace AutoTriageWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //
+
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -22,7 +22,7 @@ namespace AutoTriageWeb
 
             bool respuesta = bool.Parse(rblOncologica.SelectedValue);
 
-            // Session["EvaluacionOncologica"] = respuesta;
+            Session["EvaluacionOncologica"] = respuesta;
 
             Response.Redirect("~/Ejemplo.aspx");
         }

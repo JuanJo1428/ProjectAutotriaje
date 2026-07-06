@@ -50,6 +50,9 @@ namespace ProjectData.Entities
         public DateTime FechaNacimiento { get; set; }
 
 
+        public string LugarNacimiento { get; set; }
+
+
         public bool Activo { get; set; }
 
 

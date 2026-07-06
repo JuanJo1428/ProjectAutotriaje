@@ -1,13 +1,10 @@
-﻿using ProjectData.Context;
-using ProjectData.Entities;
+﻿using ProjectData.Entities;
 using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
 using ProjectDto.Dtos.GhipsDtos;
 using ProjectServices.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ProjectServices.Implementations
 {
@@ -125,6 +122,9 @@ namespace ProjectServices.Implementations
 
             PacienteProcesadoRespuestaDto respuesta = new PacienteProcesadoRespuestaDto();
 
+            
+            NormalizarPaciente(pacienteValidado);
+
 
             //Consulta del Paciente en las distintas Bases
             BuscarPacienteRespuestaDto consulta = BuscarPaciente(new BuscarPacienteDto
@@ -230,7 +230,10 @@ namespace ProjectServices.Implementations
                 PrimerApellido = paciente.PrimerApellido,
                 SegundoApellido = paciente.SegundoApellido,
                 IdGenero = paciente.IdGenero,
+
                 FechaNacimiento = paciente.FechaNacimiento,
+                LugarNacimiento = paciente.LugarNacimiento,
+
                 FechaCreacion = paciente.FechaCreacion,
                 FechaActualizacion = paciente.FechaActualizacion,
                 Activo = paciente.Activo,
@@ -254,7 +257,8 @@ namespace ProjectServices.Implementations
                 FechaNacimiento = datosPaciente.FechaNacimiento,
                 Activo = true,
                 FechaCreacion = DateTime.UtcNow,
-                FechaActualizacion = null
+                FechaActualizacion = null,
+                LugarNacimiento = datosPaciente.LugarNacimiento
             };
         }
 
@@ -271,6 +275,7 @@ namespace ProjectServices.Implementations
 
             paciente.IdGenero = pacienteValidado.IdGenero;
             paciente.FechaNacimiento = pacienteValidado.FechaNacimiento;
+            paciente.LugarNacimiento = pacienteValidado.LugarNacimiento;
 
             paciente.Activo = true;
             paciente.FechaActualizacion = DateTime.UtcNow;
@@ -287,7 +292,8 @@ namespace ProjectServices.Implementations
                 PrimerApellido = paciente.PrimerApellido,
                 SegundoApellido = paciente.SegundoApellido,
                 IdGenero = paciente.IdGenero,
-                FechaNacimiento = paciente.FechaNacimiento
+                FechaNacimiento = paciente.FechaNacimiento,
+                LugarNacimiento = paciente.LugarNacimiento
             };
         }
 
@@ -317,6 +323,9 @@ namespace ProjectServices.Implementations
             if (pacienteEncontrado.FechaNacimiento != paciente.FechaNacimiento)
                 return true;
 
+            if (pacienteEncontrado.LugarNacimiento != paciente.LugarNacimiento)
+                return true;
+
             return false;
         }
 
@@ -326,6 +335,17 @@ namespace ProjectServices.Implementations
                 _tipoDocumentoRepository.ObtenerPorId(idTipoDocumento);
 
             return tipoDocumento.Codigo;
+        }
+
+        private void NormalizarPaciente(PacienteValidadoDto paciente)
+        {
+            paciente.PrimerNombre = paciente.PrimerNombre?.Trim().ToUpper();
+            paciente.SegundoNombre = paciente.SegundoNombre?.Trim().ToUpper();
+
+            paciente.PrimerApellido = paciente.PrimerApellido?.Trim().ToUpper();
+            paciente.SegundoApellido = paciente.SegundoApellido?.Trim().ToUpper();
+
+            paciente.LugarNacimiento = paciente.LugarNacimiento?.Trim().ToUpper();
         }
 
     }

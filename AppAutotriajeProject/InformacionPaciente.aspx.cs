@@ -1,11 +1,12 @@
 ﻿using ProjectDto.Dtos;
+using ProjectDto.Dtos.EscanerDtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
+using ProjectServices.Constants;
 using ProjectServices.Implementations;
 using System;
 using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ProjectServices.Constants;
 
 namespace AutoTriageWeb
 {
@@ -16,12 +17,20 @@ namespace AutoTriageWeb
             if (!IsPostBack)
             {
                 CargarGeneros();
-                CargarPaciente();
-                
+
+                if (VieneDeEscaner())
+                {
+                    CargarPacienteEscaneado();
+                }
+                else
+                {
+                    CargarPacienteManual();
+                }
             }
         }
 
-        private void CargarPaciente()
+
+        private void CargarPacienteManual()
         {
             BuscarPacienteRespuestaDto respuesta = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
 
@@ -60,6 +69,37 @@ namespace AutoTriageWeb
         }
 
 
+        private void CargarPacienteEscaneado()
+        {
+            PacienteEscaneadoDto paciente = Session["PacienteEscaneado"] as PacienteEscaneadoDto;
+
+            if (paciente == null)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return;
+            }
+
+            txtTipoDocumento.Text = paciente.DescripcionTipoDocumento;
+            txtNumeroDocumento.Text = paciente.NroDocumento;
+
+            txtPrimerNombre.Text = paciente.PrimerNombre;
+            txtSegundoNombre.Text = paciente.SegundoNombre;
+
+            txtPrimerApellido.Text = paciente.PrimerApellido;
+            txtSegundoApellido.Text = paciente.SegundoApellido;
+
+            txtFechaNacimiento.Text = paciente.FechaNacimiento.ToString("yyyy-MM-dd");
+
+            if (paciente.IdGenero > 0)
+            {
+                ddlSexoBiologico.SelectedValue = paciente.IdGenero.ToString();
+            }
+  
+
+            HabilitarModoConsulta();
+        }
+
+
         private readonly GeneroService _generoService = new GeneroService();
         private void CargarGeneros()
         {
@@ -85,42 +125,47 @@ namespace AutoTriageWeb
             if (!Page.IsValid)
                 return;
 
-           
-            BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
+            bool vieneDeEscaner = VieneDeEscaner();
 
-            if (respuestaBusqueda == null)
+            PacienteValidadoDto pacienteValidado;
+
+            if (vieneDeEscaner)
+            {
+                pacienteValidado = ConstruirPacienteValidadoEscaner();
+            }
+            else
+            {
+                pacienteValidado = ConstruirPacienteValidadoManual();
+            }
+
+
+            if (pacienteValidado == null)
             {
                 Response.Redirect("~/Identificacion.aspx");
                 return;
             }
-
-
-            PacienteDto paciente = respuestaBusqueda.PacientePrincipal;
-
-            //Creación del Dto que se procesará
-            PacienteValidadoDto pacienteValidado = new PacienteValidadoDto
-            {
-                IdTipoDocumento = paciente.IdTipoDocumento,
-
-                NroDocumento = paciente.NroDocumento,
-
-                PrimerNombre = txtPrimerNombre.Text.Trim(),
-
-                SegundoNombre = txtSegundoNombre.Text.Trim(),
-
-                PrimerApellido = txtPrimerApellido.Text.Trim(),
-
-                SegundoApellido = txtSegundoApellido.Text.Trim(),
-
-                IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
-
-                FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text)
-            };
+        
 
             //Procesa Paciente
             PacienteProcesadoRespuestaDto pacienteProcesado = _pacienteService.ProcesarPaciente(pacienteValidado);
 
             Session["PacienteProcesado"] = pacienteProcesado;
+
+
+            // Actualiza el paciente guardado en la session busqueda cuando el flujo es manual
+            if (!vieneDeEscaner)
+            {
+                BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
+
+                if (respuestaBusqueda != null)
+                {
+                    respuestaBusqueda.PacientePrincipal = pacienteProcesado.Paciente;
+                    respuestaBusqueda.Existe = true;
+                    respuestaBusqueda.EncontradoAutotriaje = true;
+
+                    Session["BusquedaPaciente"] = respuestaBusqueda;
+                }
+            }
 
 
             //Consulta Registro Pendiente
@@ -167,5 +212,80 @@ namespace AutoTriageWeb
 
             btnEditarPaciente.Visible = false;
         }
+
+        private bool VieneDeEscaner()
+        {
+            return Session["PacienteEscaneado"] != null;
+        }
+
+        private PacienteValidadoDto ConstruirPacienteValidadoManual()
+        {
+            BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
+
+            if (respuestaBusqueda == null)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return null;
+            }
+
+            PacienteDto paciente = respuestaBusqueda.PacientePrincipal;
+
+            return new PacienteValidadoDto
+            {
+                IdTipoDocumento = paciente.IdTipoDocumento,
+
+                NroDocumento = paciente.NroDocumento,
+
+                PrimerNombre = txtPrimerNombre.Text.Trim(),
+
+                SegundoNombre = txtSegundoNombre.Text.Trim(),
+
+                PrimerApellido = txtPrimerApellido.Text.Trim(),
+
+                SegundoApellido = txtSegundoApellido.Text.Trim(),
+
+                IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
+
+                FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+
+                LugarNacimiento = null
+            };
+
+        }
+
+        private PacienteValidadoDto ConstruirPacienteValidadoEscaner()
+        {
+            PacienteEscaneadoDto paciente = Session["PacienteEscaneado"] as PacienteEscaneadoDto;
+
+            if (paciente == null)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return null;
+            }
+
+            return new PacienteValidadoDto
+            {
+                IdTipoDocumento = paciente.IdTipoDocumento,
+
+                NroDocumento = paciente.NroDocumento,
+
+                PrimerNombre = txtPrimerNombre.Text.Trim(),
+
+                SegundoNombre = txtSegundoNombre.Text.Trim(),
+
+                PrimerApellido = txtPrimerApellido.Text.Trim(),
+
+                SegundoApellido = txtSegundoApellido.Text.Trim(),
+
+                IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
+
+                FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+
+                LugarNacimiento = paciente.LugarNacimiento
+            };
+        }
+
+
+
     }
 }

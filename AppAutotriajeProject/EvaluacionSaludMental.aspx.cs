@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectDto.Dtos;
+using ProjectServices.Constants;
+using System;
 using System.Web.UI;
 
 namespace AutoTriageWeb
@@ -7,11 +9,19 @@ namespace AutoTriageWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //
+
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
+            PacienteProcesadoRespuestaDto respuestaProcesado = Session["PacienteProcesado"] as PacienteProcesadoRespuestaDto;
+
+            if (respuestaProcesado.Paciente.IdGenero == (int)Generos.Masculino)
+            {
+                Response.Redirect("~/InformacionPaciente.aspx");
+                return;
+            }
+
             Response.Redirect("~/EvaluacionMaternidad.aspx");
         }
 
@@ -22,7 +32,7 @@ namespace AutoTriageWeb
 
             bool respuesta = bool.Parse(rblSaludMental.SelectedValue);
 
-            // Session["EvaluacionSaludMental"] = respuesta;
+            Session["EvaluacionSaludMental"] = respuesta;
 
             Response.Redirect("~/EvaluacionOncologica.aspx");
         }
