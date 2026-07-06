@@ -16,15 +16,15 @@ namespace AppAutotriajeProject
         {
             if (!IsPostBack)
             {
-                //CargarGeneros();
+                CargarGeneros();
 
                 if (VieneDeEscaner())
                 {
-                    //CargarPacienteEscaneado();
+                    CargarPacienteEscaneado();
                 }
                 else
                 {
-                    //CargarPacienteManual();
+                    CargarPacienteManual();
                 }
             }
         }
