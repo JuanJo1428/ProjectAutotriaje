@@ -331,6 +331,17 @@ fieldset {
 .form-group {
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin-bottom: 1.4rem;
+}
+
+.validation-error {
+    position: absolute;
+    bottom: -1.2rem;
+    left: 0;
+    font-size: 1rem;
+    white-space: nowrap;
+    z-index: 10;
 }
 
 .form-group label {
@@ -462,4 +473,4 @@ fieldset {
     font-weight: 700;
 }
 
-.condition-form .btn-next {color: var(--color-surface)}
+.condition-form .btn-next {color: var(--color-surface);}

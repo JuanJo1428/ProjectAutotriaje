@@ -54,13 +54,13 @@
                         aria-label="Número de documento">
                     </asp:TextBox>
 
-                    <asp:RequiredFieldValidator
+                    <%--<asp:RequiredFieldValidator
                         ID="rfvDocumento"
                         runat="server"
                         ControlToValidate="txtDocumento"
                         Display="Dynamic"
                         CssClass="validation-error"
-                        ErrorMessage="Debe ingresar su número de documento para continuar." />
+                        ErrorMessage="Debe ingresar su número de documento para continuar." />--%>
 
                     <asp:CustomValidator
                         ID="cvDocumento"
@@ -70,7 +70,7 @@
                         CssClass="validation-error"
                         ValidateEmptyText="false"
                         OnServerValidate="cvDocumento_ServerValidate"
-                        ErrorMessage="El documento no cumple el formato del tipo seleccionado." />
+                        ErrorMessage="El documento no cumple con el formato correcto." />
                 </div>
 
                 <div id="numpadGrid" class="numpad-grid">
@@ -121,8 +121,8 @@
             OnClick="btnContinuar_Click" />
     </div>
 
+        <%--// const rfvDocumentoId = '<%= rfvDocumento.ClientID %>';--%>
     <script>
-        const rfvDocumentoId = '<%= rfvDocumento.ClientID %>';
         const cvDocumentoId = '<%= cvDocumento.ClientID %>';
     </script>
     <script src="Scripts/js/identificacion.js?v=1.1" defer></script>

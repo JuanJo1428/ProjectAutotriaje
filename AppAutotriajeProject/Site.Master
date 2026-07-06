@@ -36,5 +36,6 @@
             <span>&copy; <%= DateTime.Now.Year %> Hospital Alma Mater - Sistema GHIPS</span>
         </footer>
     </form>
+    <script src="/Scripts/js/validaciones-temporales.js" defer></script>
 </body>
 </html>
