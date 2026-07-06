@@ -1,45 +1,50 @@
 ﻿const EscaneoUI = {
-    iconElement: document.getElementById('scanIcon'),
-    zoneElement: document.getElementById('scanTargetZone'),
+
+    iconElement: null,
+    zoneElement: null,
 
     init: function () {
-        console.log("API del Escáner iniciada: Esperando lectura de código de barras...");
 
+        this.iconElement = document.getElementById("scanIcon");
+        this.zoneElement = document.getElementById("scanTargetZone");
+
+        console.log("Escáner iniciado. Esperando documento...");
+
+        // SIMULACIÓN
+        // Cuando llegue el SDK esta llamada desaparecerá
         setTimeout(() => {
-            this.procesarEscaneoExitoso();
+
+            this.notificarEscaneoExitoso();
+
         }, 4000);
+
     },
 
-    procesarEscaneoExitoso: function () {
+    notificarEscaneoExitoso: function () {
+
+        // Cambia el icono por el check
         if (this.iconElement) {
             this.iconElement.className = "fa-solid fa-circle-check scan-success-icon";
         }
 
+        // Cambia el estilo de la caja
         if (this.zoneElement) {
-            this.zoneElement.classList.add('scan-box-verified');
+            this.zoneElement.classList.add("scan-box-verified");
         }
 
-        const pacienteSimulado = {
-            idTipoDocumento: "CC",
-            nroDocumento: "1020304050",
-            primerNombre: "Carlos",
-            segundoNombre: "Alberto",
-            primerApellido: "Gómez",
-            segundoApellido: "Restrepo",
-            sexoBiologico: "Masculino",
-            fechaNacimiento: "1992-05-14",
-            editado: false,
-            existeEnBaseDatos: true
-        };
-
-        sessionStorage.setItem('paciente_triage', JSON.stringify(pacienteSimulado));
-
+        // Espera un momento para que el usuario vea la confirmación
         setTimeout(() => {
-            window.location.href = "InformacionPaciente.aspx";
-        }, 1500);
+
+            document.getElementById("btnEscaneoExitoso").click();
+
+        }, 1200);
+
     }
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+
     EscaneoUI.init();
+
 });
