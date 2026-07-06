@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Identificación" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Identificacion.aspx.cs" Inherits="AutoTriageWeb.Identificacion" %>
+﻿<%@ Page Title="Identificación" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Identificacion.aspx.cs" Inherits="AppAutotriajeProject.Identificacion" %>
 
 <asp:Content ID="ContentIdentificacion" ContentPlaceHolderID="MainContent" runat="server">
     <div class="description-container">
@@ -15,7 +15,7 @@
         </asp:Label>
     </div>
 
-    <fieldset style="border:none;width:100%;" class="identification-form">
+    <fieldset class="identification-form">
         <legend class="sr-only">
             Identificación del Paciente
         </legend>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Bienvenido" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AutoTriageWeb.Inicio" %>
+﻿<%@ Page Title="Bienvenido" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AppAutotriajeProject.Inicio" %>
 
 <asp:Content ID="ContentWelcome" ContentPlaceHolderID="MainContent" runat="server">
     <section class="welcome-container">

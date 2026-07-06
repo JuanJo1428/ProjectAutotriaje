@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Información del Paciente" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InformacionPaciente.aspx.cs" Inherits="AutoTriageWeb.InformacionPaciente" %>
+﻿<%@ Page Title="Información del Paciente" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InformacionPaciente.aspx.cs" Inherits="AppAutotriajeProject.InformacionPaciente" %>
 
 <asp:Content ID="ContentInformacion" ContentPlaceHolderID="MainContent" runat="server">
     <div class="description-container">
@@ -8,7 +8,7 @@
         </p>
     </div>
 
-    <fieldset style="border:none;">
+    <fieldset>
         <legend class="sr-only">
             Información del paciente
         </legend>
@@ -92,7 +92,6 @@
             </div>
 
             <div class="form-group">
-
                 <label for="txtSegundoApellido">
                     Segundo Apellido
                 </label>
@@ -177,7 +176,7 @@
                 ID="btnContinuar"
                 runat="server"
                 Text="Continuar"
-                CssClass="btn btn-continue"
+                CssClass="btn btn-next"
                 OnClick="btnContinuar_Click" />
         </div>
     </div>

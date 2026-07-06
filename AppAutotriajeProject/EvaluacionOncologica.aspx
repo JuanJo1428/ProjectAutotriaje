@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Evaluación de Condición Oncológica" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionOncologica.aspx.cs" Inherits="AutoTriageWeb.EvaluacionOncologica" %>
+﻿<%@ Page Title="Evaluación de Condición Oncológica" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionOncologica.aspx.cs" Inherits="AppAutotriajeProject.EvaluacionOncologica" %>
 
 <asp:Content ID="ContentEvaluacionOncologica" ContentPlaceHolderID="MainContent" runat="server">
     <div class="description-container">

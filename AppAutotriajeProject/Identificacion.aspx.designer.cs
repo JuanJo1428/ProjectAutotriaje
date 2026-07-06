@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoTriageWeb
+namespace AppAutotriajeProject
 {
 
 

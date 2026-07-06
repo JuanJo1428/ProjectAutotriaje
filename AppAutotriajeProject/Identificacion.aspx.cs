@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AutoTriageWeb
+namespace AppAutotriajeProject
 {
     public partial class Identificacion : System.Web.UI.Page
     {
@@ -15,7 +15,7 @@ namespace AutoTriageWeb
         {
             if (!IsPostBack)
             {
-                CargarTiposDocumento();
+                //CargarTiposDocumento();
 
                 if (Session["MensajeError"] != null)
                 {

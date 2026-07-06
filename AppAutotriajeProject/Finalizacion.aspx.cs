@@ -7,11 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace AppAutotriajeProject
 {
-    public partial class Ejemplo : System.Web.UI.Page
+    public partial class Finalizacion : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnTerminar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

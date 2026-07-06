@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AutoTriageWeb
+namespace AppAutotriajeProject
 {
     public partial class InformacionPaciente : System.Web.UI.Page
     {
@@ -16,15 +16,15 @@ namespace AutoTriageWeb
         {
             if (!IsPostBack)
             {
-                CargarGeneros();
+                //CargarGeneros();
 
                 if (VieneDeEscaner())
                 {
-                    CargarPacienteEscaneado();
+                    //CargarPacienteEscaneado();
                 }
                 else
                 {
-                    CargarPacienteManual();
+                    //CargarPacienteManual();
                 }
             }
         }

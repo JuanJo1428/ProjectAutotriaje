@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace AutoTriageWeb
+namespace AppAutotriajeProject
 {
     public partial class EvaluacionOncologica : Page
     {
@@ -24,7 +24,7 @@ namespace AutoTriageWeb
 
             Session["EvaluacionOncologica"] = respuesta;
 
-            Response.Redirect("~/Ejemplo.aspx");
+            Response.Redirect("~/AdelantarTriage.aspx");
         }
     }
 }

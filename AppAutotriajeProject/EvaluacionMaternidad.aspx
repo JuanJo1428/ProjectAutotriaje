@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Evaluación de Maternidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionMaternidad.aspx.cs" Inherits="AutoTriageWeb.EvaluacionMaternidad" %>
+﻿<%@ Page Title="Evaluación de Maternidad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionMaternidad.aspx.cs" Inherits="AppAutotriajeProject.EvaluacionMaternidad" %>
 
 <asp:Content ID="ContentEvaluacionMaternidad" ContentPlaceHolderID="MainContent" runat="server">
     <div class="description-container">

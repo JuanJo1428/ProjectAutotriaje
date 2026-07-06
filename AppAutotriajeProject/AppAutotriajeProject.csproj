@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdelantarTriage.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -152,12 +153,12 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\site.css" />
-    <Content Include="Ejemplo.aspx" />
     <Content Include="EscaneoDocumento.aspx" />
     <Content Include="EvaluacionMaternidad.aspx" />
     <Content Include="EvaluacionOncologica.aspx" />
     <Content Include="EvaluacionSaludMental.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Finalizacion.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Identificacion.aspx" />
     <Content Include="Default.aspx" />
@@ -226,19 +227,19 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdelantarTriage.aspx.cs">
+      <DependentUpon>AdelantarTriage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdelantarTriage.aspx.designer.cs">
+      <DependentUpon>AdelantarTriage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\RegistroAtencionController.cs" />
-    <Compile Include="Ejemplo.aspx.cs">
-      <DependentUpon>Ejemplo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ejemplo.aspx.designer.cs">
-      <DependentUpon>Ejemplo.aspx</DependentUpon>
-    </Compile>
     <Compile Include="EscaneoDocumento.aspx.cs">
       <DependentUpon>EscaneoDocumento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="EvaluacionSaludMental.aspx.designer.cs">
       <DependentUpon>EvaluacionSaludMental.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finalizacion.aspx.cs">
+      <DependentUpon>Finalizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finalizacion.aspx.designer.cs">
+      <DependentUpon>Finalizacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

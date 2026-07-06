@@ -3,7 +3,7 @@ using ProjectServices.Constants;
 using System;
 using System.Web.UI;
 
-namespace AutoTriageWeb
+namespace AppAutotriajeProject
 {
     public partial class EvaluacionSaludMental : Page
     {

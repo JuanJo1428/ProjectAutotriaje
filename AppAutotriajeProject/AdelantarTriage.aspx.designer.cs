@@ -11,26 +11,26 @@ namespace AppAutotriajeProject
 {
 
 
-    public partial class EvaluacionMaternidad
+    public partial class AdelantarTriage
     {
 
         /// <summary>
-        /// rblMaternidad control.
+        /// btnSiAT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblMaternidad;
+        protected global::System.Web.UI.WebControls.LinkButton btnSiAT;
 
         /// <summary>
-        /// rfvRespuesta control.
+        /// btnNoAT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRespuesta;
+        protected global::System.Web.UI.WebControls.LinkButton btnNoAT;
 
         /// <summary>
         /// btnVolver control.
@@ -40,14 +40,5 @@ namespace AppAutotriajeProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
-
-        /// <summary>
-        /// btnContinuar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnContinuar;
     }
 }

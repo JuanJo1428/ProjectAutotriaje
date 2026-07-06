@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Escaneo de Documento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EscaneoDocumento.aspx.cs" Inherits="AutoTriageWeb.EscaneoDocumento" %>
+﻿<%@ Page Title="Escaneo de Documento" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EscaneoDocumento.aspx.cs" Inherits="AppAutotriajeProject.EscaneoDocumento" %>
 
 <asp:Content ID="ContentEscaneo" ContentPlaceHolderID="MainContent" runat="server">
 

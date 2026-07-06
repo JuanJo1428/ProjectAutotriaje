@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Evaluación de Salud Mental" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionSaludMental.aspx.cs" Inherits="AutoTriageWeb.EvaluacionSaludMental" %>
+﻿<%@ Page Title="Evaluación de Salud Mental" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EvaluacionSaludMental.aspx.cs" Inherits="AppAutotriajeProject.EvaluacionSaludMental" %>
 
 <asp:Content ID="ContentEvaluacionSaludMental" ContentPlaceHolderID="MainContent" runat="server">
 
