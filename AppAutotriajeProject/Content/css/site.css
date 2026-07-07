@@ -486,18 +486,15 @@ fieldset {
 ========================== */
 
 .top-actions {
-    position: fixed;
-    top: 95px; /* Debajo del header azul */
-    right: 25px;
-    z-index: 1000;
+    margin-left: auto;
 }
 
 .btn-waiting {
-    background-color: var(--color-surface);
-    color: var(--color-primary);
+    padding: 0.8rem 1.6rem;
     border: 2px solid var(--color-primary);
     border-radius: var(--border-radius-lg);
-    padding: 0.8rem 1.6rem;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
     font-family: inherit;
     font-size: 1rem;
     font-weight: 700;
@@ -506,12 +503,52 @@ fieldset {
     transition: background-color .15s ease, color .15s ease, transform .1s ease, box-shadow .15s ease;
 }
 
-    .btn-waiting:hover {
-        background-color: var(--color-primary);
-        color: var(--color-surface);
-        box-shadow: 0 8px 20px rgba(9, 60, 113, .25);
-    }
+.btn-waiting:hover {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    box-shadow: 0 8px 20px rgba(9, 60, 113, .25);
+}
 
-    .btn-waiting:active {
-        transform: scale(.96);
-    }
+.btn-waiting:active {
+    transform: scale(0.96);
+}
+
+
+/* Sala de página */
+
+.sala-espera-container {
+    width: 60%;
+    max-width: 900px;
+    margin: auto;
+    background-color: var(--color-surface);
+}
+
+.pacientes-lista-header {
+    display: flex;
+    font-weight: bold;
+    padding: 0.75rem;
+}
+
+.paciente-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-text-muted);
+    font-size: 1.2rem;
+}
+
+.col-info {
+    flex: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sin-pacientes-mensaje {
+    display: block;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-style: italic;
+}

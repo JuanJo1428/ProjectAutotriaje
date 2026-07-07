@@ -166,6 +166,7 @@
     <Content Include="InformacionPaciente.aspx" />
     <Content Include="RegistroActivo.aspx" />
     <Content Include="RegistroPendiente.aspx" />
+    <Content Include="SalaEspera.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -317,6 +318,13 @@
     </Compile>
     <Compile Include="RegistroPendiente.aspx.designer.cs">
       <DependentUpon>RegistroPendiente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SalaEspera.aspx.cs">
+      <DependentUpon>SalaEspera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SalaEspera.aspx.designer.cs">
+      <DependentUpon>SalaEspera.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
