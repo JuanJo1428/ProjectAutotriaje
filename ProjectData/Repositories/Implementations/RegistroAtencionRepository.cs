@@ -37,9 +37,9 @@ namespace ProjectData.Repositories.Implementations
             return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion);
         }
 
-        public RegistroAtencion ObtenerRegistroPendiente(int idAtencion)
+        public RegistroAtencion ObtenerRegistroPendiente(int idPaciente)
         {
-            return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion && !ra.Atendido);
+            return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdPaciente == idPaciente && !ra.Atendido);
         }
 
         public List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente)

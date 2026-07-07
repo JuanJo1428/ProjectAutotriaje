@@ -175,7 +175,7 @@ namespace AppAutotriajeProject
             {
                 Session["RegistroPendiente"] = registroPendiente;
 
-                Response.Redirect("~/RegistroPendiente.aspx");
+                Response.Redirect("~/Finalizacion.aspx");
                 return;
             }
 
