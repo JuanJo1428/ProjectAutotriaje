@@ -1,4 +1,4 @@
-﻿<%@ Page Title="¿Adelantar triage?" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdelantarTriage.aspx.cs" Inherits="AppAutotriajeProject.AdelantarTriage" %>
+﻿<%@ Page Title="Adelantar triage" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdelantarTriage.aspx.cs" Inherits="AppAutotriajeProject.AdelantarTriage" %>
 
 <asp:Content ID="ContentAdelantarTriage" ContentPlaceHolderID="MainContent" runat="server">
     <div class="description-container">

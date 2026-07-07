@@ -152,6 +152,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\finales.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="EscaneoDocumento.aspx" />
     <Content Include="EvaluacionMaternidad.aspx" />
@@ -163,6 +164,8 @@
     <Content Include="Identificacion.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="InformacionPaciente.aspx" />
+    <Content Include="RegistroActivo.aspx" />
+    <Content Include="RegistroPendiente.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -301,6 +304,20 @@
       <DependentUpon>InformacionPaciente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistroActivo.aspx.cs">
+      <DependentUpon>RegistroActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroActivo.aspx.designer.cs">
+      <DependentUpon>RegistroActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroPendiente.aspx.cs">
+      <DependentUpon>RegistroPendiente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistroPendiente.aspx.designer.cs">
+      <DependentUpon>RegistroPendiente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

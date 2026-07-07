@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Finalizacion.aspx.cs" Inherits="AppAutotriajeProject.Finalizacion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Finalizacion.aspx.cs" Inherits="AppAutotriajeProject.RegistroActivo" %>
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
     <meta charset="utf-8" />
-    <title>Registro Completado</title>
+    <title>Registro activo</title>
     <link rel="stylesheet" href="~/Content/css/finales.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
@@ -14,7 +14,7 @@
                 <i class="fa-solid fa-check"></i>
             </div>
 
-            <h1>Final del proceso</h1>
+            <h1>Usted ya tiene un registro activo</h1>
             <p>
                 <span>Su información ha sido enviada al personal médico (GHIPS).</span><br /><br />
                 <b>Por favor, tome asiento en la sala de espera.<br />

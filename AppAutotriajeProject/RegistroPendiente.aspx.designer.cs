@@ -11,25 +11,34 @@ namespace AppAutotriajeProject
 {
 
 
-    public partial class RegistroActivo
+    public partial class RegistroPendiente
     {
 
         /// <summary>
-        /// formf control.
+        /// btnSiRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formf;
+        protected global::System.Web.UI.WebControls.LinkButton btnSiRP;
 
         /// <summary>
-        /// btnTerminar control.
+        /// btnNoRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnTerminar;
+        protected global::System.Web.UI.WebControls.LinkButton btnNoRP;
+
+        /// <summary>
+        /// btnVolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
     }
 }

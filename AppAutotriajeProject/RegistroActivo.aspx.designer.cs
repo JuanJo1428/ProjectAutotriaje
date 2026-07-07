@@ -11,7 +11,7 @@ namespace AppAutotriajeProject
 {
 
 
-    public partial class RegistroActivo
+    public partial class Finalizacion
     {
 
         /// <summary>
