@@ -180,13 +180,22 @@ namespace AppAutotriajeProject
             }
 
 
-            if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Femenino)
+            if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Masculino)
             {
-                Response.Redirect("~/EvaluacionMaternidad.aspx");
+
+                EvaluacionesPacienteDto evaluaciones = new EvaluacionesPacienteDto
+                {
+                    CondicionMaternidad = false
+                };
+
+                Session["EvaluacionesPaciente"] = evaluaciones;
+
+                Response.Redirect("~/EvaluacionSaludMental.aspx");
                 return;
             }
 
-            Response.Redirect("~/EvaluacionSaludMental.aspx");    
+            Response.Redirect("~/EvaluacionMaternidad.aspx");
+            return;
         }
 
         private void HabilitarModoConsulta()
@@ -224,7 +233,6 @@ namespace AppAutotriajeProject
 
             if (respuestaBusqueda == null)
             {
-                Response.Redirect("~/Identificacion.aspx");
                 return null;
             }
 
@@ -259,7 +267,6 @@ namespace AppAutotriajeProject
 
             if (paciente == null)
             {
-                Response.Redirect("~/Identificacion.aspx");
                 return null;
             }
 

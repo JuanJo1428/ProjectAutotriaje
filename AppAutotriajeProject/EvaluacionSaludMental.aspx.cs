@@ -1,4 +1,5 @@
 ﻿using ProjectDto.Dtos;
+using ProjectDto.Dtos.RegistroAtencionDtos;
 using ProjectServices.Constants;
 using System;
 using System.Web.UI;
@@ -30,11 +31,21 @@ namespace AppAutotriajeProject
             if (!Page.IsValid)
                 return;
 
-            bool respuesta = bool.Parse(rblSaludMental.SelectedValue);
+            EvaluacionesPacienteDto evaluaciones = Session["EvaluacionesPaciente"] as EvaluacionesPacienteDto;
 
-            Session["EvaluacionSaludMental"] = respuesta;
+            if (evaluaciones == null)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return;
+            }
+
+            evaluaciones.CondicionMental = bool.Parse(rblSaludMental.SelectedValue);
+
+            Session["EvaluacionesPaciente"] = evaluaciones;
 
             Response.Redirect("~/EvaluacionOncologica.aspx");
+
+            return;
         }
     }
 }

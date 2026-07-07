@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectDto.Dtos.RegistroAtencionDtos;
+using System;
 using System.Web.UI;
 
 namespace AppAutotriajeProject
@@ -20,11 +21,21 @@ namespace AppAutotriajeProject
             if (!Page.IsValid)
                 return;
 
-            bool respuesta = bool.Parse(rblOncologica.SelectedValue);
+            EvaluacionesPacienteDto evaluaciones = Session["EvaluacionesPaciente"] as EvaluacionesPacienteDto;
 
-            Session["EvaluacionOncologica"] = respuesta;
+            if (evaluaciones == null)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return;
+            }
+
+            evaluaciones.CondicionOncologica = bool.Parse(rblOncologica.SelectedValue);
+
+            Session["EvaluacionesPaciente"] = evaluaciones;
 
             Response.Redirect("~/AdelantarTriage.aspx");
+
+            return;
         }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="Dtos\RegistroAtencionDtos\ConsultarRegistroPendienteRespuestaDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionRespuestaDto.cs" />
+    <Compile Include="Dtos\RegistroAtencionDtos\EvaluacionesPacienteDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\RegistroAtencionDto.cs" />
     <Compile Include="Dtos\TiposDocumentoDtos\TipoDocumentoListaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

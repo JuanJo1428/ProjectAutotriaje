@@ -77,6 +77,8 @@ namespace AppAutotriajeProject
                 Session["BusquedaPaciente"] = respuesta;
 
                 Response.Redirect("~/InformacionPaciente.aspx");
+                    
+                return;
             }
         }
 

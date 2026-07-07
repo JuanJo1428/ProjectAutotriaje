@@ -161,8 +161,7 @@ namespace ProjectServices.Implementations
                 CondicionMaternidad = datosRegistro.CondicionMaternidad,
                 CondicionMental = datosRegistro.CondicionMental,
                 CondicionOncologica = datosRegistro.CondicionOncologica,
-                AutotriajeIniciado = false,
-                MotivoConsulta = datosRegistro.MotivoConsulta,
+                AutotriajeIniciado = datosRegistro.AutotriajeIniciado,
                 Atendido = false,
                 Activo = true,
                 FechaActualizacion = null

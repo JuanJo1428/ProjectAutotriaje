@@ -334,6 +334,13 @@ namespace ProjectServices.Implementations
             TipoDocumento tipoDocumento =
                 _tipoDocumentoRepository.ObtenerPorId(idTipoDocumento);
 
+            if (tipoDocumento == null)
+            {
+                throw new InvalidOperationException(
+                    $"No existe un TipoDocumento con Id = {idTipoDocumento}.");
+            }
+
+
             return tipoDocumento.Codigo;
         }
 

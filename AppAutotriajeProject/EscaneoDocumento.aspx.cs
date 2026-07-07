@@ -31,6 +31,8 @@ namespace AppAutotriajeProject
             Session["FlujoEscaner"] = true;
 
             Response.Redirect("~/InformacionPaciente.aspx");
+
+            return;
         }
 
         private void OnDocumentoEscaneado(PacienteEscaneadoDto paciente)
@@ -45,7 +47,7 @@ namespace AppAutotriajeProject
             return new PacienteEscaneadoDto
             {
                 DescripcionTipoDocumento = "Cédula de Ciudadanía",
-                IdTipoDocumento = 1,
+                IdTipoDocumento = 2,
 
                 NroDocumento = "123456789",
 

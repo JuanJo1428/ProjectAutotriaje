@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectDto.Dtos.RegistroAtencionDtos;
+using System;
 using System.Web.UI;
 
 namespace AppAutotriajeProject
@@ -20,11 +21,15 @@ namespace AppAutotriajeProject
             if (!Page.IsValid)
                 return;
 
-            bool respuesta = bool.Parse(rblMaternidad.SelectedValue);
+            EvaluacionesPacienteDto evaluaciones = new EvaluacionesPacienteDto();
 
-            Session["EvaluacionMaternidad"] = respuesta;
+            evaluaciones.CondicionMaternidad = bool.Parse(rblMaternidad.SelectedValue);
+
+            Session["EvaluacionesPaciente"] = evaluaciones;
 
             Response.Redirect("~/EvaluacionSaludMental.aspx");
+
+            return;
         }
     }
 }
