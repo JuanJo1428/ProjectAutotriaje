@@ -479,3 +479,39 @@ fieldset {
 }
 
 .condition-form .btn-next {color: var(--color-surface);}
+
+
+/* ==========================
+   Botón Sala de Espera
+========================== */
+
+.top-actions {
+    position: fixed;
+    top: 95px; /* Debajo del header azul */
+    right: 25px;
+    z-index: 1000;
+}
+
+.btn-waiting {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    padding: 0.8rem 1.6rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+    transition: background-color .15s ease, color .15s ease, transform .1s ease, box-shadow .15s ease;
+}
+
+    .btn-waiting:hover {
+        background-color: var(--color-primary);
+        color: var(--color-surface);
+        box-shadow: 0 8px 20px rgba(9, 60, 113, .25);
+    }
+
+    .btn-waiting:active {
+        transform: scale(.96);
+    }

@@ -13,5 +13,10 @@ namespace AppAutotriajeProject
         {
             Response.Redirect("~/Identificacion.aspx");
         }
+
+        protected void btnWaitingRoom_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/SalaEspera.aspx");
+        }
     }
 }
