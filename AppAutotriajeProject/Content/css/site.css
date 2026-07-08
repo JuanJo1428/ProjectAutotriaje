@@ -509,3 +509,9 @@ fieldset {
     color: var(--color-text-muted);
     font-style: italic;
 }
+
+@media screen and (max-width: 1400px) {
+    html {
+        font-size: 15px;
+    }
+}
