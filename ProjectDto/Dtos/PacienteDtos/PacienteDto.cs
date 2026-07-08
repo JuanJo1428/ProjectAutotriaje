@@ -26,8 +26,6 @@ namespace ProjectDto.Dtos
 
         public DateTime FechaNacimiento { get; set; }
 
-        public string LugarNacimiento { get; set; }
-
         public DateTime? FechaCreacion { get; set; }
 
         public DateTime? FechaActualizacion { get; set; }

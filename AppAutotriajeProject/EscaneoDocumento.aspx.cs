@@ -60,8 +60,6 @@ namespace AppAutotriajeProject
                 IdGenero = (int)Generos.Masculino,
 
                 FechaNacimiento = new DateTime(1998, 5, 18),
-
-                LugarNacimiento = "MEDELLIN"
             };
         }
     }

@@ -22,6 +22,5 @@ namespace ProjectDto.Dtos.EscanerDtos
 
         public DateTime FechaNacimiento { get; set; }
 
-        public string LugarNacimiento { get; set; }
     }
 }

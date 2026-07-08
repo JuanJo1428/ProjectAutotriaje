@@ -260,8 +260,6 @@ namespace AppAutotriajeProject
                 IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
 
                 FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture),
-
-                LugarNacimiento = null
             };
 
         }
@@ -292,8 +290,6 @@ namespace AppAutotriajeProject
                 IdGenero = Convert.ToInt32(ddlSexoBiologico.SelectedValue),
 
                 FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture),
-
-                LugarNacimiento = paciente.LugarNacimiento
             };
         }
 
@@ -337,7 +333,6 @@ namespace AppAutotriajeProject
 
             pacienteEscaneado.FechaNacimiento = paciente.FechaNacimiento;
 
-            pacienteEscaneado.LugarNacimiento = paciente.LugarNacimiento;
 
             Session["PacienteEscaneado"] = pacienteEscaneado;
         }

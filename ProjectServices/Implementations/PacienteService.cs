@@ -232,7 +232,6 @@ namespace ProjectServices.Implementations
                 IdGenero = paciente.IdGenero,
 
                 FechaNacimiento = paciente.FechaNacimiento,
-                LugarNacimiento = paciente.LugarNacimiento,
 
                 FechaCreacion = paciente.FechaCreacion,
                 FechaActualizacion = paciente.FechaActualizacion,
@@ -257,8 +256,7 @@ namespace ProjectServices.Implementations
                 FechaNacimiento = datosPaciente.FechaNacimiento,
                 Activo = true,
                 FechaCreacion = DateTime.UtcNow,
-                FechaActualizacion = null,
-                LugarNacimiento = datosPaciente.LugarNacimiento
+                FechaActualizacion = null
             };
         }
 
@@ -275,7 +273,6 @@ namespace ProjectServices.Implementations
 
             paciente.IdGenero = pacienteValidado.IdGenero;
             paciente.FechaNacimiento = pacienteValidado.FechaNacimiento;
-            paciente.LugarNacimiento = pacienteValidado.LugarNacimiento;
 
             paciente.Activo = true;
             paciente.FechaActualizacion = DateTime.UtcNow;
@@ -292,8 +289,7 @@ namespace ProjectServices.Implementations
                 PrimerApellido = paciente.PrimerApellido,
                 SegundoApellido = paciente.SegundoApellido,
                 IdGenero = paciente.IdGenero,
-                FechaNacimiento = paciente.FechaNacimiento,
-                LugarNacimiento = paciente.LugarNacimiento
+                FechaNacimiento = paciente.FechaNacimiento
             };
         }
 
@@ -323,9 +319,6 @@ namespace ProjectServices.Implementations
             if (pacienteEncontrado.FechaNacimiento != paciente.FechaNacimiento)
                 return true;
 
-            if (pacienteEncontrado.LugarNacimiento != paciente.LugarNacimiento)
-                return true;
-
             return false;
         }
 
@@ -352,7 +345,6 @@ namespace ProjectServices.Implementations
             paciente.PrimerApellido = paciente.PrimerApellido?.Trim().ToUpper();
             paciente.SegundoApellido = paciente.SegundoApellido?.Trim().ToUpper();
 
-            paciente.LugarNacimiento = paciente.LugarNacimiento?.Trim().ToUpper();
         }
 
     }
