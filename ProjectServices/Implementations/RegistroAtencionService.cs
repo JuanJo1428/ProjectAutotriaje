@@ -6,6 +6,7 @@ using ProjectDto.Dtos.RegistroAtencionDtos;
 using ProjectServices.Constants;
 using ProjectServices.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace ProjectServices.Implementations
 {
@@ -147,6 +148,12 @@ namespace ProjectServices.Implementations
 
 
             return MapearARegistroAtencionDto(registro);
+        }
+
+
+        public List<RegistroAtencion> ObtenerPacientesSalaEspera()
+        {
+            return _registroAtencionRepository.ObtenerPacientesSalaEspera();
         }
 
 

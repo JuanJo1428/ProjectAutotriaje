@@ -18,11 +18,11 @@
             <ItemTemplate>
                 <div class="paciente-card">
                     <div class="col-info">
-                        <span class="tipo-doc"><%# Eval("TipoDocumento") %></span> 
-                        <span class="nro-doc"><%# Eval("NroDocumento") %></span>
+                        <span class="tipo-doc"><%# Eval("Paciente.TipoDocumento.Nombre") %></span> 
+                        <span class="nro-doc"><%# Eval("Paciente.NroDocumento") %></span>
                     </div>
                     <div class="col-info">
-                        <span class="nombre-paciente"><%# Eval("NombreCompleto") %></span>
+                        <span class="nombre-paciente"><%# Eval("Paciente.NombreCompleto") %></span>
                     </div>
                 </div>
             </ItemTemplate>

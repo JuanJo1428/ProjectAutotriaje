@@ -32,6 +32,17 @@ namespace ProjectData.Repositories.Implementations
             return _context.RegistrosAtencion.Where(p => p.Activo).ToList();
         }
 
+        public List<RegistroAtencion> ObtenerPacientesSalaEspera()
+        {
+             return _context.RegistrosAtencion
+                    .AsNoTracking()
+                    .Include(r => r.Paciente)
+                    .Include(r => r.Paciente.TipoDocumento)
+                    .Where(r => r.Activo && !r.Atendido)
+                    .OrderBy(r => r.FechaRegistro)
+                    .ToList();
+        }
+
         public RegistroAtencion ObtenerPorId(int idAtencion)
         {
             return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion);
