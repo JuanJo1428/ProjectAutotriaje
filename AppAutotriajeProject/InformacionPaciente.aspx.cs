@@ -152,19 +152,14 @@ namespace AppAutotriajeProject
             Session["PacienteProcesado"] = pacienteProcesado;
 
 
-            // Actualiza el paciente guardado en la session busqueda cuando el flujo es manual
-            if (!vieneDeEscaner)
+            // Sincroniza la información del paciente en la sesión correspondiente.
+            if (vieneDeEscaner)
             {
-                BuscarPacienteRespuestaDto respuestaBusqueda = Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
-
-                if (respuestaBusqueda != null)
-                {
-                    respuestaBusqueda.PacientePrincipal = pacienteProcesado.Paciente;
-                    respuestaBusqueda.Existe = true;
-                    respuestaBusqueda.EncontradoAutotriaje = true;
-
-                    Session["BusquedaPaciente"] = respuestaBusqueda;
-                }
+                ActualizarSesionEscaner(pacienteProcesado.Paciente);
+            }
+            else
+            {
+                ActualizarSesionBusqueda(pacienteProcesado.Paciente);
             }
 
 
@@ -175,6 +170,11 @@ namespace AppAutotriajeProject
             {
                 Session["RegistroPendiente"] = registroPendiente;
 
+                if (registroPendiente.RegistroAtencion.AutotriajeIniciado)
+                {
+                    Response.Redirect("~/RegistroActivo.aspx");
+
+                }
                 Response.Redirect("~/RegistroPendiente.aspx");
                 return;
             }
@@ -224,7 +224,12 @@ namespace AppAutotriajeProject
 
         private bool VieneDeEscaner()
         {
-            return Session["PacienteEscaneado"] != null;
+            object flujo = Session["FlujoEscaner"];
+
+            if (flujo == null)
+                return false;
+
+            return (bool)flujo;
         }
 
         private PacienteValidadoDto ConstruirPacienteValidadoManual()
@@ -292,6 +297,50 @@ namespace AppAutotriajeProject
             };
         }
 
+        private void ActualizarSesionBusqueda(PacienteDto paciente)
+        {
+            BuscarPacienteRespuestaDto respuestaBusqueda =
+                Session["BusquedaPaciente"] as BuscarPacienteRespuestaDto;
+
+            if (respuestaBusqueda == null)
+            {
+                return;
+            }
+
+            respuestaBusqueda.PacientePrincipal = paciente;
+
+            respuestaBusqueda.Existe = true;
+
+            respuestaBusqueda.EncontradoAutotriaje = true;
+
+            Session["BusquedaPaciente"] = respuestaBusqueda;
+        }
+
+
+        private void ActualizarSesionEscaner(PacienteDto paciente)
+        {
+            PacienteEscaneadoDto pacienteEscaneado =
+                Session["PacienteEscaneado"] as PacienteEscaneadoDto;
+
+            if (pacienteEscaneado == null)
+            {
+                return;
+            }
+
+            pacienteEscaneado.PrimerNombre = paciente.PrimerNombre;
+            pacienteEscaneado.SegundoNombre = paciente.SegundoNombre;
+
+            pacienteEscaneado.PrimerApellido = paciente.PrimerApellido;
+            pacienteEscaneado.SegundoApellido = paciente.SegundoApellido;
+
+            pacienteEscaneado.IdGenero = paciente.IdGenero;
+
+            pacienteEscaneado.FechaNacimiento = paciente.FechaNacimiento;
+
+            pacienteEscaneado.LugarNacimiento = paciente.LugarNacimiento;
+
+            Session["PacienteEscaneado"] = pacienteEscaneado;
+        }
 
 
     }

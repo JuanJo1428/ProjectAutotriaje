@@ -16,6 +16,7 @@ namespace AppAutotriajeProject
 
         protected void btnTerminar_Click(object sender, EventArgs e)
         {
+            Session.Clear(); // elimina todas las variables de sesión
             Response.Redirect("~/Default.aspx");
         }
     }
