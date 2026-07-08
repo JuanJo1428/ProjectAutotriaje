@@ -158,7 +158,7 @@ fieldset {
 .manual-entry-column {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 1.1rem;
     min-width: 400px;
     width: 30%;
 }
@@ -340,7 +340,6 @@ fieldset {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 1rem;
 }
 
 .validation-error {

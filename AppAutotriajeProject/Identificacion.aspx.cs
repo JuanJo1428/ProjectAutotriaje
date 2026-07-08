@@ -15,7 +15,7 @@ namespace AppAutotriajeProject
         {
             if (!IsPostBack)
             {
-                CargarTiposDocumento();
+                //CargarTiposDocumento();
 
                 if (Session["MensajeError"] != null)
                 {
