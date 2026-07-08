@@ -10,11 +10,11 @@
         <legend class="sr-only">Continuar registro pendiente</legend>
         
         <asp:LinkButton ID="btnSiRP" runat="server" CssClass="btn btn-next" OnClick="ProcesarRespuesta" CommandArgument="true">
-            <i class="fas fa-asterisk"></i> Sí, continuar registro
+            <i class="fa-solid fa-stethoscope"></i> Sí, continuar registro
         </asp:LinkButton>
 
         <asp:LinkButton ID="btnNoRP" runat="server" CssClass="btn btn-no" OnClick="ProcesarRespuesta" CommandArgument="false">
-            <i class="fas fa-asterisk"></i> No, volver a sala de espera
+            <i class="fa-solid fa-person-walking-arrow-right"></i> No, volver a sala de espera
         </asp:LinkButton>
     </fieldset>
 
