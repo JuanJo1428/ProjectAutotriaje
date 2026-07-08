@@ -51,7 +51,7 @@ header h1 {
 header time {
     font-size: 1.25rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03rem;
 }
 
 main {
@@ -96,22 +96,44 @@ p {
 }
 
 .btn-start {
-    background-color: var(--color-accent);
-    color: var(--color-surface);
-    font-family: inherit;
-    font-size: 1.8rem;
-    font-weight: 700;
     padding: 1.5rem 3.5rem;
     border: none;
     border-radius: var(--border-radius-lg);
-    cursor: pointer;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
     box-shadow: 0 6px 16px rgba(0, 186, 179, 0.25);
     text-decoration: none;
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: 700;
+    cursor: pointer;
     transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-.btn-primary:active {
+.btn-start:active {
     background-color: #009c96;
+    transform: scale(0.96);
+}
+
+.top-actions {
+    margin-left: auto;
+}
+
+.btn-waiting {
+    padding: 0.8rem 1.6rem;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+    transition: background-color .15s ease, color .15s ease, transform .1s ease, box-shadow .15s ease;
+}
+
+.btn-waiting:active {
     transform: scale(0.96);
 }
 
@@ -141,37 +163,23 @@ fieldset {
     width: 30%;
 }
 
-/*UNA VEZ TERMINADO TODO UNIFICAR LAS DOS SIGUIENTES CLASES*/
-
-.touch-dropdown {
+.touch-dropdown, .input-display {
     display: block;
     width: 100%;
     padding: 0.5rem 1.5rem;
     border: 2px solid var(--color-primary);
     border-radius: var(--border-radius-lg);
-    font: inherit;
-    font-size: 1.25rem;
     background-color: var(--color-surface);
     color: var(--color-primary);
-    cursor: pointer;
-}
-
-.input-display {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1.5rem;
-    border: 2px solid var(--color-accent);
-    border-radius: var(--border-radius-lg);
-    background-color: var(--color-surface);
-    color: var(--color-accent);
     font: inherit;
     font-size: 1.25rem;
 }
+.touch-dropdown {cursor: pointer;}
 
 .numpad-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 0.66rem;
     width: 100%;
 }
 
@@ -211,18 +219,20 @@ fieldset {
 }
 
 .btn-scan {
-    height: 180px;
-    width: 100%;
-    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    width: 100%;
+    max-width: 450px;
+    height: 180px;
     border: 3px solid var(--color-secondary);
+    border-radius: var(--border-radius-lg);
     background-color: var(--color-surface);
     color: var(--color-primary);
     text-decoration: none;
+    transition: background-color 0.1s, transform 0.1s;
 }
 
 .btn-scan:active {
@@ -281,7 +291,7 @@ fieldset {
     width: 30%;
     height: 220px;
     margin: 40px auto;
-    border: 3px dashed var(--color-accent); /* Color verde/turquesa del prototipo */
+    border: 3px dashed var(--color-accent);
     border-radius: var(--border-radius-lg);
     display: flex;
     align-items: center;
@@ -294,7 +304,6 @@ fieldset {
     color: var(--color-accent);
 }
 
-/* Transición animada cuando la API responde OK */
 .scan-success-icon {
     font-size: 5rem;
     color: var(--color-accent);
@@ -327,12 +336,11 @@ fieldset {
 
 /* --- DEPURAR APARTIR DE AQUÍ ↓ --- */
 
-/* Grupos de cada campo */
 .form-group {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
 }
 
 .validation-error {
@@ -385,21 +393,8 @@ fieldset {
     border: 2px solid var(--color-text-muted);
 }
 
-/* Responsividad en pantallas pequeñas (por si se reduce la ventana) */
-@media (max-height: 700px) {
-    .form-grid {
-        row-gap: 8px;
-    }
 
-    .form-control {
-        padding: 8px 12px;
-    }
-}
-
-
-/* ===========================
-   Pantallas de condiciones
-=========================== */
+/* Pantallas de condiciones */
 
 .condition-form {
     display: flex;
@@ -443,9 +438,7 @@ fieldset {
     box-shadow: 0 8px 20px rgba(23,183,181,.35);
 }
 
-/* ============================================
-   Alerta de Error en Procesamiento Paciente
-========================================= */
+/* Alerta de Error en Procesamiento Paciente (SE DEBE VOLVER A REVISAR) */
 
 .error-banner {
     display: block;
@@ -477,42 +470,7 @@ fieldset {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .condition-form .btn-next {color: var(--color-surface);}
-
-
-/* ==========================
-   Botón Sala de Espera
-========================== */
-
-.top-actions {
-    margin-left: auto;
-}
-
-.btn-waiting {
-    padding: 0.8rem 1.6rem;
-    border: 2px solid var(--color-primary);
-    border-radius: var(--border-radius-lg);
-    background-color: var(--color-surface);
-    color: var(--color-primary);
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
-    transition: background-color .15s ease, color .15s ease, transform .1s ease, box-shadow .15s ease;
-}
-
-.btn-waiting:hover {
-    background-color: var(--color-primary);
-    color: var(--color-surface);
-    box-shadow: 0 8px 20px rgba(9, 60, 113, .25);
-}
-
-.btn-waiting:active {
-    transform: scale(0.96);
-}
-
 
 /* Sala de página */
 
