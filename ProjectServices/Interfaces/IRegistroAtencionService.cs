@@ -1,5 +1,7 @@
-﻿using ProjectDto.Dtos;
+﻿using ProjectData.Entities;
+using ProjectDto.Dtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
+using System.Collections.Generic;
 
 namespace ProjectServices.Interfaces
 {
@@ -10,5 +12,7 @@ namespace ProjectServices.Interfaces
         ConsultarRegistroPendienteRespuestaDto ConsultarRegistroPendiente(PacienteProcesadoRespuestaDto pacienteProcesado);
 
         RegistroAtencionDto ActualizarRegistro(ActualizarRegistroAtencionDto datosRegistro);
+
+        List<RegistroAtencion> ObtenerPacientesSalaEspera();
     }
 }

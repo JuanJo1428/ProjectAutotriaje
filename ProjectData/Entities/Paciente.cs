@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 
 namespace ProjectData.Entities
@@ -64,6 +65,23 @@ namespace ProjectData.Entities
 
         //Relacion muchos registros para un solo paciente
         public virtual ICollection<RegistroAtencion> Atenciones { get; set; }
+
+
+        //Propiedad Calculada
+        [NotMapped]
+        public string NombreCompleto
+        {
+            get
+            {
+                return string.Join(" ", new[]
+                {
+                PrimerNombre,
+                SegundoNombre,
+                PrimerApellido,
+                SegundoApellido
+            }.Where(x => !string.IsNullOrWhiteSpace(x)));
+            }
+        }
 
     }
 }

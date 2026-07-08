@@ -8,6 +8,8 @@ namespace ProjectData.Repositories.Interfaces
     {
         List<RegistroAtencion> ObtenerTodos(bool incluirInactivos);
 
+        List<RegistroAtencion> ObtenerPacientesSalaEspera();
+
         RegistroAtencion CrearRegistro(RegistroAtencion atencion);
 
         RegistroAtencion ActualizarRegistro(RegistroAtencion registro);
