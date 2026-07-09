@@ -24,6 +24,15 @@ namespace AppAutotriajeProject
         protected global::System.Web.UI.WebControls.Button btnVolver;
 
         /// <summary>
+        /// hdLectura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdLectura;
+
+        /// <summary>
         /// btnEscaneoExitoso control.
         /// </summary>
         /// <remarks>

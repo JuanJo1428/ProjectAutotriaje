@@ -1,43 +1,98 @@
 ﻿const EscaneoUI = {
 
+    buffer: "",
+
+    hdLectura: null,
+    btnEscaneo: null,
     iconElement: null,
     zoneElement: null,
 
     init: function () {
 
+        this.hdLectura = document.getElementById("hdLectura");
+        this.btnEscaneo = document.getElementById("btnEscaneoExitoso");
         this.iconElement = document.getElementById("scanIcon");
         this.zoneElement = document.getElementById("scanTargetZone");
 
-        console.log("Escáner iniciado. Esperando documento...");
+        this.prepararEscaner();
 
-        // SIMULACIÓN
-        // Cuando llegue el SDK esta llamada desaparecerá
-        setTimeout(() => {
+        console.log("Esperando lectura...");
+    },
 
-            this.notificarEscaneoExitoso();
+    prepararEscaner: function () {
 
-        }, 4000);
+        document.addEventListener("keydown", (e) => {
+
+            //-------------------------------------
+            // Fin de lectura
+            //-------------------------------------
+
+            if (e.key === "Enter") {
+
+                e.preventDefault();
+
+                console.log("Lectura completa:");
+                console.log(this.buffer);
+
+                this.hdLectura.value = this.buffer;
+
+                this.notificarEscaneoExitoso();
+
+                this.buffer = "";
+
+                return;
+            }
+
+            //-------------------------------------
+            // Ignorar Shift
+            //-------------------------------------
+
+            if (e.key === "Shift") {
+                return;
+            }
+
+            //-------------------------------------
+            // Convertir TAB en \t
+            //-------------------------------------
+
+            if (e.key === "Tab") {
+
+                e.preventDefault();
+
+                this.buffer += "\t";
+
+                return;
+            }
+
+            //-------------------------------------
+            // Ignorar teclas largas
+            //-------------------------------------
+
+            if (e.key.length > 1)
+                return;
+
+            //-------------------------------------
+            // Guardar carácter
+            //-------------------------------------
+
+            this.buffer += e.key;
+
+        });
 
     },
 
     notificarEscaneoExitoso: function () {
 
-        // Cambia el icono por el check
-        if (this.iconElement) {
-            this.iconElement.className = "fa-solid fa-circle-check scan-success-icon";
-        }
+        this.iconElement.className =
+            "fa-solid fa-circle-check scan-success-icon";
 
-        // Cambia el estilo de la caja
-        if (this.zoneElement) {
-            this.zoneElement.classList.add("scan-box-verified");
-        }
+        this.zoneElement.classList.add("scan-box-verified");
 
-        // Espera un momento para que el usuario vea la confirmación
         setTimeout(() => {
 
-            document.getElementById("btnEscaneoExitoso").click();
+            this.btnEscaneo.click();
 
-        }, 1200);
+        }, 700);
 
     }
 

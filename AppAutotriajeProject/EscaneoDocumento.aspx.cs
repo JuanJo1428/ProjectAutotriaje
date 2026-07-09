@@ -1,5 +1,6 @@
 ﻿using ProjectDto.Dtos.EscanerDtos;
 using ProjectServices.Constants;
+using ProjectServices.Implementations;
 using System;
 using System.Web.UI;
 
@@ -12,9 +13,19 @@ namespace AppAutotriajeProject
 
         }
 
+
+        private readonly EscanerService _escanerService = new EscanerService();
         protected void btnEscaneoExitoso_Click(object sender, EventArgs e)
         {
-            PacienteEscaneadoDto paciente = SimularRespuestaEscaner();
+
+            string lectura = hdLectura.Value;
+
+            if (string.IsNullOrWhiteSpace(lectura))
+            {
+                return;
+            }
+
+            PacienteEscaneadoDto paciente = _escanerService.ProcesarLectura(lectura);
 
             ProcesarEscaneoExitoso(paciente);
         }
@@ -35,32 +46,6 @@ namespace AppAutotriajeProject
             return;
         }
 
-        private void OnDocumentoEscaneado(PacienteEscaneadoDto paciente)
-        {
-            ProcesarEscaneoExitoso(paciente);
-        }
 
-
-        //Simulacion Escaneo
-        private PacienteEscaneadoDto SimularRespuestaEscaner()
-        {
-            return new PacienteEscaneadoDto
-            {
-                DescripcionTipoDocumento = "Cédula de Ciudadanía",
-                IdTipoDocumento = 2,
-
-                NroDocumento = "123456789",
-
-                PrimerNombre = "JUAN",
-                SegundoNombre = "CARLOS",
-
-                PrimerApellido = "PEREZ",
-                SegundoApellido = "GOMEZ",
-
-                IdGenero = (int)Generos.Masculino,
-
-                FechaNacimiento = new DateTime(1998, 5, 18),
-            };
-        }
     }
 }

@@ -9,7 +9,7 @@
     </p>
 
     <div id="scanTargetZone" class="scan-target-box">
-        <i id="scanIcon" class="fa-solid fa-camera scan-main-icon" aria-hidden="true"></i>
+        <i id="scanIcon" class="fa-solid fa-camera scan-main-icon"></i>
     </div>
 
     <div class="flow-navigation text-left">
@@ -21,7 +21,13 @@
             OnClick="btnVolver_Click" />
     </div>
 
-    <!-- Botón oculto para disparar el postback -->
+    <!-- Aquí se guardará la lectura completa -->
+    <asp:HiddenField
+        ID="hdLectura"
+        runat="server"
+        ClientIDMode="Static" />
+
+    <!-- Botón oculto -->
     <asp:Button
         ID="btnEscaneoExitoso"
         runat="server"
@@ -29,6 +35,6 @@
         Style="display:none;"
         OnClick="btnEscaneoExitoso_Click" />
 
-    <script src="Scripts/js/escaneoDocumento.js?v=1.0" defer></script>
+    <script src="Scripts/js/escaneoDocumento.js?v=3.0" defer></script>
 
 </asp:Content>
