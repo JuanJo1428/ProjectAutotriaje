@@ -53,6 +53,13 @@
     <Compile Include="Dtos\PacienteDtos\PacienteDto.cs" />
     <Compile Include="Dtos\PacienteDtos\PacienteValidadoDto.cs" />
     <Compile Include="Dtos\PacienteDtos\PacienteProcesadoRespuestaDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\FlujoPretriajeDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\FlujoSeleccionadoDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\OpcionPreguntaDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\PreguntaPretriajeDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\RespuestaPreguntaDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\ResultadoPretriajeDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\SolicitudPretriajeDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\ActualizarRegistroAtencionDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\ConsultarRegistroPendienteRespuestaDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionDto.cs" />
@@ -62,6 +69,11 @@
     <Compile Include="Dtos\TiposDocumentoDtos\TipoDocumentoListaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectCommon\ProjectCommon.csproj">
+      <Project>{70eae085-d65b-49a3-bf27-3b525e4c4457}</Project>
+      <Name>ProjectCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

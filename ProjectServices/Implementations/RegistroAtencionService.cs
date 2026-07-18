@@ -3,7 +3,7 @@ using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectDto.Dtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
-using ProjectServices.Constants;
+using ProjectCommon.Constants;
 using ProjectServices.Interfaces;
 using System;
 using System.Collections.Generic;

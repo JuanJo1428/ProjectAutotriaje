@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D1B088D-747C-4233-B99D-537F06979514}</ProjectGuid>
+    <ProjectGuid>{70EAE085-D65B-49A3-BF27-3B525E4C4457}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectServices</RootNamespace>
-    <AssemblyName>ProjectServices</AssemblyName>
+    <RootNamespace>ProjectCommon</RootNamespace>
+    <AssemblyName>ProjectCommon</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,36 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementations\EscanerService.cs" />
-    <Compile Include="Implementations\GeneroService.cs" />
-    <Compile Include="Implementations\GhipsService.cs" />
-    <Compile Include="Implementations\PacienteService.cs" />
-    <Compile Include="Implementations\RegistroAtencionService.cs" />
-    <Compile Include="Implementations\TipoDocumentoService.cs" />
-    <Compile Include="Interfaces\IEscanerService.cs" />
-    <Compile Include="Interfaces\IGeneroService.cs" />
-    <Compile Include="Interfaces\IGhipsService.cs" />
-    <Compile Include="Interfaces\IPacienteService.cs" />
-    <Compile Include="Interfaces\IRegistroAtencionService.cs" />
-    <Compile Include="Interfaces\ITipoDocumentoService.cs" />
-    <Compile Include="Parser\CedulaParser.cs" />
-    <Compile Include="Parser\IEscanParser.cs" />
+    <Compile Include="Constants\Generos.cs" />
+    <Compile Include="Constants\TipoRespuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectCommon\ProjectCommon.csproj">
-      <Project>{70eae085-d65b-49a3-bf27-3b525e4c4457}</Project>
-      <Name>ProjectCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProjectData\ProjectData.csproj">
-      <Project>{b62500d8-42a1-4b35-93f5-7e6cd6fcb042}</Project>
-      <Name>ProjectData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProjectDto\ProjectDto.csproj">
-      <Project>{abd8d6a9-b5d7-4bd3-87b5-320bd20a8369}</Project>
-      <Name>ProjectDto</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

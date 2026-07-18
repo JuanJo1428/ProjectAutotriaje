@@ -1,5 +1,5 @@
 ﻿using ProjectDto.Dtos.EscanerDtos;
-using ProjectServices.Constants;
+using ProjectCommon.Constants;
 using System;
 
 namespace ProjectServices.Parser

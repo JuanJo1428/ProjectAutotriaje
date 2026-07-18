@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using ProjectData.Entities;
+using ProjectData.Entities.PretriajeModel;
 
 namespace ProjectData.Context
 {
@@ -17,5 +18,13 @@ namespace ProjectData.Context
         public DbSet<Genero> OpcionesGenero { get; set; }
 
         public DbSet<TipoDocumento> TiposDocumento { get; set; }
+
+        public DbSet<FlujoPretriaje> FlujosPretriaje { get; set; }
+
+        public DbSet<PreguntaPretriaje> PreguntasPretriaje { get; set; }
+
+        public DbSet<DecisionPretriaje> DecisionesPretriaje { get; set; }
+
+        public DbSet<OpcionPreguntaPretriaje> OpcionesPreguntaPretriaje { get; set; }
     }
 }

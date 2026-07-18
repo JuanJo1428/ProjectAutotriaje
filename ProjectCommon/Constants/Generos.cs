@@ -1,4 +1,4 @@
-﻿namespace ProjectServices.Constants
+﻿namespace ProjectCommon.Constants
 {
     public enum Generos
     {

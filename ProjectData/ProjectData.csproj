@@ -53,11 +53,18 @@
   <ItemGroup>
     <Compile Include="Context\AppDbContext.cs" />
     <Compile Include="Entities\Genero.cs" />
+    <Compile Include="Entities\PretriajeModel\OpcionPreguntaPretriaje.cs" />
+    <Compile Include="Entities\PretriajeModel\PreguntaPretriaje.cs" />
+    <Compile Include="Entities\PretriajeModel\FlujoPretriaje.cs" />
+    <Compile Include="Entities\PretriajeModel\DecisionPretriaje.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\RegistroAtencion.cs" />
     <Compile Include="Entities\Paciente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implementations\GeneroRepository.cs" />
+    <Compile Include="Repositories\Implementations\PretriajeImplementations\DecisionPretriajeRepository.cs" />
+    <Compile Include="Repositories\Implementations\PretriajeImplementations\FlujoPretriajeRepository.cs" />
+    <Compile Include="Repositories\Implementations\PretriajeImplementations\PreguntaPretriajeRepository.cs" />
     <Compile Include="Repositories\Implementations\RegistroAtencionRepository.cs" />
     <Compile Include="Repositories\Implementations\PacienteRepository.cs" />
     <Compile Include="Repositories\Implementations\TipoDocumentoRepository.cs" />
@@ -65,10 +72,19 @@
     <Compile Include="Repositories\Interfaces\IPacienteRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRegistroAtencionRepository.cs" />
     <Compile Include="Repositories\Interfaces\ITipoDocumentoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IDecisionPretriajeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IFlujoPretriajeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IPreguntaPretriajeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectCommon\ProjectCommon.csproj">
+      <Project>{70eae085-d65b-49a3-bf27-3b525e4c4457}</Project>
+      <Name>ProjectCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
