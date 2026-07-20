@@ -4,7 +4,7 @@
     {
         public bool Finalizado { get; set; }
 
-        public int? Prioridad { get; set; }
+        public PrioridadPretriajeDto Prioridad { get; set; }
 
         public string Mensaje { get; set; }
 

@@ -20,7 +20,7 @@ namespace ProjectData.Entities.PretriajeModel
 
         public string Descripcion { get; set; }
 
-        public string PalabrasClave { get; set; }
+        public string Codigo { get; set; }
 
         public bool Activo { get; set; }
 

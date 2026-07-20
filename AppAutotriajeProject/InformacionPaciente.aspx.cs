@@ -1,7 +1,7 @@
 ﻿using ProjectDto.Dtos;
 using ProjectDto.Dtos.EscanerDtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
-using ProjectServices.Constants;
+using ProjectCommon.Constants;
 using ProjectServices.Implementations;
 using System;
 using System.Globalization;

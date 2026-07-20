@@ -32,5 +32,10 @@ namespace ProjectData.Repositories.Implementations
                 .Where(f => f.Activo)
                 .ToList();
         }
+
+        public FlujoPretriaje ObtenerPorCodigo(string codigo)
+        {
+            return _context.FlujosPretriaje.FirstOrDefault(f => f.Codigo.ToUpper() == codigo.ToUpper() && f.Activo);
+        }
     }
 }

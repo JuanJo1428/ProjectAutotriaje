@@ -7,8 +7,9 @@ namespace ProjectData.Repositories.Interfaces.PretriajeInterfaces
     {
         PreguntaPretriaje ObtenerPorId(int idPregunta);
 
-        //PreguntaPretriaje ObtenerPrimeraPregunta(int idFlujo);
+        PreguntaPretriaje ObtenerPrimeraPregunta(int idFlujo);
 
         List<PreguntaPretriaje> ObtenerPreguntasPorFlujo(int idFlujo);
+
     }
 }

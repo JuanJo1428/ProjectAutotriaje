@@ -54,9 +54,9 @@
     <Compile Include="Dtos\PacienteDtos\PacienteValidadoDto.cs" />
     <Compile Include="Dtos\PacienteDtos\PacienteProcesadoRespuestaDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\FlujoPretriajeDto.cs" />
-    <Compile Include="Dtos\PretriajeDtos\FlujoSeleccionadoDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\OpcionPreguntaDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\PreguntaPretriajeDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\PrioridadPretriajeDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\RespuestaPreguntaDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\ResultadoPretriajeDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\SolicitudPretriajeDto.cs" />

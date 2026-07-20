@@ -34,7 +34,10 @@ namespace ProjectData.Entities.PretriajeModel
         public virtual PreguntaPretriaje PreguntaSiguiente { get; set; }
 
 
-        public int? Prioridad { get; set; }
+        public int? IdPrioridad { get; set; }
+
+        [ForeignKey(nameof(IdPrioridad))]
+        public virtual PrioridadPretriaje Prioridad { get; set; }
 
 
         public bool EsActivo { get; set; }

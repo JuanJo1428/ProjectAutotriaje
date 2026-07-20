@@ -1,6 +1,6 @@
 ﻿using ProjectDto.Dtos;
 using ProjectDto.Dtos.RegistroAtencionDtos;
-using ProjectServices.Constants;
+using ProjectCommon.Constants;
 using System;
 using System.Web.UI;
 

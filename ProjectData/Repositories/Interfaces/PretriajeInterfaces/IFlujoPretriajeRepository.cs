@@ -10,5 +10,7 @@ namespace ProjectData.Repositories.Interfaces.PretriajeInterfaces
         List<FlujoPretriaje> ObtenerTodos();
 
         FlujoPretriaje ObtenerPorNombre(string nombre);
+
+        FlujoPretriaje ObtenerPorCodigo(string codigo);
     }
 }

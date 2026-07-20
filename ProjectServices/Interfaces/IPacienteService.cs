@@ -1,7 +1,4 @@
-﻿using ProjectData.Entities;
-using ProjectDto.Dtos;
-using System.Collections.Generic;
-
+﻿using ProjectDto.Dtos;
 
 namespace ProjectServices.Interfaces
 {

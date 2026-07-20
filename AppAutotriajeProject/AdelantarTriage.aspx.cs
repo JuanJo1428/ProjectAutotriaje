@@ -43,7 +43,6 @@ namespace AppAutotriajeProject
             Session["CrearRegistroRespuesta"] = respuesta;
 
 
-
             if (deseaContinuar)
             {
                 //Mientras se crea MotivoConsulta.aspx

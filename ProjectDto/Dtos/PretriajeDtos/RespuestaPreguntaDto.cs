@@ -6,6 +6,6 @@
 
         public bool? RespuestaSiNo { get; set; }
 
-        public int IdOpcionSeleccionada { get; set; }
+        public int? IdOpcionSeleccionada { get; set; }
     }
 }
