@@ -164,6 +164,7 @@
     <Content Include="Identificacion.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="InformacionPaciente.aspx" />
+    <Content Include="MotivoConsultaForm.aspx" />
     <Content Include="RegistroActivo.aspx" />
     <Content Include="RegistroPendiente.aspx" />
     <Content Include="SalaEspera.aspx" />
@@ -303,6 +304,13 @@
     </Compile>
     <Compile Include="InformacionPaciente.aspx.designer.cs">
       <DependentUpon>InformacionPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MotivoConsultaForm.aspx.cs">
+      <DependentUpon>MotivoConsultaForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MotivoConsultaForm.aspx.designer.cs">
+      <DependentUpon>MotivoConsultaForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistroActivo.aspx.cs">
