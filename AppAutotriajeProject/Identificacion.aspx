@@ -51,7 +51,8 @@
                         ClientIDMode="Static"
                         CssClass="input-display"
                         placeholder="Ingrese número de documento"
-                        aria-label="Número de documento">
+                        aria-label="Número de documento"
+                        ReadOnly="true">
                     </asp:TextBox>
 
                     <%--<asp:RequiredFieldValidator
