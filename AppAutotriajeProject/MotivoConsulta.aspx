@@ -18,7 +18,7 @@
             TextMode="MultiLine" 
             Rows="4"
             onkeypress="return soloLetras(event)"
-            placeholder="Ejemplo: Tengo dolor fuerte en el pecho desde esta mañana...">
+            placeholder="Ejemplos: Tengo dolor fuerte en el pecho desde esta mañana...">
         </asp:TextBox>
 
         <asp:Button

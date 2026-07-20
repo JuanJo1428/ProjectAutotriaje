@@ -164,6 +164,7 @@
     <Content Include="Identificacion.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="InformacionPaciente.aspx" />
+    <Content Include="MotivoConsulta.aspx" />
     <Content Include="MotivoConsultaForm.aspx" />
     <Content Include="RegistroActivo.aspx" />
     <Content Include="RegistroPendiente.aspx" />
@@ -304,6 +305,12 @@
     </Compile>
     <Compile Include="InformacionPaciente.aspx.designer.cs">
       <DependentUpon>InformacionPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MotivoConsulta.aspx.cs">
+      <DependentUpon>MotivoConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MotivoConsulta.aspx.designer.cs">
+      <DependentUpon>MotivoConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="MotivoConsultaForm.aspx.cs">
       <DependentUpon>MotivoConsultaForm.aspx</DependentUpon>
