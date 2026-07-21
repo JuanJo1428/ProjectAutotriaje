@@ -73,7 +73,7 @@ footer {
 }
 
 
-/* Pantalla de inicio */
+/* Página de inicio */
 
 .welcome-container {
     display: flex;
@@ -137,7 +137,7 @@ p {
     transform: scale(0.96);
 }
 
-/* Pantalla de Identificación */
+/* Página de Identificación */
 
 .description-container {
     text-align: center;
@@ -285,7 +285,7 @@ fieldset {
 }
 
 
-/* Página de escaneo (EDITAR HACIA LA ÚLTIMA VERSIÓN - QUEDA PENDIENTE)*/
+/* Página de escaneo de documento (EDITAR HACIA LA ÚLTIMA VERSIÓN - QUEDA PENDIENTE HACER CAMBIOS EN EL ESTILO) */
 
 .scan-target-box {
     width: 30%;
@@ -322,7 +322,7 @@ fieldset {
     }
 }
 
-/* Pantalla de Información */
+/* Página de Información almacenada del paciente */
 
 .form-grid {
     flex-grow: 1;
@@ -333,8 +333,6 @@ fieldset {
     width: 60%;
     margin: 0 auto;
 }
-
-/* --- DEPURAR APARTIR DE AQUÍ ↓ --- */
 
 .form-group {
     display: flex;
@@ -393,7 +391,7 @@ fieldset {
 }
 
 
-/* Pantallas de condiciones */
+/* Páginas de condiciones maternidad, salud mental y oncológica */
 
 .condition-form {
     display: flex;
@@ -437,7 +435,7 @@ fieldset {
     box-shadow: 0 8px 20px rgba(23,183,181,.35);
 }
 
-/* Alerta de Error en Procesamiento Paciente (SE DEBE VOLVER A REVISAR) */
+/* Alerta de Error en Procesamiento Paciente (ESTILO BASE - SE PUEDE PENSAR EN CAMBIOS) */
 
 .error-banner {
     display: block;
@@ -453,7 +451,7 @@ fieldset {
     text-align: center;
 }
 
-/* Página de adelantar triage */
+/* Página de Adelantar triage */
 
 .condition-form .btn {
     width: 50%;
@@ -471,7 +469,7 @@ fieldset {
 }
 .condition-form .btn-next {color: var(--color-surface);}
 
-/* Sala de página */
+/* `Página de Sala de espera */
 
 .sala-espera-container {
     width: 60%;
@@ -522,7 +520,7 @@ fieldset {
     }
 }
 
-/* Página de motivo */
+/* Página de Motivo de consulta */
 
 .sintomas-form {
     display: flex;
@@ -557,4 +555,123 @@ fieldset {
 
 .btn-voice:active {
     transform: scale(0.96);
+}
+
+/* Página de Preguntas de seguimiento */
+
+.container-triaje {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 750px;
+    text-align: center;
+}
+
+.card-pregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding: 2.2rem;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background-color: var(--color-surface);
+}
+
+.pregunta-titulo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
+}
+
+.opciones-sino {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.btn-opcion-sino {
+    flex: 1;
+    padding: 1.25rem 1rem;
+    border: 2px solid black;
+    border-radius: var(--border-radius-lg);
+    background-color: var(--color-surface);
+    color: #0284c7;
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-opcion-si {
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.btn-opcion-si:active {
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+.btn-opcion-no {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.btn-opcion-no:active {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.opciones-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.select-triaje {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    color: #334155;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.select-triaje:focus {
+    border-color: #0284c7;
+    background-color: #ffffff;
+}
+
+.btn-siguiente {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-siguiente:hover, .btn-siguiente:active {
+    background-color: #0369a1;
+}
+
+.mensaje-final {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #15803d;
+    font-weight: 600;
 }
