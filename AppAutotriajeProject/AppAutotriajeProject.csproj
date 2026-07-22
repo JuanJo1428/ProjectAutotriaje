@@ -165,6 +165,7 @@
     <Content Include="Default.aspx" />
     <Content Include="InformacionPaciente.aspx" />
     <Content Include="MotivoConsulta.aspx" />
+    <Content Include="PreguntasSeguimiento.aspx" />
     <Content Include="RegistroActivo.aspx" />
     <Content Include="RegistroPendiente.aspx" />
     <Content Include="SalaEspera.aspx" />
@@ -312,6 +313,12 @@
     </Compile>
     <Compile Include="MotivoConsulta.aspx.designer.cs">
       <DependentUpon>MotivoConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreguntasSeguimiento.aspx.cs">
+      <DependentUpon>PreguntasSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreguntasSeguimiento.aspx.designer.cs">
+      <DependentUpon>PreguntasSeguimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistroActivo.aspx.cs">
