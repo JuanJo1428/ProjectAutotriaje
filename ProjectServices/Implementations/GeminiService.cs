@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,8 @@ namespace ProjectServices.Implementations
         private readonly string _apiKey;
 
         private readonly string _urlBase;
+
+        private readonly string _geminiModel;
         
         private readonly HttpClient _httpClient;
 
@@ -26,6 +29,8 @@ namespace ProjectServices.Implementations
 
             _urlBase = ConfigurationManager.AppSettings["GeminiUrl"];
 
+            _geminiModel = ConfigurationManager.AppSettings["GeminiModel"];
+
 
             //Validar que Existan las configuraciones en el WebConfig
 
@@ -34,6 +39,9 @@ namespace ProjectServices.Implementations
 
             if (string.IsNullOrWhiteSpace(_urlBase))
                 throw new Exception("No se encontró la configuración GeminiUrl.");
+
+            if (string.IsNullOrWhiteSpace(_geminiModel))
+                throw new Exception("No se encontró la configuración GeminiModel.");
 
 
             _httpClient = new HttpClient
@@ -105,8 +113,10 @@ namespace ProjectServices.Implementations
                 "application/json");
 
 
+            string endpoint = $"{_urlBase}models/{_geminiModel}:generateContent?key={_apiKey}";
+
             //Peticion tipo Post(Ya que estamos enviando información para que sea procesada)
-            HttpResponseMessage response = await _httpClient.PostAsync($"{_urlBase}?key={_apiKey}", content);
+            HttpResponseMessage response = await _httpClient.PostAsync(endpoint, content);
 
 
             //Validacion de que la peticion si haya sido exitosa

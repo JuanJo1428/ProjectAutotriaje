@@ -48,6 +48,8 @@ namespace AppAutotriajeProject
 
             if (respuesta.Existe)
             {
+                QuitarPlaceholders();
+
                 txtPrimerNombre.Text = paciente.PrimerNombre;
                 txtSegundoNombre.Text = paciente.SegundoNombre;
                 txtPrimerApellido.Text = paciente.PrimerApellido;
@@ -78,6 +80,8 @@ namespace AppAutotriajeProject
                 Response.Redirect("~/Identificacion.aspx");
                 return;
             }
+
+            QuitarPlaceholders();
 
             txtTipoDocumento.Text = paciente.DescripcionTipoDocumento;
             txtNumeroDocumento.Text = paciente.NroDocumento;
@@ -337,6 +341,13 @@ namespace AppAutotriajeProject
             Session["PacienteEscaneado"] = pacienteEscaneado;
         }
 
+        private void QuitarPlaceholders()
+        {
+            txtPrimerNombre.Attributes.Remove("placeholder");
+            txtSegundoNombre.Attributes.Remove("placeholder");
+            txtPrimerApellido.Attributes.Remove("placeholder");
+            txtSegundoApellido.Attributes.Remove("placeholder");
+        }
 
     }
 }

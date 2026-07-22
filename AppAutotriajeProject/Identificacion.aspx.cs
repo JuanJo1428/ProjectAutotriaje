@@ -62,7 +62,8 @@ namespace AppAutotriajeProject
             if (Page.IsValid)
             {
                 string tipoSeleccionado = ddlTipoDocumento.SelectedValue;
-                string documentoIngresado = txtDocumento.Text;
+
+                string documentoIngresado = Request.Form[txtDocumento.UniqueID];
 
 
                 BuscarPacienteDto datosBusqueda = new BuscarPacienteDto
