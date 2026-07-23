@@ -16,6 +16,11 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public PreguntaPretriajeRepository()
+        {
+            _context = new AppDbContext();
+        }
+
         public PreguntaPretriaje ObtenerPorId(int idPregunta)
         {
             return _context.PreguntasPretriaje
@@ -28,7 +33,6 @@ namespace ProjectData.Repositories.Implementations
             return _context.PreguntasPretriaje
                 .Include(p => p.Opciones)
                 .Where(p => p.IdFlujo == idFlujo && p.Activo)
-                .OrderBy(p => p.Orden)
                 .FirstOrDefault();
         }
 
@@ -37,7 +41,6 @@ namespace ProjectData.Repositories.Implementations
             return _context.PreguntasPretriaje
                 .Include(p => p.Opciones)
                 .Where(p => p.IdFlujo == idFlujo && p.Activo)
-                .OrderBy(p => p.Orden)
                 .ToList();
         }
     }

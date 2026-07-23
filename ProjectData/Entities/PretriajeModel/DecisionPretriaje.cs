@@ -16,9 +16,6 @@ namespace ProjectData.Entities.PretriajeModel
         public virtual PreguntaPretriaje Pregunta { get; set; }
 
 
-        public bool? RespuestaSiNoEsperada { get; set; }
-
-
         public int IdOpcionEsperada { get; set; }
 
         [ForeignKey(nameof(IdOpcionEsperada))]

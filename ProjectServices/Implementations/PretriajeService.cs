@@ -1,5 +1,7 @@
 ﻿using ProjectCommon.Constants;
 using ProjectData.Entities.PretriajeModel;
+using ProjectData.Repositories.Implementations;
+using ProjectData.Repositories.Implementations.PretriajeImplementations;
 using ProjectData.Repositories.Interfaces;
 using ProjectData.Repositories.Interfaces.PretriajeInterfaces;
 using ProjectDto.Dtos.PretriajeDtos;
@@ -30,6 +32,15 @@ namespace ProjectServices.Implementations
             _decisionRepository = decisionRepository;
             _prioridadRepository = prioridadRepository;
             _clasificador = clasificador;
+        }
+
+        public PretriajeService()
+        {
+            _flujoRepository = new FlujoPretriajeRepository();
+            _preguntaRepository = new PreguntaPretriajeRepository();
+            _decisionRepository = new DecisionPretriajeRepository();
+            _prioridadRepository = new PrioridadPretriajeRepository();
+            _clasificador = new ClasificadorMotivoConsultaService();
         }
 
         public async Task<FlujoPretriajeDto> DeterminarFlujoAsync(SolicitudPretriajeDto solicitud)
@@ -72,42 +83,30 @@ namespace ProjectServices.Implementations
             return ConvertirPreguntaDto(pregunta);
         }
 
-        public ResultadoPretriajeDto ProcesarRespuesta(RespuestaPreguntaDto respuesta)
+        public ResultadoPretriajeDto ProcesarRespuesta(RegistrarRespuestaPreguntaDto respuesta)
         {
-            // 1. Obtener la pregunta actual
-            PreguntaPretriaje pregunta = _preguntaRepository.ObtenerPorId(respuesta.IdPregunta);
 
-            if (pregunta == null)
-            {
-                return new ResultadoPretriajeDto
-                {
-                    Finalizado = true,
-                    Mensaje = "La pregunta no existe."
-                };
-            }
-
-
-            // 2. Obtener la decisión correspondiente
-            DecisionPretriaje decision = ObtenerDecision(pregunta, respuesta);
+            // 1. Obtener la decisión correspondiente
+            DecisionPretriaje decision = _decisionRepository.ObtenerDecision(respuesta.IdPregunta, respuesta.IdOpcionSeleccionada);
 
             if (decision == null)
             {
                 return new ResultadoPretriajeDto
                 {
                     Finalizado = true,
-                    Mensaje = "No existe una decisión configurada para la respuesta."
+                    Mensaje = "No existe una decisión parametrizada para la respuesta seleccionada."
                 };
             }
 
 
-            // 3. ¿El flujo termina?
+            // 2. ¿El flujo termina?
             if (decision.FinalizaFlujo)
             {
                 return ConstruirResultadoFinal(decision);
             }
 
 
-            // 4. Cargar la siguiente pregunta
+            // 3. Cargar la siguiente pregunta
             return ConstruirResultadoPregunta(decision);
         }
 
@@ -122,8 +121,6 @@ namespace ProjectServices.Implementations
                 TextoPregunta = pregunta.TextoPregunta,
 
                 TipoRespuesta = pregunta.TipoRespuesta,
-
-                Obligatoria = pregunta.Obligatoria,
 
                 Opciones = pregunta.Opciones?
                     .Where(o => o.Activo)
@@ -161,33 +158,20 @@ namespace ProjectServices.Implementations
             };
         }
 
-        private DecisionPretriaje ObtenerDecision(PreguntaPretriaje pregunta, RespuestaPreguntaDto respuesta)
-        {
-            switch (pregunta.TipoRespuesta)
-            {
-                case TipoRespuesta.SiNo:
-
-                    return _decisionRepository.ObtenerDecisionSiNo(
-                        pregunta.IdPregunta,
-                        respuesta.RespuestaSiNo.Value);
-
-                case TipoRespuesta.Lista:
-
-                    return _decisionRepository.ObtenerDecisionLista(
-                        pregunta.IdPregunta,
-                        respuesta.IdOpcionSeleccionada.Value);
-
-                default:
-
-                    return null;
-            }
-        }
-
         private ResultadoPretriajeDto ConstruirResultadoFinal(DecisionPretriaje decision)
         {
             PrioridadPretriaje prioridad = _prioridadRepository.ObtenerPorId(decision.IdPrioridad.Value);
 
+            if (prioridad == null)
+            {
                 return new ResultadoPretriajeDto
+                {
+                    Finalizado = true,
+                    Mensaje = "No existe una prioridad parametrizada."
+                };
+            }
+
+            return new ResultadoPretriajeDto
                 {
                     Finalizado = true,
 
@@ -202,10 +186,18 @@ namespace ProjectServices.Implementations
         {
             PreguntaPretriaje siguientePregunta = _preguntaRepository.ObtenerPorId(decision.IdPreguntaSiguiente.Value);
 
+            if (siguientePregunta == null)
+            {
+                return new ResultadoPretriajeDto
+                {
+                    Finalizado = true,
+                    Mensaje = "La siguiente pregunta no fue encontrada."
+                };
+            }
+
             return new ResultadoPretriajeDto
             {
                 Finalizado = false,
-
                 SiguientePregunta = ConvertirPreguntaDto(siguientePregunta)
             };
         }

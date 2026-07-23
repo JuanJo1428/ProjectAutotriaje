@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectData.Entities.PretriajeModel;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -37,6 +38,18 @@ namespace ProjectData.Entities
 
 
         public string MotivoConsulta { get; set; }
+
+
+        public int? IdPrioridad { get; set; }
+
+        [ForeignKey(nameof(IdPrioridad))]
+        public virtual PrioridadPretriaje Prioridad { get; set; }
+
+
+        public int? IdFlujoClinico { get; set; }
+
+        [ForeignKey(nameof(IdFlujoClinico))]
+        public virtual FlujoPretriaje FlujoClinico { get; set; }
 
 
         public bool Atendido { get; set; }

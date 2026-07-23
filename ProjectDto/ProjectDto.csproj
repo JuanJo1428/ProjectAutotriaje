@@ -57,7 +57,7 @@
     <Compile Include="Dtos\PretriajeDtos\OpcionPreguntaDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\PreguntaPretriajeDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\PrioridadPretriajeDto.cs" />
-    <Compile Include="Dtos\PretriajeDtos\RespuestaPreguntaDto.cs" />
+    <Compile Include="Dtos\PretriajeDtos\RegistrarRespuestaPreguntaDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\ResultadoPretriajeDto.cs" />
     <Compile Include="Dtos\PretriajeDtos\SolicitudPretriajeDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\ActualizarRegistroAtencionDto.cs" />
@@ -66,6 +66,8 @@
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionRespuestaDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\EvaluacionesPacienteDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\RegistroAtencionDto.cs" />
+    <Compile Include="Dtos\RespuestaPretriajeDtos\ConsultarRespuestasRegistroDto.cs" />
+    <Compile Include="Dtos\RespuestaPretriajeDtos\RespuestaPreguntaPretriajeDto.cs" />
     <Compile Include="Dtos\TiposDocumentoDtos\TipoDocumentoListaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

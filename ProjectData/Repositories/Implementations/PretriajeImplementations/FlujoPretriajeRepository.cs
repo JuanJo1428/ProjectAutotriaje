@@ -16,6 +16,11 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
+        public FlujoPretriajeRepository()
+        {
+            _context = new AppDbContext();
+        }
+
         public FlujoPretriaje ObtenerPorId(int idFlujo)
         {
             return _context.FlujosPretriaje.FirstOrDefault(f => f.IdFlujo == idFlujo && f.Activo);

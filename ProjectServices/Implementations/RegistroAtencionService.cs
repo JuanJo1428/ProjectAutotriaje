@@ -140,6 +140,10 @@ namespace ProjectServices.Implementations
 
             registro.AutotriajeIniciado = datosRegistro.AutotriajeIniciado;
 
+            registro.IdPrioridad = datosRegistro.IdPrioridad;
+
+            registro.IdFlujoClinico = datosRegistro.IdFlujoClinico;
+
             registro.Atendido = datosRegistro.Atendido;
 
             registro.FechaActualizacion = DateTime.Now;
@@ -188,6 +192,10 @@ namespace ProjectServices.Implementations
                 CondicionOncologica = registro.CondicionOncologica,
                 AutotriajeIniciado = registro.AutotriajeIniciado,
                 MotivoConsulta = registro.MotivoConsulta,
+
+                IdPrioridad = registro.IdPrioridad,
+                IdFlujoClinico = registro.IdFlujoClinico,
+
                 Atendido = registro.Atendido,
                 Activo = registro.Activo
             };

@@ -29,13 +29,7 @@ namespace ProjectData.Entities.PretriajeModel
         public string TextoPregunta { get; set; }
 
 
-        public int Orden { get; set; }
-
-
         public TipoRespuesta TipoRespuesta { get; set; }
-
-
-        public bool Obligatoria { get; set; }
 
 
         public bool Activo { get; set; }

@@ -17,8 +17,8 @@
                     
                     <!-- ESQUELETO 1: Pregunta Tipo Sí / No -->
                     <asp:Panel ID="pnlTipoSiNo" runat="server" Visible="false" CssClass="opciones-sino">
-                        <asp:Button ID="btnSi" runat="server" Text="Sí" CssClass="btn-opcion-sino btn-opcion-si" OnClick="btnOpcionSiNo_Click" CommandArgument="SI" />
-                        <asp:Button ID="btnNo" runat="server" Text="No" CssClass="btn-opcion-sino btn-opcion-no" OnClick="btnOpcionSiNo_Click" CommandArgument="NO" />
+                        <asp:Button ID="btnSi" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-si" OnClick="btnOpcionSiNo_Click" />
+                        <asp:Button ID="btnNo" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-no" OnClick="btnOpcionSiNo_Click" />
                     </asp:Panel>
 
                     <!-- ESQUELETO 2: Pregunta Tipo Lista Desplegable -->

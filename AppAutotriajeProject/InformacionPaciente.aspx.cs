@@ -179,6 +179,9 @@ namespace AppAutotriajeProject
                     Response.Redirect("~/RegistroActivo.aspx");
 
                 }
+
+                Session["RegistroAtencion"] = registroPendiente.RegistroAtencion;
+
                 Response.Redirect("~/RegistroPendiente.aspx");
                 return;
             }

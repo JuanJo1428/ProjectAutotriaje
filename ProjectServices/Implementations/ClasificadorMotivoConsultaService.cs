@@ -1,7 +1,9 @@
 ﻿using ProjectData.Entities.PretriajeModel;
+using ProjectData.Repositories.Implementations;
 using ProjectData.Repositories.Interfaces.PretriajeInterfaces;
 using ProjectDto.Dtos.PretriajeDtos;
 using ProjectServices.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,12 @@ namespace ProjectServices.Implementations
         {
             _iaService = iaService;
             _flujoRepository = flujoPretriaje;
+        }
+
+        public ClasificadorMotivoConsultaService()
+        {
+            _iaService = new GeminiService();
+            _flujoRepository = new FlujoPretriajeRepository();
         }
 
         public async Task<string> ClasificarMotivoConsultaAsync(SolicitudPretriajeDto solicitud)

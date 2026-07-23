@@ -22,6 +22,10 @@ namespace ProjectDto.Dtos.RegistroAtencionDtos
 
         public string MotivoConsulta { get; set; }
 
+        public int? IdPrioridad { get; set; }
+
+        public int? IdFlujoClinico { get; set; }
+
         public bool Atendido { get; set; }
 
         public bool Activo { get; set; }

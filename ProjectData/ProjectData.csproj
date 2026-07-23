@@ -58,6 +58,7 @@
     <Compile Include="Entities\PretriajeModel\FlujoPretriaje.cs" />
     <Compile Include="Entities\PretriajeModel\DecisionPretriaje.cs" />
     <Compile Include="Entities\PretriajeModel\PrioridadPretriaje.cs" />
+    <Compile Include="Entities\PretriajeModel\RespuestaPreguntaPretriaje.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\RegistroAtencion.cs" />
     <Compile Include="Entities\Paciente.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Repositories\Implementations\PretriajeImplementations\FlujoPretriajeRepository.cs" />
     <Compile Include="Repositories\Implementations\PretriajeImplementations\PreguntaPretriajeRepository.cs" />
     <Compile Include="Repositories\Implementations\PretriajeImplementations\PrioridadPretriajeRepository.cs" />
+    <Compile Include="Repositories\Implementations\PretriajeImplementations\RespuestaPreguntaPretriajeRepository.cs" />
     <Compile Include="Repositories\Implementations\RegistroAtencionRepository.cs" />
     <Compile Include="Repositories\Implementations\PacienteRepository.cs" />
     <Compile Include="Repositories\Implementations\TipoDocumentoRepository.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IFlujoPretriajeRepository.cs" />
     <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IPreguntaPretriajeRepository.cs" />
     <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IPrioridadPretriajeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\PretriajeInterfaces\IRespuestaPreguntaPretriajeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -28,5 +28,7 @@ namespace ProjectData.Context
         public DbSet<OpcionPreguntaPretriaje> OpcionesPreguntaPretriaje { get; set; }
 
         public DbSet<PrioridadPretriaje> PrioridadesPretriaje { get; set; }
+
+        public DbSet<RespuestaPreguntaPretriaje> RespuestasPreguntasPretriaje { get; set; }
     }
 }

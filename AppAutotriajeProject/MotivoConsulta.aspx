@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Motivo de consulta" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MotivoConsulta.aspx.cs" Inherits="AppAutotriajeProject.MotivoConsulta" %>
+﻿<%@ Page Title="Motivo de consulta" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" Async="true" CodeBehind="MotivoConsulta.aspx.cs" Inherits="AppAutotriajeProject.MotivoConsulta" %>
 
 <asp:Content ID="ContentMotivoConsulta" ContentPlaceHolderID="MainContent" runat="server">
 

@@ -16,8 +16,6 @@ namespace ProjectDto.Dtos.PretriajeDtos
 
         public TipoRespuesta TipoRespuesta { get; set; }
 
-        public bool Obligatoria { get; set; }
-
         public List<OpcionPreguntaDto> Opciones { get; set; }
     }
 }

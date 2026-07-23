@@ -13,6 +13,6 @@ namespace ProjectServices.Interfaces
 
         PreguntaPretriajeDto ObtenerPrimeraPregunta(int idFlujo);
 
-        ResultadoPretriajeDto ProcesarRespuesta(RespuestaPreguntaDto respuesta);
+        ResultadoPretriajeDto ProcesarRespuesta(RegistrarRespuestaPreguntaDto respuesta);
     }
 }

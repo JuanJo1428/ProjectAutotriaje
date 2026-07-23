@@ -8,6 +8,10 @@
 
         public bool AutotriajeIniciado { get; set; }
 
+        public int IdPrioridad { get; set; }
+
+        public int IdFlujoClinico { get; set; }
+
         public bool Atendido { get; set; }
     }
 }

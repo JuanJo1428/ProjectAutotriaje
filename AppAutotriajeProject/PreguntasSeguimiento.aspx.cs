@@ -1,42 +1,37 @@
-﻿using System;
+﻿using ProjectCommon.Constants;
+using ProjectDto.Dtos.PretriajeDtos;
+using System;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ProjectServices.Implementations;
+using ProjectData.Entities;
+using ProjectDto.Dtos.RegistroAtencionDtos;
 
 namespace AppAutotriajeProject
 {
-    // Estructura de datos temporal / DTO
-    public class PreguntaDTO
-    {
-        public int Id { get; set; }
-        public string TextoPregunta { get; set; }
-        public string TipoPregunta { get; set; } // "SINO" o "DROPDOWN"
-        public List<string> Opciones { get; set; } // Aplica para DROPDOWN
-    }
 
     public partial class PreguntasSeguimiento : Page
     {
-        // Guardamos el índice actual en ViewState para la prueba interactiva
-        private int IndicePreguntaActual
-        {
-            get { return ViewState["IndicePreguntaActual"] != null ? (int)ViewState["IndicePreguntaActual"] : 0; }
-            set { ViewState["IndicePreguntaActual"] = value; }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                IndicePreguntaActual = 0;
-                CargarSiguientePreguntaSimulada();
+                PreguntaPretriajeDto pregunta = Session["PreguntaActual"] as PreguntaPretriajeDto;
+
+                if (pregunta == null)
+                {
+                    Response.Redirect("~/MotivoConsulta.aspx");
+                    return;
+                }
+
+                CargarPreguntaEnPantalla(pregunta);
             }
         }
 
-        /// <summary>
-        /// Método principal que se encarga de renderizar la pregunta recibida.
-        /// Este es el método que usará la respuesta entregada por el backend.
-        /// </summary>
-        public void CargarPreguntaEnPantalla(PreguntaDTO pregunta)
+
+        private readonly PretriajeService _pretriajeService = new PretriajeService();
+        public void CargarPreguntaEnPantalla(PreguntaPretriajeDto pregunta)
         {
             if (pregunta == null)
             {
@@ -46,18 +41,30 @@ namespace AppAutotriajeProject
                 return;
             }
 
+
             lblTextoPregunta.Text = pregunta.TextoPregunta;
 
             // Ocultamos ambos esqueletos por defecto
             pnlTipoSiNo.Visible = false;
             pnlTipoDropdown.Visible = false;
 
+
             // Mostramos el esqueleto correspondiente según el tipo
-            if (pregunta.TipoPregunta == "SINO")
+            if (pregunta.TipoRespuesta == TipoRespuesta.SiNo)
             {
                 pnlTipoSiNo.Visible = true;
+
+                if (pregunta.Opciones != null && pregunta.Opciones.Count == 2)
+                {
+                    btnSi.Text = pregunta.Opciones[0].Texto;
+                    btnSi.CommandArgument = pregunta.Opciones[0].IdOpcion.ToString();
+
+                    btnNo.Text = pregunta.Opciones[1].Texto;
+                    btnNo.CommandArgument = pregunta.Opciones[1].IdOpcion.ToString();
+                }
             }
-            else if (pregunta.TipoPregunta == "DROPDOWN")
+
+            else if (pregunta.TipoRespuesta == TipoRespuesta.Lista)
             {
                 pnlTipoDropdown.Visible = true;
 
@@ -65,94 +72,99 @@ namespace AppAutotriajeProject
                 ddlOpciones.Items.Clear();
                 ddlOpciones.Items.Add(new ListItem("-- Seleccione una opción --", ""));
 
-                if (pregunta.Opciones != null)
+                if (pregunta.Opciones != null && pregunta.Opciones.Count > 0)
                 {
-                    foreach (string opcion in pregunta.Opciones)
+                    foreach (var opcion in pregunta.Opciones)
                     {
-                        ddlOpciones.Items.Add(new ListItem(opcion, opcion));
+                        ddlOpciones.Items.Add(
+                            new ListItem(
+                                opcion.Texto,
+                                opcion.IdOpcion.ToString()
+                            ));
                     }
                 }
             }
         }
 
+        private readonly RespuestaPreguntaPretriajeService _respuestaService = new RespuestaPreguntaPretriajeService();
         // Evento cuando se responde una pregunta tipo Sí / No
         protected void btnOpcionSiNo_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            string respuesta = btn.CommandArgument; // Contendrá "SI" o "NO"
 
-            AvanzarSimulacion();
+            PreguntaPretriajeDto pregunta = Session["PreguntaActual"] as PreguntaPretriajeDto;
+
+            if (pregunta == null)
+                return;
+
+            Button btn = (Button)sender;
+
+
+            RegistrarRespuestaPreguntaDto respuesta = ConstruirResgistrarRespuestaDto
+                (pregunta.IdPregunta, int.Parse(btn.CommandArgument));
+
+            //Guardamos la pregunta y la respuesta
+            _respuestaService.RegistrarRespuesta(respuesta);
+
+
+            ProcesarRespuesta(respuesta);
         }
 
         // Evento cuando se responde una pregunta tipo Lista Desplegable
         protected void btnSiguienteDropdown_Click(object sender, EventArgs e)
         {
-            string respuesta = ddlOpciones.SelectedValue;
+            if (string.IsNullOrEmpty(ddlOpciones.SelectedValue))
+                return;
 
-            if (string.IsNullOrEmpty(respuesta))
+            PreguntaPretriajeDto pregunta = Session["PreguntaActual"] as PreguntaPretriajeDto;
+
+            if (pregunta == null)
+                return;
+
+            RegistrarRespuestaPreguntaDto respuesta = ConstruirResgistrarRespuestaDto
+                (pregunta.IdPregunta, int.Parse(ddlOpciones.SelectedValue));
+
+            //Guardamos la pregunta y la respuesta
+            _respuestaService.RegistrarRespuesta(respuesta);
+
+
+            ProcesarRespuesta(respuesta);
+        }
+
+        //Para procesar cualquier tipo de respuesta
+        private void ProcesarRespuesta(RegistrarRespuestaPreguntaDto respuesta)
+        {
+            ResultadoPretriajeDto resultado = _pretriajeService.ProcesarRespuesta(respuesta);
+
+            if (resultado == null)
+                return;
+
+            if (resultado.Finalizado)
             {
-                // Validación básica opcional
+                Session["ResultadoPretriaje"] = resultado;
+
+                Response.Redirect("~/Finalizacion.aspx");
                 return;
             }
 
-            AvanzarSimulacion();
+            Session["PreguntaActual"] = resultado.SiguientePregunta;
+
+            CargarPreguntaEnPantalla(resultado.SiguientePregunta);
         }
 
-        #region MÉTODOS DE PRUEBA SIMULADA (Comentar/Eliminar al integrar el backend real)
-
-        private void AvanzarSimulacion()
+        private RegistrarRespuestaPreguntaDto ConstruirResgistrarRespuestaDto(int idPregunta, int idOpcionSeleccionada)
         {
-            IndicePreguntaActual++;
-            CargarSiguientePreguntaSimulada();
-        }
+            RegistroAtencionDto registroAtencion = Session["RegistroAtencion"] as RegistroAtencionDto;
 
-        private void CargarSiguientePreguntaSimulada()
-        {
-            List<PreguntaDTO> bancoPruebas = ObtenerPreguntasDePrueba();
+            return new RegistrarRespuestaPreguntaDto
+            {
+                IdRegistro = registroAtencion.IdAtencion,
 
-            if (IndicePreguntaActual < bancoPruebas.Count)
-            {
-                CargarPreguntaEnPantalla(bancoPruebas[IndicePreguntaActual]);
-            }
-            else
-            {
-                CargarPreguntaEnPantalla(null); // Indica el final
-            }
-        }
+                IdPregunta = idPregunta,
 
-        private List<PreguntaDTO> ObtenerPreguntasDePrueba()
-        {
-            return new List<PreguntaDTO>
-            {
-                new PreguntaDTO
-                {
-                    Id = 1,
-                    TextoPregunta = "¿Ha presentado fiebre o escalofríos en las últimas 24 horas?",
-                    TipoPregunta = "SINO"
-                },
-                new PreguntaDTO
-                {
-                    Id = 2,
-                    TextoPregunta = "¿Cuál es el nivel aproximado de intensidad de su dolor?",
-                    TipoPregunta = "DROPDOWN",
-                    Opciones = new List<string> { "Leve (1 - 3)", "Moderado (4 - 6)", "Severo (7 - 9)", "Insoportable (10)" }
-                },
-                new PreguntaDTO
-                {
-                    Id = 3,
-                    TextoPregunta = "¿Siente alguna dificultad para respirar en este momento?",
-                    TipoPregunta = "SINO"
-                },
-                new PreguntaDTO
-                {
-                    Id = 4,
-                    TextoPregunta = "¿Hace cuánto tiempo iniciaron los síntomas principales?",
-                    TipoPregunta = "DROPDOWN",
-                    Opciones = new List<string> { "Menos de 2 horas", "Entre 2 y 12 horas", "Entre 12 y 24 horas", "Más de 24 horas" }
-                }
+                IdOpcionSeleccionada = idOpcionSeleccionada,
+
             };
         }
 
-        #endregion
     }
 }

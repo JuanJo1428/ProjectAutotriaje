@@ -45,7 +45,7 @@ namespace AppAutotriajeProject
 
             if (deseaContinuar)
             {
-                //Mientras se crea MotivoConsulta.aspx
+
                 Response.Redirect("~/MotivoConsulta.aspx");
                 return;
             }

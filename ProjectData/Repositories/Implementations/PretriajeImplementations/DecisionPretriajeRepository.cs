@@ -14,16 +14,13 @@ namespace ProjectData.Repositories.Implementations
             _context = context;
         }
 
-        public DecisionPretriaje ObtenerDecisionSiNo(int idPregunta, bool respuesta)
+        public DecisionPretriajeRepository()
         {
-            return _context.DecisionesPretriaje
-                .FirstOrDefault(d =>
-                    d.IdPregunta == idPregunta &&
-                    d.RespuestaSiNoEsperada == respuesta &&
-                    d.EsActivo);
+            _context = new AppDbContext();
         }
 
-        public DecisionPretriaje ObtenerDecisionLista(int idPregunta, int idOpcionSeleccionada)
+
+        public DecisionPretriaje ObtenerDecision(int idPregunta, int idOpcionSeleccionada)
         {
             return _context.DecisionesPretriaje
                 .FirstOrDefault(d =>

@@ -4,8 +4,6 @@ namespace ProjectData.Repositories.Interfaces.PretriajeInterfaces
 {
     public interface IDecisionPretriajeRepository
     {
-        DecisionPretriaje ObtenerDecisionSiNo(int idPregunta, bool respuesta);
-
-        DecisionPretriaje ObtenerDecisionLista(int idPregunta, int idOpcionSeleccionada);
+        DecisionPretriaje ObtenerDecision(int idPregunta, int idOpcionSeleccionada);
     }
 }

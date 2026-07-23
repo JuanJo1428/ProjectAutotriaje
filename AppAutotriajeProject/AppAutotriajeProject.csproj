@@ -316,6 +316,7 @@
     </Compile>
     <Compile Include="PreguntasSeguimiento.aspx.cs">
       <DependentUpon>PreguntasSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PreguntasSeguimiento.aspx.designer.cs">
       <DependentUpon>PreguntasSeguimiento.aspx</DependentUpon>

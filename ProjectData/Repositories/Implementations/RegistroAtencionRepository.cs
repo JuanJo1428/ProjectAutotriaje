@@ -45,12 +45,18 @@ namespace ProjectData.Repositories.Implementations
 
         public RegistroAtencion ObtenerPorId(int idAtencion)
         {
-            return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdAtencion == idAtencion);
+            return _context.RegistrosAtencion
+                .Include(r => r.Prioridad)
+                .Include(r => r.FlujoClinico)
+                .FirstOrDefault(ra => ra.IdAtencion == idAtencion);
         }
 
         public RegistroAtencion ObtenerRegistroPendiente(int idPaciente)
         {
-            return _context.RegistrosAtencion.FirstOrDefault(ra => ra.IdPaciente == idPaciente && !ra.Atendido);
+            return _context.RegistrosAtencion
+                .Include(r => r.Prioridad)
+                .Include(r => r.FlujoClinico)
+                .FirstOrDefault(ra => ra.IdPaciente == idPaciente && !ra.Atendido);
         }
 
         public List<RegistroAtencion> ObtenerRegistrosPorPaciente(int idPaciente)
@@ -69,10 +75,7 @@ namespace ProjectData.Repositories.Implementations
 
         public RegistroAtencion ActualizarRegistro(RegistroAtencion atencion)
         {
-            _context.Entry(atencion).State = EntityState.Modified;
-
             _context.SaveChanges();
-
             return atencion;
         }
 
