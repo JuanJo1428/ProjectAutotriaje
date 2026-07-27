@@ -15,6 +15,15 @@ namespace AppAutotriajeProject
     {
 
         /// <summary>
+        /// upSalaEspera control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upSalaEspera;
+
+        /// <summary>
         /// rptPacientesEspera control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,33 @@ namespace AppAutotriajeProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPacientesEspera;
+
+        /// <summary>
+        /// pnlModalDetalles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlModalDetalles;
+
+        /// <summary>
+        /// rptPreguntas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPreguntas;
+
+        /// <summary>
+        /// btnCerrarModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrarModal;
 
         /// <summary>
         /// btnVolver control.
