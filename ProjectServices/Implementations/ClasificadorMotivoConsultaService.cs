@@ -54,7 +54,7 @@ namespace ProjectServices.Implementations
 
             foreach (FlujoPretriaje flujo in flujos)
             {
-                flujosPrompt.AppendLine($"{flujo.Codigo} -> {flujo.Descripcion}");
+                flujosPrompt.AppendLine($"{flujo.Nombre}:{flujo.Codigo} -> {flujo.Descripcion}");
             }
 
             return $@"
@@ -98,6 +98,8 @@ namespace ProjectServices.Implementations
                 • Nunca inventes códigos.
                 • Nunca respondas ""No aplica"", ""No identificado"" o respuestas similares.
                 • Tu respuesta debe contener exactamente un único código válido perteneciente a los flujos disponibles.
+                • Nunca modifiques el formato del código.
+                • Respeta exactamente las letras y números del código seleccionado.
 
                 ========================================
                 CRITERIOS DE PRIORIZACIÓN
@@ -129,23 +131,71 @@ namespace ProjectServices.Implementations
                 • El primero que aparezca.
                 • El síntoma menos grave.
 
-                Si el motivo de consulta no corresponde claramente a un único flujo, selecciona el flujo disponible que tenga la MAYOR relación clínica con el motivo descrito.
+                Si el motivo de consulta parece compatible con varios flujos, selecciona el flujo específico que represente el mayor riesgo clínico o el síntoma predominante.
 
+                Solo si ningún flujo específico resulta clínicamente razonable podrás utilizar el flujo de respaldo.
+                
                 Antes de responder:
 
                 1. Analiza completamente el motivo de consulta.
                 2. Identifica todos los síntomas descritos.
                 3. Evalúa la gravedad relativa de cada uno.
                 4. Determina cuál representa el mayor riesgo clínico.
-                5. Solo después selecciona el flujo correspondiente.
+                5. Compara el caso con TODOS los flujos disponibles.
+                6. Selecciona el flujo específico que tenga mayor coherencia clínica.
 
                 No tomes decisiones basándote únicamente en palabras clave.
 
                 Analiza siempre el contexto completo del motivo de consulta.
+                
+                ========================================
+                USO DEL FLUJO DE RESPALDO
+                ========================================
+
+                Existe un flujo denominado ""Otros síntomas generales y no clasificables"" cuyo único propósito es actuar como mecanismo de seguridad cuando realmente no exista una relación clínica razonable con ninguno de los demás flujos disponibles.
+
+                Este flujo representa la ÚLTIMA alternativa de clasificación.
+
+                Antes de seleccionarlo debes:
+
+                1. Comparar el motivo de consulta con TODOS los flujos disponibles.
+                2. Evaluar si alguno presenta una relación clínica razonable, aunque no sea perfecta.
+                3. Seleccionar siempre el flujo específico que mejor represente el síntoma predominante y el mayor riesgo clínico.
+
+                Nunca selecciones un flujo genérico si existe un flujo específico que describa el sistema corporal, órgano o condición clínica predominante del paciente.
+
+                Siempre prioriza la especificidad clínica sobre las categorías generales.
+
+                NO utilices el flujo de respaldo únicamente porque:
+
+                • El motivo de consulta esté redactado de forma informal.
+                • Existan errores ortográficos.
+                • El paciente utilice lenguaje cotidiano.
+                • El caso no coincida exactamente con un ejemplo.
+                • Existan síntomas compatibles con más de un flujo.
+                • Tengas dudas leves entre dos flujos.
+                • El motivo de consulta sea corto.
+                • El paciente no utilice terminología médica.
+
+                El flujo de respaldo SOLO puede utilizarse cuando, después de analizar cuidadosamente el motivo de consulta completo, determines que NO existe una relación clínica suficientemente razonable con ninguno de los demás flujos específicos.
+
+                Si existe un flujo que explique el caso aunque sea parcialmente, SIEMPRE debes preferir ese flujo específico antes que el flujo de respaldo.
+
+                Únicamente utiliza el flujo ""Otros síntomas generales y no clasificables"" cuando la clasificación en cualquier otro flujo implique forzar una relación clínica inexistente.
 
                 ========================================
-                FLUJOS DISPONIBLES
+                CATÁLOGO OFICIAL DE FLUJOS CLÍNICOS
                 ========================================
+
+                Cada flujo contiene un nombre, un código y una descripción clínica.
+
+                No bases tu decisión únicamente en el nombre del flujo.
+
+                Utiliza la descripción completa de cada flujo para comprender el alcance clínico de cada categoría.
+
+                Aplica además todo tu conocimiento médico, clínico y de triaje para determinar cuál flujo representa de forma más precisa el motivo de consulta del paciente.
+
+                La clasificación debe fundamentarse en el análisis clínico integral del caso y posteriormente seleccionar el flujo cuya descripción tenga la mayor coherencia con dicho análisis.
 
                 {flujosPrompt}
 
@@ -212,7 +262,7 @@ namespace ProjectServices.Implementations
                 RESPUESTA
                 ========================================
 
-                Devuelve únicamente el código del flujo como se encuentra en la sección de flujos exactamente.
+                Devuelve únicamente el código del flujo exactamente como aparece en el catálogo oficial de flujos clínicos.
                 ";
 
         }

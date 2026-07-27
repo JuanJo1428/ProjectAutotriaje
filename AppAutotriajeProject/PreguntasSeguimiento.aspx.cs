@@ -1,12 +1,13 @@
-﻿using ProjectCommon.Constants;
+﻿using Microsoft.Win32;
+using ProjectCommon.Constants;
+using ProjectData.Entities;
 using ProjectDto.Dtos.PretriajeDtos;
+using ProjectDto.Dtos.RegistroAtencionDtos;
+using ProjectServices.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ProjectServices.Implementations;
-using ProjectData.Entities;
-using ProjectDto.Dtos.RegistroAtencionDtos;
 
 namespace AppAutotriajeProject
 {
@@ -141,6 +142,15 @@ namespace AppAutotriajeProject
             if (resultado.Finalizado)
             {
                 Session["ResultadoPretriaje"] = resultado;
+
+                RegistroAtencionDto registroAtencion = Session["RegistroAtencion"] as RegistroAtencionDto;
+
+                if (registroAtencion != null)
+                {
+                    registroAtencion.AutotriajeIniciado = true;
+
+                    Session["RegistroAtencion"] = registroAtencion;
+                }
 
                 Response.Redirect("~/Finalizacion.aspx");
                 return;

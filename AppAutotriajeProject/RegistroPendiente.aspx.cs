@@ -16,14 +16,12 @@ namespace AppAutotriajeProject
         }
 
         protected void ProcesarRespuesta(object sender, EventArgs e)
-        {
-
+        {   
             LinkButton botonPresionado = (LinkButton)sender;
 
             string respuestaString = botonPresionado.CommandArgument;
             bool deseaContinuar = Convert.ToBoolean(respuestaString);
 
-            //...
 
             if (deseaContinuar)
             {

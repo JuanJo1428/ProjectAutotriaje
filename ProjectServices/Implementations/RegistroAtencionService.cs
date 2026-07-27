@@ -119,8 +119,6 @@ namespace ProjectServices.Implementations
 
             respuesta.TieneRegistroPendiente = true;
 
-            respuesta.MostrarOpcionContinuarAutotriaje = !registroPendiente.AutotriajeIniciado;
-
             return respuesta;
         }
 

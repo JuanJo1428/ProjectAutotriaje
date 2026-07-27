@@ -18,7 +18,7 @@ namespace ProjectData.Entities.PretriajeModel
 
 
         [Required]
-        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
 
 
         public int? TiempoMaximoAtencion { get; set; }

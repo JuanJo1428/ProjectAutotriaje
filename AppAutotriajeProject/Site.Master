@@ -33,7 +33,7 @@
         </main>
 
         <footer>
-            <span>&copy; <%= DateTime.Now.Year %> Hospital Alma Mater - Sistema GHIPS</span>
+            <span>&copy; <asp:Literal ID="litYear" runat="server" /> Hospital Alma Mater – Sistema GHIPS</span>
         </footer>
     </form>
     <script src="/Scripts/js/validaciones-temporales.js" defer></script>

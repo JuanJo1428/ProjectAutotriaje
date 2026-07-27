@@ -11,5 +11,7 @@ namespace ProjectData.Repositories.Interfaces.PretriajeInterfaces
 
         List<PreguntaPretriaje> ObtenerPreguntasPorFlujo(int idFlujo);
 
+        List<OpcionPreguntaPretriaje> ObtenerSiNo();
+
     }
 }

@@ -43,5 +43,12 @@ namespace ProjectData.Repositories.Implementations
                 .Where(p => p.IdFlujo == idFlujo && p.Activo)
                 .ToList();
         }
+
+        public List<OpcionPreguntaPretriaje> ObtenerSiNo()
+        {
+            return _context.OpcionesPreguntaPretriaje
+                .Where(p => p.IdPregunta == null && p.Activo)
+                .ToList();
+        }
     }
 }

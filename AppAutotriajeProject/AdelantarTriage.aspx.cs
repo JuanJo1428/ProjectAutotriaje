@@ -38,17 +38,21 @@ namespace AppAutotriajeProject
             //Se crea y se guarda el registro en la sesión del usuario
             CrearRegistroAtencionRespuestaDto respuesta = _registroService.CrearRegistroAtencion(datosRegistro);
 
-            Session["RegistroAtencion"] = respuesta.RegistroAtencion;
-
-            Session["CrearRegistroRespuesta"] = respuesta;
-
-
             if (deseaContinuar)
             {
+                respuesta.RegistroAtencion.AutotriajeIniciado = true;
+
+                Session["RegistroAtencion"] = respuesta.RegistroAtencion;
+
+                Session["CrearRegistroRespuesta"] = respuesta;
 
                 Response.Redirect("~/MotivoConsulta.aspx");
                 return;
             }
+
+            Session["RegistroAtencion"] = respuesta.RegistroAtencion;
+
+            Session["CrearRegistroRespuesta"] = respuesta;
 
             Response.Redirect("~/Finalizacion.aspx");
             return;

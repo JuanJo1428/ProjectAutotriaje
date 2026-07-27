@@ -7,7 +7,10 @@ namespace AppAutotriajeProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //
+            if (!IsPostBack)
+            {
+                litYear.Text = DateTime.Now.Year.ToString();
+            }
         }
     }
 }

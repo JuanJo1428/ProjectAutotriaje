@@ -4,8 +4,6 @@
     {
         public bool TieneRegistroPendiente { get; set; }
 
-        public bool MostrarOpcionContinuarAutotriaje { get; set; }
-
         public RegistroAtencionDto RegistroAtencion { get; set; }
     }
 }

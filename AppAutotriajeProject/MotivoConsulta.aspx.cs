@@ -1,4 +1,5 @@
 ﻿using ProjectDto.Dtos.PretriajeDtos;
+using ProjectDto.Dtos.RegistroAtencionDtos;
 using ProjectServices.Implementations;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,16 @@ namespace AppAutotriajeProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                //Si el usuario ya había escrito un motivo de consulta previo, lo recuperamos en la caja de texto
+                SolicitudPretriajeDto motivoExistente = Session["MotivoConsulta"] as SolicitudPretriajeDto;
 
+                if (motivoExistente != null && !string.IsNullOrWhiteSpace(motivoExistente.MotivoConsulta))
+                {
+                    txtSintomas.Text = motivoExistente.MotivoConsulta;
+                }
+            }
         }
 
         private readonly PretriajeService _pretriajeService = new PretriajeService();
@@ -66,6 +76,13 @@ namespace AppAutotriajeProject
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
+            ConsultarRegistroPendienteRespuestaDto registroAtencion = Session["RegistroPendiente"] as ConsultarRegistroPendienteRespuestaDto;
+            
+            if (registroAtencion.TieneRegistroPendiente == true)
+            {
+                Response.Redirect("~/RegistroPendiente.aspx");
+            }
+
             Response.Redirect("~/AdelantarTriage.aspx");
         }
     }

@@ -38,6 +38,8 @@ namespace ProjectData.Entities.PretriajeModel
         public virtual ICollection<OpcionPreguntaPretriaje> Opciones { get; set; }
 
 
+        //  Le indicamos a EF que esta lista corresponde a la propiedad "Pregunta" en DecisionPretriaje
+        [InverseProperty(nameof(DecisionPretriaje.Pregunta))]
         public virtual ICollection<DecisionPretriaje> Decisiones { get; set; }
     }
 }

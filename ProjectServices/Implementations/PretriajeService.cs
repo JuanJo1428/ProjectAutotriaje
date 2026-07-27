@@ -114,6 +114,27 @@ namespace ProjectServices.Implementations
         //Metodos Privado de Mapeo
         private PreguntaPretriajeDto ConvertirPreguntaDto(PreguntaPretriaje pregunta)
         {
+            var opcionesDto = pregunta.Opciones?
+             .Where(o => o.Activo)
+             .Select(o => new OpcionPreguntaDto
+             {
+                 IdOpcion = o.IdOpcion,
+                 Texto = o.Texto
+             })
+             .ToList();
+
+            // Si la pregunta es tipo Sí/No y no trae opciones asociadas, consultamos las globales a la BD
+            if (pregunta.TipoRespuesta == TipoRespuesta.SiNo && (opcionesDto == null || opcionesDto.Count == 0))
+            {
+                var opcionesGlobales = _preguntaRepository.ObtenerSiNo();
+
+                opcionesDto = opcionesGlobales.Select(o => new OpcionPreguntaDto
+                {
+                    IdOpcion = o.IdOpcion,
+                    Texto = o.Texto
+                }).ToList();
+            }
+
             return new PreguntaPretriajeDto
             {
                 IdPregunta = pregunta.IdPregunta,
@@ -122,14 +143,7 @@ namespace ProjectServices.Implementations
 
                 TipoRespuesta = pregunta.TipoRespuesta,
 
-                Opciones = pregunta.Opciones?
-                    .Where(o => o.Activo)
-                    .Select(o => new OpcionPreguntaDto
-                    {
-                        IdOpcion = o.IdOpcion,
-                        Texto = o.Texto
-                    })
-                    .ToList()
+                Opciones = opcionesDto
             };
         }
 
@@ -143,7 +157,7 @@ namespace ProjectServices.Implementations
 
                 Color = prioridad.Color,
 
-                Codigo = prioridad.Codigo
+                Descripcion = prioridad.Descripcion
             };
         }
 
