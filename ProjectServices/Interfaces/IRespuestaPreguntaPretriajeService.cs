@@ -1,5 +1,6 @@
 ﻿using ProjectDto.Dtos.PretriajeDtos;
 using ProjectDto.Dtos.RespuestaPretriajeDtos;
+using System.Collections.Generic;
 
 namespace ProjectServices.Interfaces
 {
@@ -7,6 +8,6 @@ namespace ProjectServices.Interfaces
     {
         RespuestaPreguntaPretriajeDto RegistrarRespuesta(RegistrarRespuestaPreguntaDto respuesta);
 
-        ConsultarRespuestasRegistroDto ObtenerRespuestasRegistro(int idRegistro);
+        List<RespuestaModalSalaEsperaDto> ObtenerRespuestasRegistro(int idRegistro);
     }
 }

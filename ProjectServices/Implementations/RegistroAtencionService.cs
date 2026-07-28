@@ -7,6 +7,8 @@ using ProjectCommon.Constants;
 using ProjectServices.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace ProjectServices.Implementations
 {
@@ -82,7 +84,6 @@ namespace ProjectServices.Implementations
                 }
             }
 
-
             RegistroAtencion atencionCreada = MapearARegistroAtencion(datosRegistro, edadPaciente);
 
             atencionCreada = _registroAtencionRepository.CrearRegistro(atencionCreada);
@@ -153,9 +154,12 @@ namespace ProjectServices.Implementations
         }
 
 
-        public List<RegistroAtencion> ObtenerPacientesSalaEspera()
+        public List<SalaEsperaDto> ObtenerPacientesSalaEspera()
         {
-            return _registroAtencionRepository.ObtenerPacientesSalaEspera();
+            return _registroAtencionRepository
+                .ObtenerPacientesSalaEspera()
+                .Select(MapSalaEspera)
+                .ToList();
         }
 
 
@@ -165,7 +169,7 @@ namespace ProjectServices.Implementations
             return new RegistroAtencion
             {
                 IdPaciente = datosRegistro.IdPaciente,
-                FechaRegistro = DateTime.UtcNow,
+                FechaRegistro = datosRegistro.FechaRegistro,
                 EdadPaciente = edad,
                 CondicionMaternidad = datosRegistro.CondicionMaternidad,
                 CondicionMental = datosRegistro.CondicionMental,
@@ -199,6 +203,28 @@ namespace ProjectServices.Implementations
             };
         }
 
+        private SalaEsperaDto MapSalaEspera(RegistroAtencion r)
+        {
+            return new SalaEsperaDto
+            {
+                IdAtencion = r.IdAtencion,
+                IdPaciente = r.IdPaciente,
+                FechaRegistro = r.FechaRegistro,
+                FechaActualizacion = r.FechaActualizacion,
+                EdadPaciente = r.EdadPaciente,
+                CondicionMaternidad = r.CondicionMaternidad,
+                CondicionMental = r.CondicionMental,
+                CondicionOncologica = r.CondicionOncologica,
+                AutotriajeIniciado = r.AutotriajeIniciado,
+                MotivoConsulta = r.MotivoConsulta,
+                NivelPrioridad = r.Prioridad?.NivelPrioridad,
+                FlujoClinico = r.FlujoClinico?.Nombre,
+                NombreCompleto = r.Paciente.NombreCompleto,
+                TipoDocumento = r.Paciente.TipoDocumento.Nombre,
+                NumeroDocumento = r.Paciente.NroDocumento
+            };
+        }
+
         private int CalcularEdad(DateTime fechaNacimiento)
         {
             DateTime fechaActual = DateTime.UtcNow;
@@ -226,5 +252,6 @@ namespace ProjectServices.Implementations
                 datosRegistro.CondicionMaternidad = false;
             }
         }
+
     }
 }

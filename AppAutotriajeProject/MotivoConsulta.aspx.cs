@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AppAutotriajeProject
 {
@@ -42,6 +43,7 @@ namespace AppAutotriajeProject
                 MotivoConsulta = txtSintomas.Text
             };
 
+            
             Session["MotivoConsulta"] = motivoConsulta;
 
 
@@ -85,5 +87,6 @@ namespace AppAutotriajeProject
 
             Response.Redirect("~/AdelantarTriage.aspx");
         }
+
     }
 }

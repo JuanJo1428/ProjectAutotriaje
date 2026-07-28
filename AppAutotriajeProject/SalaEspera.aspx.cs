@@ -1,6 +1,9 @@
-﻿using ProjectServices.Implementations;
+﻿using ProjectDto.Dtos.RegistroAtencionDtos;
+using ProjectDto.Dtos.RespuestaPretriajeDtos;
+using ProjectServices.Implementations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,67 +18,74 @@ namespace AppAutotriajeProject
         {
             if (!IsPostBack)
             {
-                // Para entorno de producción:
-                // CargarSalaEspera();
+                CargarSalaEspera();
 
-                // Para pruebas locales:
-                CargarDatosSimulados();
+            }
+        }
+
+        protected void tmActualizarSala_Tick(object sender, EventArgs e)
+        {
+            if(!pnlModalDetalles.Visible)
+            {
+                CargarSalaEspera();
             }
         }
 
         private void CargarSalaEspera()
         {
-            //Elementos necesarios para la creacion de la tarjeta del repeater para el paciente
-            //Cada registro tambien tenes el nivelPrioridad(1-5), con su respectivo color y codigoColor
-            //Tiene tambien el MotivoConsulta en string
-            //Condiciones de priorizacion para colocar los respectivos simbolos representativos
+            List<SalaEsperaDto> pacientes = _registroService.ObtenerPacientesSalaEspera();
 
-            var pacientes = _registroService.ObtenerPacientesSalaEspera();
+            ViewState["PacientesSalaEspera"] = pacientes;
+
             rptPacientesEspera.DataSource = pacientes;
             rptPacientesEspera.DataBind();
-
-            //btnVerDetalles.CommandArgument = pacientes.IdRegistro;
         }
 
-        private void CargarPreguntas(int idRegistro)
+        private void CargarPreguntas(int idAtencion)
         {
-            // Para entorno de producción:
-            // var respuestas = _respuestaService.ObtenerRespuestasRegistro(idRegistro);
-            // rptPreguntas.DataSource = respuestas;
-            // rptPreguntas.DataBind();
+            List<RespuestaModalSalaEsperaDto> respuestas = _respuestaService.ObtenerRespuestasRegistro(idAtencion);
 
-            var respuestasSimuladas = ObtenerRespuestasSimuladas(idRegistro);
-            rptPreguntas.DataSource = respuestasSimuladas;
+            rptPreguntas.DataSource = respuestas;
             rptPreguntas.DataBind();
+
         }
-
-        /* 
-        // Se reemplazó por rptPacientesEspera_ItemCommand para abrir el modal sobre la misma página.
-        protected void btnVerDetalles_Click(object sender, EventArgs e)
-        {
-            //El command del boton de ver detalles en la tarjeta del repeater es el idRegistro que obtiene cuando carga el paciente
-            //Lo puede poner dinamicamente
-            //int idRegistro = int.Parse((btn.CommandArgument));
-
-            //CargarPreguntas(idRegistro);
-
-            //Cuando este creada, intentar que sea una pestaña emergente(no se como sea su funcionamiento)
-            Response.Redirect("~/VerDetalles.aspx");
-        }
-        */
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Default.aspx");
         }
 
+
         // Manejo interactivo de clic en tarjetas
+
         protected void rptPacientesEspera_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "VerDetalles")
             {
-                int idRegistro = Convert.ToInt32(e.CommandArgument);
-                CargarPreguntas(idRegistro);
+                tmActualizarSala.Enabled = false;
+
+                int idAtencion = Convert.ToInt32(e.CommandArgument);
+
+
+                List<SalaEsperaDto> pacientes = ViewState["PacientesSalaEspera"] as List<SalaEsperaDto>;
+
+                if (pacientes == null)
+                    return;
+
+                SalaEsperaDto paciente = pacientes?.Find(x => x.IdAtencion == idAtencion);
+
+                if (paciente != null)
+                {
+                    lblMotivoConsulta.Text = paciente.MotivoConsulta;
+
+                    lblSintomaPredominante.Text = paciente.FlujoClinico;
+
+                    lblTiempoEspera.Text = CalcularTiempoEspera(paciente.FechaRegistro);
+                }
+
+
+                CargarPreguntas(idAtencion);
+
                 pnlModalDetalles.Visible = true;
             }
         }
@@ -83,113 +93,78 @@ namespace AppAutotriajeProject
         protected void btnCerrarModal_Click(object sender, EventArgs e)
         {
             pnlModalDetalles.Visible = false;
+
+            tmActualizarSala.Enabled = true;
+            CargarSalaEspera();
         }
 
-        #region HELPERS PARA CLASES DINÁMICAS DE CSS E ÍCONOS
+        private string CalcularTiempoEspera(DateTime fechaRegistro)
+        {
+            TimeSpan tiempo = DateTime.Now - fechaRegistro;
+
+            if (tiempo.TotalMinutes < 1)
+                return "Menos de 1 minuto";
+
+            if (tiempo.TotalHours < 1)
+            {
+                int minutos = (int)tiempo.TotalMinutes;
+                return minutos == 1
+                    ? "1 minuto"
+                    : $"{minutos} minutos";
+            }
+
+            return $"{(int)tiempo.TotalHours} h {tiempo.Minutes} min";
+        }
 
         // Retorna la clase de prioridad (1 al 5) para aplicar el color al borde y fondo de ícono
-        public string GetCssClassTarjeta(object nivelPrioridadObj, bool continuoTriage)
+        public string GetCssClassTarjeta(int? nivelPrioridad, bool autotriajeIniciado)
         {
-            int nivelPrioridad = 4; // Prioridad por defecto (verde)
+            int prioridad;
 
-            if (nivelPrioridadObj != null && int.TryParse(nivelPrioridadObj.ToString(), out int prio))
+            if (!autotriajeIniciado || nivelPrioridad == null)
             {
-                if (prio >= 1 && prio <= 5) nivelPrioridad = prio;
+                prioridad = 0;
+            }
+            else
+            {
+                prioridad = nivelPrioridad.Value;
             }
 
-            string claseClick = continuoTriage ? "clickable" : "no-clickable";
-            return $"paciente-card prioridad-{nivelPrioridad} {claseClick}";
+            string claseClick = autotriajeIniciado
+                ? "clickable"
+                : "no-clickable";
+
+            return $"paciente-card prioridad-{prioridad} {claseClick}";
         }
 
-        public string GetClaseIconoFontAwesome(string condicion)
+        public string GetClaseIconoFontAwesome(SalaEsperaDto dto)
         {
-            if (string.IsNullOrEmpty(condicion)) return "fa-solid fa-circle-check";
+            if (!dto.AutotriajeIniciado)
+                return "fa-regular fa-clock";
 
-            switch (condicion.ToLower())
-            {
-                case "maternidad":
-                    return "fa-solid fa-person-pregnant";
-                case "saludmental":
-                    return "fa-solid fa-brain";
-                case "oncologica":
-                    return "fa-solid fa-dna";
-                default:
-                    return "fa-solid fa-circle-check";
-            }
+            if (dto.CondicionMaternidad)
+                return "fa-solid fa-baby-carriage";
+
+            if (dto.CondicionMental)
+                return "fa-solid fa-brain";
+
+            if (dto.CondicionOncologica)
+                return "fa-solid fa-dna";
+
+            return "fa-solid fa-circle-check";
         }
 
-        #endregion
-
-        #region MOCK DE PRUEBAS LOCALES
-
-        private void CargarDatosSimulados()
+        public bool MostrarPoblacionPriorizada(SalaEsperaDto dto)
         {
-            var pacientesSimulados = new List<object>
-            {
-                new {
-                    IdRegistro = 101,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "1015189591", NombreCompleto = "FULANA 1" },
-                    MotivoConsulta = "Dolor abdominal agudo",
-                    Condicion = "Maternidad",
-                    NivelPrioridad = 1,
-                    ContinuoTriage = true
-                },
-                new {
-                    IdRegistro = 102,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "1032456789", NombreCompleto = "FULANO 2" },
-                    MotivoConsulta = "Ansiedad e insomnio prolongado",
-                    Condicion = "SaludMental",
-                    NivelPrioridad = 2,
-                    ContinuoTriage = true
-                },
-                new {
-                    IdRegistro = 103,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "1015189591", NombreCompleto = "FULANO 3" },
-                    MotivoConsulta = "Dolor abdominal agudo",
-                    Condicion = "Maternidad",
-                    NivelPrioridad = 3,
-                    ContinuoTriage = true
-                },
-                new {
-                    IdRegistro = 104,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "9876543210", NombreCompleto = "FULANO 4" },
-                    MotivoConsulta = "Control de quimioterapia",
-                    Condicion = "Oncologica",
-                    NivelPrioridad = 5,
-                    ContinuoTriage = true
-                },
-                new {
-                    IdRegistro = 105,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "1122334455", NombreCompleto = "FULANO 5" },
-                    MotivoConsulta = "Consulta general por malestar",
-                    Condicion = "Ninguna",
-                    NivelPrioridad = 4,
-                    ContinuoTriage = false // Hace que no sea clickeable ni abre modal
-                },
-                new {
-                    IdRegistro = 106,
-                    Paciente = new { TipoDocumento = new { Nombre = "CC" }, NroDocumento = "9876543210", NombreCompleto = "FULANO 6" },
-                    MotivoConsulta = "Control de quimioterapia",
-                    Condicion = "Oncologica",
-                    NivelPrioridad = 4,
-                    ContinuoTriage = true
-                }
-            };
+            if (dto == null)
+                return false;
 
-            rptPacientesEspera.DataSource = pacientesSimulados;
-            rptPacientesEspera.DataBind();
+            return dto.CondicionMaternidad
+                || dto.CondicionMental
+                || dto.CondicionOncologica
+                || dto.EdadPaciente < 5
+                || dto.EdadPaciente >= 65;
         }
 
-        private List<object> ObtenerRespuestasSimuladas(int idRegistro)
-        {
-            return new List<object>
-            {
-                new { Pregunta = "¿Motivo de consulta registrado?", Respuesta = "Dolor fuerte en el abdomen desde la mañana." },
-                new { Pregunta = "¿Fiebre en las últimas 24h?", Respuesta = "Sí" },
-                new { Pregunta = "Nivel de dolor", Respuesta = "Severo (7 - 9)" }
-            };
-        }
-
-        #endregion
     }
 }

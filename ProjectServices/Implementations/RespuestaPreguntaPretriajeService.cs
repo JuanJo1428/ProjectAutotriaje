@@ -5,6 +5,7 @@ using ProjectDto.Dtos.PretriajeDtos;
 using ProjectDto.Dtos.RespuestaPretriajeDtos;
 using ProjectServices.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectServices.Implementations
 {
@@ -42,18 +43,16 @@ namespace ProjectServices.Implementations
             return ConvertirRespuestaDto(respuestaAñadida);
         }
 
-        public ConsultarRespuestasRegistroDto ObtenerRespuestasRegistro(int idRegistro)
+        public List<RespuestaModalSalaEsperaDto> ObtenerRespuestasRegistro(int idRegistro)
         {
             List<RespuestaPreguntaPretriaje> respuestas = _respuestaRepository.ObtenerPorRegistro(idRegistro);
 
-            ConsultarRespuestasRegistroDto consultaDto = new ConsultarRespuestasRegistroDto();
-
-            foreach (RespuestaPreguntaPretriaje respuesta in respuestas)
+            return respuestas.Select(r => new RespuestaModalSalaEsperaDto
             {
-                consultaDto.Respuestas.Add(ConvertirRespuestaDto(respuesta));
-            }
-
-            return consultaDto;
+                Pregunta = r.Pregunta.TextoPregunta,
+                Respuesta = r.OpcionSeleccionada.Texto,
+            })
+            .ToList();
         }
 
         //Metodo de Mapeo

@@ -10,7 +10,8 @@
     escuchando: false,
     reconocimientoActivo: false,
 
-    textoBase: "",
+    // Cada resultado final queda guardado aquí.
+    resultadosFinales: {},
 
     inicializar: function () {
 
@@ -34,20 +35,17 @@
 
         this.btnHablar.addEventListener("click", () => {
 
-            if (!this.escuchando) {
-                this.iniciarDictado();
-            }
-            else {
+            if (this.escuchando)
                 this.detenerDictado();
-            }
+            else
+                this.iniciarDictado();
 
         });
 
         this.btnContinuar.addEventListener("click", () => {
 
-            if (this.escuchando) {
+            if (this.escuchando)
                 this.detenerDictado();
-            }
 
         });
 
@@ -60,7 +58,6 @@
             this.btnHablar.disabled = false;
             this.btnHablar.value = "🔴 Escuchando...";
             this.btnHablar.classList.add("dictando");
-
         };
 
         this.reconocimiento.onresult = (event) => {
@@ -69,23 +66,44 @@
 
             for (let i = event.resultIndex; i < event.results.length; i++) {
 
-                const transcripcion = event.results[i][0].transcript;
+                const texto = event.results[i][0].transcript.trim();
 
                 if (event.results[i].isFinal) {
 
-                    this.textoBase += transcripcion + " ";
+                    // SIEMPRE reemplaza el resultado del mismo índice.
+                    // Nunca concatena.
+                    this.resultadosFinales[i] = texto;
 
                 }
                 else {
 
-                    textoTemporal += transcripcion;
-
+                    textoTemporal += texto + " ";
                 }
+            }
+
+            let textoFinal = "";
+
+            Object.keys(this.resultadosFinales)
+                .sort((a, b) => Number(a) - Number(b))
+                .forEach(indice => {
+
+                    textoFinal += this.resultadosFinales[indice] + " ";
+
+                });
+
+            let texto = (textoFinal + textoTemporal)
+                .replace(/\s+/g, " ")
+                .trim();
+
+            if (texto.length > 0) {
+
+                texto =
+                    texto.charAt(0).toUpperCase() +
+                    texto.slice(1);
 
             }
 
-            this.txtSintomas.value = this.textoBase + textoTemporal;
-
+            this.txtSintomas.value = texto;
         };
 
         this.reconocimiento.onend = () => {
@@ -101,36 +119,29 @@
                 }
                 catch (e) {
 
-                    console.log("Reinicio ignorado:", e);
+                    console.log(e);
 
                 }
 
             }
             else {
 
+                this.estadoDictado.style.display = "none";
+
                 this.btnHablar.disabled = false;
                 this.btnHablar.value = "🎤 Iniciar dictado";
                 this.btnHablar.classList.remove("dictando");
-
             }
-
         };
 
         this.reconocimiento.onerror = (event) => {
 
-            console.log("SpeechRecognition:", event.error);
+            console.log(event.error);
 
-            switch (event.error) {
+            if (event.error !== "aborted" &&
+                event.error !== "no-speech") {
 
-                case "no-speech":
-                    break;
-
-                case "aborted":
-                    break;
-
-                default:
-                    this.detenerDictado();
-                    break;
+                this.detenerDictado();
 
             }
 
@@ -143,9 +154,9 @@
         if (this.reconocimientoActivo)
             return;
 
-        this.escuchando = true;
+        this.resultadosFinales = {};
 
-        this.textoBase = this.txtSintomas.value;
+        this.escuchando = true;
 
         this.txtSintomas.readOnly = true;
 
@@ -162,7 +173,6 @@
             console.log(e);
 
             this.btnHablar.disabled = false;
-
         }
 
     },
@@ -174,28 +184,13 @@
 
         this.escuchando = false;
 
+        this.txtSintomas.readOnly = false;
+
         this.btnHablar.disabled = true;
         this.btnHablar.value = "⏳ Deteniendo...";
 
-        this.estadoDictado.style.display = "none";
-
-        // Conserva todo el texto reconocido
-        this.textoBase = this.txtSintomas.value.trim();
-
-        this.txtSintomas.readOnly = false;
-
-        if (this.reconocimientoActivo) {
-
+        if (this.reconocimientoActivo)
             this.reconocimiento.stop();
-
-        }
-        else {
-
-            this.btnHablar.disabled = false;
-            this.btnHablar.value = "🎤 Iniciar dictado";
-            this.btnHablar.classList.remove("dictando");
-
-        }
 
     }
 

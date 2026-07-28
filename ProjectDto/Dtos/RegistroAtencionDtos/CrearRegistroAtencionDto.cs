@@ -1,4 +1,6 @@
-﻿namespace ProjectDto.Dtos.RegistroAtencionDtos
+﻿using System;
+
+namespace ProjectDto.Dtos.RegistroAtencionDtos
 {
     public class CrearRegistroAtencionDto
     {
@@ -11,5 +13,7 @@
         public bool CondicionOncologica { get; set; }
 
         public bool AutotriajeIniciado { get; set; }
+
+        public DateTime FechaRegistro { get; set; }
     }
 }

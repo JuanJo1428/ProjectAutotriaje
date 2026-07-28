@@ -24,6 +24,15 @@ namespace AppAutotriajeProject
         protected global::System.Web.UI.UpdatePanel upSalaEspera;
 
         /// <summary>
+        /// tmActualizarSala control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer tmActualizarSala;
+
+        /// <summary>
         /// rptPacientesEspera control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,33 @@ namespace AppAutotriajeProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlModalDetalles;
+
+        /// <summary>
+        /// lblMotivoConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMotivoConsulta;
+
+        /// <summary>
+        /// lblSintomaPredominante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSintomaPredominante;
+
+        /// <summary>
+        /// lblTiempoEspera control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTiempoEspera;
 
         /// <summary>
         /// rptPreguntas control.

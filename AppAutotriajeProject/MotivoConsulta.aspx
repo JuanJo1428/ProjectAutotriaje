@@ -80,25 +80,40 @@
     </div>
 
     <script type="text/javascript">
-    tion soloLetras(e) {
-      var key = e.keyCode || e.which;
-    var tecla = String.fromCharCode(key);
 
-    if (key === 8 || key === 13)
+        function soloLetras(e) {
+
+            const key = e.keyCode || e.which;
+
+            // Permitir teclas especiales
+            if (
+                key === 8 ||   // Backspace
+                key === 9 ||   // Tab
+                key === 13 ||  // Enter
+                key === 32 ||  // Espacio
+                key === 37 ||  // Flecha izquierda
+                key === 38 ||  // Flecha arriba
+                key === 39 ||  // Flecha derecha
+                key === 40 ||  // Flecha abajo
+                key === 46     // Delete
+            ) {
                 return true;
-            letras = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s\n.,;:()¿?¡!]*$/;
-             (!letras.test(tecla)) {
-          e.preventDefault();
-            return false;
+            }
 
+            const tecla = String.fromCharCode(key);
+
+            const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ.,;:()¿?¡!\s]$/;
+
+            if (!permitido.test(tecla)) {
+                e.preventDefault();
+                return false;
             }
 
             return true;
-
-        }
+            }
 
     </script>
 
-    <script src="Scripts/js/MotivoConsulta.js?v=2.0" defer></script>
+    <script src="Scripts/js/MotivoConsulta.js?v=3.0" defer></script>
 
 </asp:Content>

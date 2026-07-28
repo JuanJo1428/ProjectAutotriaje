@@ -25,13 +25,6 @@ namespace AppAutotriajeProject
             if (registroAtencion == null)
             {
                 //Error
-                return;
-            }
-
-            //Sinó realizó el Autotriaje Clínico no se actualiza el registro de atención
-            if (!registroAtencion.AutotriajeIniciado)
-            {
-                Session.Clear();
                 Response.Redirect("~/Default.aspx");
                 return;
             }
@@ -43,12 +36,14 @@ namespace AppAutotriajeProject
 
             ResultadoPretriajeDto resultadoDto = Session["ResultadoPretriaje"] as ResultadoPretriajeDto;
 
+
+            //Sinó realizó el Autotriaje Clínico no se actualiza el registro de atención
             if (motivoDto == null || flujoDto == null || resultadoDto == null)
             {
-                // Manejar error
+                Session.Clear();
+                Response.Redirect("~/Default.aspx");
                 return;
             }
-
          
             string motivoConsulta = motivoDto.MotivoConsulta;
 

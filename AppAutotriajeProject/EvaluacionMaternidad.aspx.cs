@@ -8,7 +8,13 @@ namespace AppAutotriajeProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CondicionMaternidad"] != null)
+            {
+                bool maternidad = (bool)Session["CondicionMaternidad"];
 
+                rblMaternidad.SelectedValue = maternidad.ToString().ToLower();
+            }
+                
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -24,6 +30,8 @@ namespace AppAutotriajeProject
             EvaluacionesPacienteDto evaluaciones = new EvaluacionesPacienteDto();
 
             evaluaciones.CondicionMaternidad = bool.Parse(rblMaternidad.SelectedValue);
+
+            Session["CondicionMaternidad"] = evaluaciones.CondicionMaternidad;
 
             Session["EvaluacionesPaciente"] = evaluaciones;
 

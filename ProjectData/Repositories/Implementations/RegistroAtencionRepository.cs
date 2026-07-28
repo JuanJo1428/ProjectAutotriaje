@@ -38,8 +38,17 @@ namespace ProjectData.Repositories.Implementations
                     .AsNoTracking()
                     .Include(r => r.Paciente)
                     .Include(r => r.Paciente.TipoDocumento)
+                    .Include(r => r.Prioridad)
+                    .Include(r => r.FlujoClinico)
                     .Where(r => r.Activo && !r.Atendido)
-                    .OrderBy(r => r.FechaRegistro)
+                    .OrderByDescending(r =>
+                        r.CondicionMaternidad ||
+                        r.CondicionMental ||
+                        r.CondicionOncologica ||
+                        r.EdadPaciente <= 5 ||
+                        r.EdadPaciente >= 65)
+
+                    .ThenBy(r => r.FechaRegistro)
                     .ToList();
         }
 

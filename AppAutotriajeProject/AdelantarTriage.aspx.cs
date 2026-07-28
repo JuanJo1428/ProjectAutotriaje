@@ -94,7 +94,9 @@ namespace AppAutotriajeProject
 
                 CondicionOncologica = evaluaciones.CondicionOncologica,
 
-                AutotriajeIniciado = deseaAdelantarAutotriaje
+                AutotriajeIniciado = deseaAdelantarAutotriaje,
+
+                FechaRegistro = DateTime.Now
             };
         }
 

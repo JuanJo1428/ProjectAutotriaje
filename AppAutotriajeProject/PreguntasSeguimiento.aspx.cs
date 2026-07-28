@@ -143,15 +143,6 @@ namespace AppAutotriajeProject
             {
                 Session["ResultadoPretriaje"] = resultado;
 
-                RegistroAtencionDto registroAtencion = Session["RegistroAtencion"] as RegistroAtencionDto;
-
-                if (registroAtencion != null)
-                {
-                    registroAtencion.AutotriajeIniciado = true;
-
-                    Session["RegistroAtencion"] = registroAtencion;
-                }
-
                 Response.Redirect("~/Finalizacion.aspx");
                 return;
             }

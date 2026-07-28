@@ -8,7 +8,12 @@ namespace AppAutotriajeProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CondicionOncologica"] != null)
+            {
+                bool oncologico = (bool)Session["CondicionOncologica"];
 
+                rblOncologica.SelectedValue = oncologico.ToString().ToLower();
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -30,6 +35,8 @@ namespace AppAutotriajeProject
             }
 
             evaluaciones.CondicionOncologica = bool.Parse(rblOncologica.SelectedValue);
+
+            Session["CondicionOncologica"] = evaluaciones.CondicionOncologica;
 
             Session["EvaluacionesPaciente"] = evaluaciones;
 

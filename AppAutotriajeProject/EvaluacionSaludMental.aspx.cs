@@ -10,7 +10,12 @@ namespace AppAutotriajeProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["CondicionMental"] != null)
+            {
+                bool saludMental = (bool)Session["CondicionMental"];
 
+                rblSaludMental.SelectedValue = saludMental.ToString().ToLower();
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -40,6 +45,8 @@ namespace AppAutotriajeProject
             }
 
             evaluaciones.CondicionMental = bool.Parse(rblSaludMental.SelectedValue);
+
+            Session["CondicionMental"] = evaluaciones.CondicionMental;
 
             Session["EvaluacionesPaciente"] = evaluaciones;
 

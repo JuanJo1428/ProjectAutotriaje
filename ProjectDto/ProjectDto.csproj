@@ -66,7 +66,8 @@
     <Compile Include="Dtos\RegistroAtencionDtos\CrearRegistroAtencionRespuestaDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\EvaluacionesPacienteDto.cs" />
     <Compile Include="Dtos\RegistroAtencionDtos\RegistroAtencionDto.cs" />
-    <Compile Include="Dtos\RespuestaPretriajeDtos\ConsultarRespuestasRegistroDto.cs" />
+    <Compile Include="Dtos\RegistroAtencionDtos\SalaEsperaDto.cs" />
+    <Compile Include="Dtos\RespuestaPretriajeDtos\RespuestaModalSalaEsperaDto.cs" />
     <Compile Include="Dtos\RespuestaPretriajeDtos\RespuestaPreguntaPretriajeDto.cs" />
     <Compile Include="Dtos\TiposDocumentoDtos\TipoDocumentoListaDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

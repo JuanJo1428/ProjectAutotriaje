@@ -13,6 +13,6 @@ namespace ProjectServices.Interfaces
 
         RegistroAtencionDto ActualizarRegistro(ActualizarRegistroAtencionDto datosRegistro);
 
-        List<RegistroAtencion> ObtenerPacientesSalaEspera();
+        List<SalaEsperaDto> ObtenerPacientesSalaEspera();
     }
 }
