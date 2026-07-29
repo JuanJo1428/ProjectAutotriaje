@@ -181,5 +181,5 @@
         </div>
     </div>
 
-    <script src="Scripts/js/informacionPaciente.js?v=4.0" defer></script>
+    <script src="<%= ResolveUrl("~/Scripts/js/InformacionPaciente.js?v=4.0") %>" defer></script>
 </asp:Content>

@@ -8,7 +8,7 @@
     <title><%: Page.Title %> - GHIPS</title>
     <link href="~/Content/css/site.css" rel="stylesheet" type="text/css" runat="server" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <script src="/Scripts/js/clock.js" defer></script>
+    <script src="<%= ResolveUrl("~/Scripts/js/clock.js") %>" ></script>
 </head>
 <body>
     <form id="formPrincipal" runat="server">
@@ -36,6 +36,6 @@
             <span>&copy; <asp:Literal ID="litYear" runat="server" /> Hospital Alma Mater – Sistema GHIPS</span>
         </footer>
     </form>
-    <script src="/Scripts/js/validaciones-temporales.js" defer></script>
+    <script src="<%= ResolveUrl("~/Scripts/js/validaciones-temporales.js") %>" ></script>
 </body>
 </html>

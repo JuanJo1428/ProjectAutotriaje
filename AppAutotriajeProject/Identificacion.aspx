@@ -126,5 +126,7 @@
     <script>
         const cvDocumentoId = '<%= cvDocumento.ClientID %>';
     </script>
-    <script src="Scripts/js/identificacion.js?v=1.1" defer></script>
+
+    <script src="<%= ResolveUrl("~/Scripts/js/identificacion.js?v=1.1") %>" defer></script>
+
 </asp:Content>

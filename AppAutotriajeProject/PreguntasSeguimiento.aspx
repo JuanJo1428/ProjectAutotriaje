@@ -66,6 +66,6 @@
         </asp:UpdatePanel>
     </div>
 
-    <script src="/Scripts/js/PreguntasSeguimiento.js?v=4.0" defer></script>
+     <script src="<%= ResolveUrl("~/Scripts/js/PreguntasSeguimiento.js?v=4.0") %>" ></script>
 
 </asp:Content>

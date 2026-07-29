@@ -115,5 +115,6 @@
     </script>
 
     <script src="Scripts/js/MotivoConsulta.js?v=3.0" defer></script>
+    <script src="<%= ResolveUrl("~/Scripts/js/MotivoConsulta.js?v=3.0") %>" ></script>
 
 </asp:Content>
