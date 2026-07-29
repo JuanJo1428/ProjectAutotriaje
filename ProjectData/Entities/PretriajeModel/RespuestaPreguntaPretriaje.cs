@@ -10,9 +10,9 @@ namespace ProjectData.Entities.PretriajeModel
         public int IdRespuesta { get; set; }
 
 
-        public int IdRegistro { get; set; }
+        public int IdAtencion { get; set; }
 
-        [ForeignKey(nameof(IdRegistro))]
+        [ForeignKey(nameof(IdAtencion))]
         public virtual RegistroAtencion Registro { get; set; }
 
 

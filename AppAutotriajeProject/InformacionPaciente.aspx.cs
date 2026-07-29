@@ -186,8 +186,9 @@ namespace AppAutotriajeProject
                 return;
             }
 
+            int Edad = CalcularEdad(pacienteProcesado.Paciente.FechaNacimiento);
 
-            if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Masculino)
+            if (pacienteProcesado.Paciente.IdGenero == (int)Generos.Masculino || Edad < 11)
             {
 
                 EvaluacionesPacienteDto evaluaciones = new EvaluacionesPacienteDto
@@ -249,6 +250,14 @@ namespace AppAutotriajeProject
             }
 
             PacienteDto paciente = respuestaBusqueda.PacientePrincipal;
+
+            DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+
+            if (fechaNacimiento >= DateTime.Today)
+            {
+                Response.Redirect("~/Identificacion.aspx");
+                return null;
+            }
 
             return new PacienteValidadoDto
             {
@@ -350,6 +359,21 @@ namespace AppAutotriajeProject
             txtSegundoNombre.Attributes.Remove("placeholder");
             txtPrimerApellido.Attributes.Remove("placeholder");
             txtSegundoApellido.Attributes.Remove("placeholder");
+        }
+
+        private int CalcularEdad(DateTime fechaNacimiento)
+        {
+            DateTime hoy = DateTime.Today;
+
+            int edad = hoy.Year - fechaNacimiento.Year;
+
+            // Si todavía no ha cumplido años este año, restamos 1
+            if (fechaNacimiento.Date > hoy.AddYears(-edad))
+            {
+                edad--;
+            }
+
+            return edad;
         }
 
     }

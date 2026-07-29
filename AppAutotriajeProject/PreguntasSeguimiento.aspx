@@ -17,16 +17,43 @@
                     
                     <!-- ESQUELETO 1: Pregunta Tipo Sí / No -->
                     <asp:Panel ID="pnlTipoSiNo" runat="server" Visible="false" CssClass="opciones-sino">
-                        <asp:Button ID="btnSi" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-si" OnClick="btnOpcionSiNo_Click" />
-                        <asp:Button ID="btnNo" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-no" OnClick="btnOpcionSiNo_Click" />
+                        <asp:Button ID="btnSi" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-si" OnClick="btnOpcionSiNo_Click" UseSubmitBehavior="false" />
+                        <asp:Button ID="btnNo" runat="server" Text="" CssClass="btn-opcion-sino btn-opcion-no" OnClick="btnOpcionSiNo_Click" UseSubmitBehavior="false" />
                     </asp:Panel>
 
-                    <!-- ESQUELETO 2: Pregunta Tipo Lista Desplegable -->
-                    <asp:Panel ID="pnlTipoDropdown" runat="server" Visible="false" CssClass="opciones-dropdown">
-                        <asp:DropDownList ID="ddlOpciones" runat="server" CssClass="select-triaje">
-                        </asp:DropDownList>
-                        <asp:Button ID="btnSiguienteDropdown" runat="server" Text="Continuar" CssClass="btn-siguiente" OnClick="btnSiguienteDropdown_Click" />
+                    <!-- ESQUELETO 2: Pregunta Tipo Lista -->
+                    <asp:Panel
+                        ID="pnlTipoLista"
+                        runat="server"
+                        Visible="false"
+                        CssClass="opciones-lista">
+
+                        <asp:Repeater
+                            ID="rptOpciones"
+                            runat="server"
+                            OnItemCommand="rptOpciones_ItemCommand">
+
+                            <ItemTemplate>
+
+                                <asp:Button
+                                    ID="btnOpcion"
+                                    runat="server"
+                                    Text='<%# Eval("Texto") %>'
+                                    CssClass="opcion-card"
+                                    CommandName="Seleccionar"
+                                    CommandArgument='<%# Eval("IdOpcion") %>'
+                                    UseSubmitBehavior="false" />
+
+                            </ItemTemplate>
+
+                        </asp:Repeater>
+
                     </asp:Panel>
+
+                    <div id="loadingPregunta" class="loading-pregunta" style="display:none;">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        <span>Cargando siguiente pregunta...</span>
+                    </div>
 
                 </div>
 
@@ -38,4 +65,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+
+    <script src="/Scripts/js/PreguntasSeguimiento.js?v=4.0" defer></script>
+
 </asp:Content>

@@ -30,12 +30,12 @@ namespace ProjectData.Repositories.Implementations.PretriajeImplementations
             return respuesta;
         }
 
-        public List<RespuestaPreguntaPretriaje> ObtenerPorRegistro(int idRegistro)
+        public List<RespuestaPreguntaPretriaje> ObtenerPorRegistro(int idAtencion)
         {
             return _context.RespuestasPreguntasPretriaje
                 .Include(r => r.Pregunta)
                 .Include(r => r.OpcionSeleccionada)
-                .Where(r => r.IdRegistro == idRegistro && r.Activo)
+                .Where(r => r.IdAtencion == idAtencion && r.Activo)
                 .ToList();
         }
 

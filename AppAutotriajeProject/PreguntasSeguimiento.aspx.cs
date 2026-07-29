@@ -47,7 +47,7 @@ namespace AppAutotriajeProject
 
             // Ocultamos ambos esqueletos por defecto
             pnlTipoSiNo.Visible = false;
-            pnlTipoDropdown.Visible = false;
+            pnlTipoLista.Visible = false;
 
 
             // Mostramos el esqueleto correspondiente según el tipo
@@ -67,23 +67,10 @@ namespace AppAutotriajeProject
 
             else if (pregunta.TipoRespuesta == TipoRespuesta.Lista)
             {
-                pnlTipoDropdown.Visible = true;
+                pnlTipoLista.Visible = true;
 
-                // Limpiar y cargar la lista desplegable
-                ddlOpciones.Items.Clear();
-                ddlOpciones.Items.Add(new ListItem("-- Seleccione una opción --", ""));
-
-                if (pregunta.Opciones != null && pregunta.Opciones.Count > 0)
-                {
-                    foreach (var opcion in pregunta.Opciones)
-                    {
-                        ddlOpciones.Items.Add(
-                            new ListItem(
-                                opcion.Texto,
-                                opcion.IdOpcion.ToString()
-                            ));
-                    }
-                }
+                rptOpciones.DataSource = pregunta.Opciones;
+                rptOpciones.DataBind();
             }
         }
 
@@ -110,10 +97,9 @@ namespace AppAutotriajeProject
             ProcesarRespuesta(respuesta);
         }
 
-        // Evento cuando se responde una pregunta tipo Lista Desplegable
-        protected void btnSiguienteDropdown_Click(object sender, EventArgs e)
+        protected void rptOpciones_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (string.IsNullOrEmpty(ddlOpciones.SelectedValue))
+            if (e.CommandName != "Seleccionar")
                 return;
 
             PreguntaPretriajeDto pregunta = Session["PreguntaActual"] as PreguntaPretriajeDto;
@@ -121,12 +107,10 @@ namespace AppAutotriajeProject
             if (pregunta == null)
                 return;
 
-            RegistrarRespuestaPreguntaDto respuesta = ConstruirResgistrarRespuestaDto
-                (pregunta.IdPregunta, int.Parse(ddlOpciones.SelectedValue));
+            RegistrarRespuestaPreguntaDto respuesta =
+                ConstruirResgistrarRespuestaDto(pregunta.IdPregunta, int.Parse(e.CommandArgument.ToString()));
 
-            //Guardamos la pregunta y la respuesta
             _respuestaService.RegistrarRespuesta(respuesta);
-
 
             ProcesarRespuesta(respuesta);
         }

@@ -26,7 +26,7 @@ namespace AppAutotriajeProject
 
 
             //Crear el Dto para la creación del registro
-            CrearRegistroAtencionDto datosRegistro = ConstruirCrearRegistroDto(deseaContinuar);
+            CrearRegistroAtencionDto datosRegistro = ConstruirCrearRegistroDto();
 
             if (datosRegistro == null)
             {
@@ -40,8 +40,6 @@ namespace AppAutotriajeProject
 
             if (deseaContinuar)
             {
-                respuesta.RegistroAtencion.AutotriajeIniciado = true;
-
                 Session["RegistroAtencion"] = respuesta.RegistroAtencion;
 
                 Session["CrearRegistroRespuesta"] = respuesta;
@@ -64,7 +62,7 @@ namespace AppAutotriajeProject
             Response.Redirect("~/EvaluacionOncologica.aspx");
         }
 
-        private CrearRegistroAtencionDto ConstruirCrearRegistroDto(bool deseaAdelantarAutotriaje)
+        private CrearRegistroAtencionDto ConstruirCrearRegistroDto()
         {
             //Recibe la información del paciente procesada
             PacienteProcesadoRespuestaDto pacienteProcesado = Session["PacienteProcesado"] as PacienteProcesadoRespuestaDto;
@@ -94,7 +92,7 @@ namespace AppAutotriajeProject
 
                 CondicionOncologica = evaluaciones.CondicionOncologica,
 
-                AutotriajeIniciado = deseaAdelantarAutotriaje,
+                AutotriajeIniciado = false,
 
                 FechaRegistro = DateTime.Now
             };

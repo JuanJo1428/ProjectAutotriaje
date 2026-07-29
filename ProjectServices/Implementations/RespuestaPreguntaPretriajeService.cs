@@ -29,7 +29,7 @@ namespace ProjectServices.Implementations
             RespuestaPreguntaPretriaje respuestaAñadida =
                 new RespuestaPreguntaPretriaje
                 {
-                    IdRegistro = respuesta.IdRegistro,
+                    IdAtencion = respuesta.IdRegistro,
 
                     IdPregunta = respuesta.IdPregunta,
 
@@ -62,7 +62,7 @@ namespace ProjectServices.Implementations
             {
                 IdRespuesta = respuesta.IdRespuesta,
 
-                IdRegistro = respuesta.IdRegistro,
+                IdRegistro = respuesta.IdAtencion,
 
                 IdPregunta = respuesta.IdPregunta,
 
